@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maria Santos — Memorial | Alaala</title>
+    <meta name="description" content="Memorial for Maria Luisa Santos — Share tributes, light candles, and honor their memory on Alaala.">
+    <meta name="keywords" content="memorial, Philippines, tribute, remembrance, Alaala, Filipino families">
+    <meta name="author" content="Alaala Memorial Services">
+    <meta name="theme-color" content="#6366f1">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕯️</text></svg>">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Alaala">
+    <meta property="og:title" content="Maria Santos — Memorial | Alaala">
+    <meta property="og:description" content="Memorial for Maria Luisa Santos — Share tributes, light candles, and honor their memory on Alaala.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1200&h=630&fit=crop">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="pages.css">
+    <link rel="stylesheet" href="memorial.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" rel="stylesheet">
+    <link rel="stylesheet" href="animations.css">
+</head>
+<body>
+    <!-- ===== TRANSPARENT NAVBAR ===== -->
+    <nav class="mem-navbar" id="memNavbar">
+        <div class="mem-nav-inner">
+            <a href="index.html" class="nav-logo">
+                <span class="logo-icon">🕯️</span>
+                <span class="logo-text">Alaala</span>
+            </a>
+            <div class="mem-nav-actions">
+                <button class="mem-nav-btn" id="shareBtn" title="Share Memorial">
+                    <span class="material-symbols-outlined">share</span>
+                </button>
+                <button class="mem-nav-btn" id="themeToggle" title="Toggle theme">
+                    <span class="material-symbols-outlined sun-icon">light_mode</span>
+                    <span class="material-symbols-outlined moon-icon">dark_mode</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HERO / COVER ===== -->
+    <header class="mem-hero">
+        <div class="mem-cover">
+            <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1400&h=400&fit=crop&crop=center" alt="Cover" class="mem-cover-img">
+            <div class="mem-cover-overlay"></div>
+        </div>
+        <div class="mem-hero-content">
+            <div class="mem-avatar-ring">
+                <div class="mem-avatar">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&h=200&fit=crop&crop=face" alt="Maria Santos">
+                </div>
+            </div>
+            <h1 class="mem-name">Maria Luisa Santos</h1>
+            <p class="mem-dates">
+                <span>March 15, 1945</span>
+                <span class="mem-dates-sep">✦</span>
+                <span>January 10, 2024</span>
+            </p>
+            <p class="mem-epitaph">"The best way to find yourself is to lose yourself in the service of others."</p>
+            <div class="mem-location">
+                <span class="material-symbols-outlined">location_on</span>
+                Manila Memorial Park, Parañaque
+            </div>
+            <div class="mem-hero-stats">
+                <div class="mem-hstat">
+                    <span class="material-symbols-outlined filled">local_fire_department</span>
+                    <strong>52</strong>
+                    <span>Candles</span>
+                </div>
+                <div class="mem-hstat">
+                    <span class="material-symbols-outlined filled">favorite</span>
+                    <strong>28</strong>
+                    <span>Tributes</span>
+                </div>
+                <div class="mem-hstat">
+                    <span class="material-symbols-outlined filled">visibility</span>
+                    <strong>847</strong>
+                    <span>Visits</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="mem-main">
+        <div class="container">
+            <!-- Sticky Tab Nav -->
+            <div class="mem-tabs" id="memTabs">
+                <button class="mem-tab active" data-section="about">About</button>
+                <button class="mem-tab" data-section="gallery">Gallery</button>
+                <button class="mem-tab" data-section="tributes">Tributes</button>
+                <button class="mem-tab" data-section="candles">Candles</button>
+                <button class="mem-tab" data-section="services">Services</button>
+            </div>
+
+            <div class="mem-layout">
+                <!-- Left: Main Content -->
+                <div class="mem-content">
+
+                    <!-- ===== ABOUT SECTION ===== -->
+                    <section class="mem-section" id="about">
+                        <div class="mem-card">
+                            <h2 class="mem-section-title">
+                                <span class="material-symbols-outlined">auto_stories</span>
+                                Life Story
+                            </h2>
+                            <div class="mem-story">
+                                <p>Maria Luisa Santos was born on March 15, 1945, in Tondo, Manila, to a family of humble fisherfolk. The eldest of six children, she learned early in life the value of hard work, sacrifice, and unwavering love for family.</p>
+                                <p>She graduated valedictorian from the Philippine Normal University and dedicated 35 years of her life to teaching elementary students in the public school system. Generations of children passed through her classroom, and many still remember her warm smile and patient guidance.</p>
+                                <p>In 1968, she married Roberto Santos, a civil engineer, and together they raised four children — Jose, Ana, Miguel, and Teresa — in their modest home in Parañaque. She was the heart of the family, the one who kept everyone together through celebrations and hardships alike.</p>
+                                <p>After retirement, Maria devoted herself to her church community at San Isidro Parish, where she led the choir for 15 years and organized feeding programs for street children. She was known throughout the neighborhood as "Nanay Maria" — always ready with a plate of food, a listening ear, or a comforting embrace.</p>
+                                <p>Maria passed peacefully on January 10, 2024, surrounded by her children and grandchildren. She leaves behind a legacy of kindness, faith, and unconditional love that will endure for generations.</p>
+                            </div>
+                        </div>
+
+                        <!-- Timeline -->
+                        <div class="mem-card">
+                            <h2 class="mem-section-title">
+                                <span class="material-symbols-outlined">timeline</span>
+                                Life Timeline
+                            </h2>
+                            <div class="mem-timeline">
+                                <div class="tl-item">
+                                    <div class="tl-dot"></div>
+                                    <div class="tl-content">
+                                        <span class="tl-year">1945</span>
+                                        <h4>Born in Tondo, Manila</h4>
+                                        <p>Eldest of six children in a fisherfolk family</p>
+                                    </div>
+                                </div>
+                                <div class="tl-item">
+                                    <div class="tl-dot"></div>
+                                    <div class="tl-content">
+                                        <span class="tl-year">1966</span>
+                                        <h4>Graduated Philippine Normal University</h4>
+                                        <p>Valedictorian, Bachelor of Elementary Education</p>
+                                    </div>
+                                </div>
+                                <div class="tl-item">
+                                    <div class="tl-dot"></div>
+                                    <div class="tl-content">
+                                        <span class="tl-year">1968</span>
+                                        <h4>Married Roberto Santos</h4>
+                                        <p>Settled in Parañaque, Manila</p>
+                                    </div>
+                                </div>
+                                <div class="tl-item">
+                                    <div class="tl-dot"></div>
+                                    <div class="tl-content">
+                                        <span class="tl-year">1969–78</span>
+                                        <h4>Raised Four Children</h4>
+                                        <p>Jose, Ana, Miguel, and Teresa</p>
+                                    </div>
+                                </div>
+                                <div class="tl-item">
+                                    <div class="tl-dot"></div>
+                                    <div class="tl-content">
+                                        <span class="tl-year">2001</span>
+                                        <h4>Retired from Teaching</h4>
+                                        <p>35 years dedicated to public education</p>
+                                    </div>
+                                </div>
+                                <div class="tl-item">
+                                    <div class="tl-dot"></div>
+                                    <div class="tl-content">
+                                        <span class="tl-year">2024</span>
+                                        <h4>Passed Peacefully</h4>
+                                        <p>Surrounded by family. Forever in our hearts.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Voice Tribute -->
+                        <div class="mem-card voice-card">
+                            <h2 class="mem-section-title">
+                                <span class="material-symbols-outlined">mic</span>
+                                Voice Tribute
+                                <span class="powered-tag">ElevenLabs</span>
+                            </h2>
+                            <div class="voice-player">
+                                <button class="vp-play" id="voicePlayBtn">
+                                    <span class="material-symbols-outlined">play_arrow</span>
+                                </button>
+                                <div class="vp-info">
+                                    <strong>A Tribute to Nanay Maria</strong>
+                                    <span>By Jose Santos • AI Voice • 2:34</span>
+                                </div>
+                                <div class="vp-wave">
+                                    <div class="vp-bar" style="height:30%"></div>
+                                    <div class="vp-bar" style="height:50%"></div>
+                                    <div class="vp-bar" style="height:80%"></div>
+                                    <div class="vp-bar" style="height:60%"></div>
+                                    <div class="vp-bar" style="height:90%"></div>
+                                    <div class="vp-bar" style="height:40%"></div>
+                                    <div class="vp-bar" style="height:70%"></div>
+                                    <div class="vp-bar" style="height:55%"></div>
+                                    <div class="vp-bar" style="height:85%"></div>
+                                    <div class="vp-bar" style="height:45%"></div>
+                                    <div class="vp-bar" style="height:65%"></div>
+                                    <div class="vp-bar" style="height:35%"></div>
+                                    <div class="vp-bar" style="height:75%"></div>
+                                    <div class="vp-bar" style="height:50%"></div>
+                                    <div class="vp-bar" style="height:60%"></div>
+                                    <div class="vp-bar" style="height:40%"></div>
+                                    <div class="vp-bar" style="height:70%"></div>
+                                    <div class="vp-bar" style="height:55%"></div>
+                                    <div class="vp-bar" style="height:30%"></div>
+                                    <div class="vp-bar" style="height:45%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ===== GALLERY SECTION ===== -->
+                    <section class="mem-section" id="gallery">
+                        <div class="mem-card">
+                            <h2 class="mem-section-title">
+                                <span class="material-symbols-outlined">photo_library</span>
+                                Photo Gallery
+                                <span class="count-badge">15 photos</span>
+                            </h2>
+                            <div class="mem-gallery">
+                                <div class="gal-item gal-wide">
+                                    <img src="https://images.unsplash.com/photo-1609220136736-443140cffec6?w=600&h=400&fit=crop" alt="Family gathering" loading="lazy">
+                                    <div class="gal-overlay"><span class="material-symbols-outlined">fullscreen</span></div>
+                                </div>
+                                <div class="gal-item">
+                                    <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?w=300&h=300&fit=crop" alt="Memory" loading="lazy">
+                                    <div class="gal-overlay"><span class="material-symbols-outlined">fullscreen</span></div>
+                                </div>
+                                <div class="gal-item">
+                                    <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=300&h=300&fit=crop" alt="Memory" loading="lazy">
+                                    <div class="gal-overlay"><span class="material-symbols-outlined">fullscreen</span></div>
+                                </div>
+                                <div class="gal-item gal-tall">
+                                    <img src="https://images.unsplash.com/photo-1516733968668-dbdce39c0651?w=300&h=500&fit=crop" alt="Memory" loading="lazy">
+                                    <div class="gal-overlay"><span class="material-symbols-outlined">fullscreen</span></div>
+                                </div>
+                                <div class="gal-item">
+                                    <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?w=300&h=300&fit=crop" alt="Memory" loading="lazy">
+                                    <div class="gal-overlay"><span class="material-symbols-outlined">fullscreen</span></div>
+                                </div>
+                                <div class="gal-item">
+                                    <img src="https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?w=300&h=300&fit=crop" alt="Memory" loading="lazy">
+                                    <div class="gal-overlay"><span class="material-symbols-outlined">fullscreen</span></div>
+                                </div>
+                                <div class="gal-item gal-wide">
+                                    <img src="https://images.unsplash.com/photo-1478145046317-39f10e56b5e9?w=600&h=300&fit=crop" alt="Memory" loading="lazy">
+                                    <div class="gal-overlay"><span class="material-symbols-outlined">fullscreen</span></div>
+                                </div>
+                                <div class="gal-item gal-more">
+                                    <span>+8</span>
+                                    <span>more photos</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ===== TRIBUTES / GUESTBOOK ===== -->
+                    <section class="mem-section" id="tributes">
+                        <div class="mem-card">
+                            <h2 class="mem-section-title">
+                                <span class="material-symbols-outlined">favorite</span>
+                                Tributes & Guestbook
+                                <span class="count-badge">28 tributes</span>
+                            </h2>
+
+                            <!-- Write a Tribute -->
+                            <div class="tribute-composer">
+                                <div class="tc-avatar">
+                                    <span class="material-symbols-outlined">person</span>
+                                </div>
+                                <div class="tc-form">
+                                    <textarea placeholder="Share a memory, message, or prayer for Maria..." rows="3" id="tributeInput"></textarea>
+                                    <div class="tc-actions">
+                                        <div class="tc-options">
+                                            <button class="tc-opt" title="Add photo">
+                                                <span class="material-symbols-outlined">add_photo_alternate</span>
+                                            </button>
+                                            <button class="tc-opt" title="Add voice note">
+                                                <span class="material-symbols-outlined">mic</span>
+                                            </button>
+                                        </div>
+                                        <button class="btn btn-primary btn-sm" id="postTributeBtn">
+                                            <span class="material-symbols-outlined">send</span> Post Tribute
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tributes List -->
+                            <div class="tributes-list">
+                                <div class="tribute-item">
+                                    <div class="tri-avatar" style="background: #6366f1">AR</div>
+                                    <div class="tri-body">
+                                        <div class="tri-header">
+                                            <strong>Ana Reyes</strong>
+                                            <span class="tri-relation">Niece</span>
+                                            <span class="tri-time">2 hours ago</span>
+                                        </div>
+                                        <p>Tita Maria, you were like a second mother to me. I remember every summer at your house in Parañaque — the adobo, the stories, the love. I will carry your warmth in my heart forever. Rest well, Tita. 🕯️💐</p>
+                                        <div class="tri-reactions">
+                                            <button class="tri-react active">
+                                                <span class="material-symbols-outlined filled">favorite</span> 12
+                                            </button>
+                                            <button class="tri-react">
+                                                <span class="material-symbols-outlined">local_fire_department</span> 5
+                                            </button>
+                                            <button class="tri-react">
+                                                <span class="material-symbols-outlined">reply</span> Reply
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tribute-item">
+                                    <div class="tri-avatar" style="background: #10b981">MG</div>
+                                    <div class="tri-body">
+                                        <div class="tri-header">
+                                            <strong>Miguel Garcia</strong>
+                                            <span class="tri-relation">Former Student</span>
+                                            <span class="tri-time">5 hours ago</span>
+                                        </div>
+                                        <p>Mrs. Santos was my Grade 3 teacher, and she changed my life. When I was struggling, she stayed after school every day to help me read. Because of her patience, I became an engineer. Thank you, Teacher Maria. You will never be forgotten.</p>
+                                        <div class="tri-reactions">
+                                            <button class="tri-react active">
+                                                <span class="material-symbols-outlined filled">favorite</span> 24
+                                            </button>
+                                            <button class="tri-react">
+                                                <span class="material-symbols-outlined">local_fire_department</span> 8
+                                            </button>
+                                            <button class="tri-react">
+                                                <span class="material-symbols-outlined">reply</span> Reply
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tribute-item">
+                                    <div class="tri-avatar" style="background: #f59e0b">TS</div>
+                                    <div class="tri-body">
+                                        <div class="tri-header">
+                                            <strong>Teresa Santos</strong>
+                                            <span class="tri-relation">Daughter</span>
+                                            <span class="tri-time">1 day ago</span>
+                                        </div>
+                                        <p>Mama, walang salitang makapaglalarawan kung gaano ka namin kamiss. Everything I am, I owe to you. Your laughter, your cooking, your prayers — they are the soundtrack of my childhood. Until we meet again. Mahal na mahal kita. 🌸</p>
+                                        <div class="tri-reactions">
+                                            <button class="tri-react active">
+                                                <span class="material-symbols-outlined filled">favorite</span> 31
+                                            </button>
+                                            <button class="tri-react">
+                                                <span class="material-symbols-outlined">local_fire_department</span> 14
+                                            </button>
+                                            <button class="tri-react">
+                                                <span class="material-symbols-outlined">reply</span> Reply
+                                            </button>
+                                        </div>
+
+                                        <!-- Reply -->
+                                        <div class="tri-reply">
+                                            <div class="tri-avatar small" style="background: #6366f1">JS</div>
+                                            <div class="tri-reply-body">
+                                                <div class="tri-header">
+                                                    <strong>Jose Santos</strong>
+                                                    <span class="tri-time">12 hours ago</span>
+                                                </div>
+                                                <p>Ate Teresa, Mama would be so proud of you. We carry her spirit together. 🤝</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tribute-item">
+                                    <div class="tri-avatar" style="background: #ec4899">FL</div>
+                                    <div class="tri-body">
+                                        <div class="tri-header">
+                                            <strong>Father Lorenzo</strong>
+                                            <span class="tri-relation">Parish Priest</span>
+                                            <span class="tri-time">3 days ago</span>
+                                        </div>
+                                        <p>Maria was a pillar of our parish community. For 15 years she led our choir with grace and devotion. Her faith was unwavering, and her generosity touched countless lives. May she find eternal rest in the arms of our Lord. 🙏</p>
+                                        <div class="tri-reactions">
+                                            <button class="tri-react active">
+                                                <span class="material-symbols-outlined filled">favorite</span> 18
+                                            </button>
+                                            <button class="tri-react">
+                                                <span class="material-symbols-outlined">local_fire_department</span> 9
+                                            </button>
+                                            <button class="tri-react">
+                                                <span class="material-symbols-outlined">reply</span> Reply
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="btn btn-outline btn-block load-more">Load more tributes</button>
+                        </div>
+                    </section>
+
+                    <!-- ===== CANDLE SECTION ===== -->
+                    <section class="mem-section" id="candles">
+                        <div class="mem-card">
+                            <h2 class="mem-section-title">
+                                <span class="material-symbols-outlined">local_fire_department</span>
+                                Virtual Candles
+                                <span class="count-badge">52 lit</span>
+                            </h2>
+
+                            <!-- Light a Candle -->
+                            <div class="candle-lighter">
+                                <div class="candle-main">
+                                    <div class="candle-visual" id="candleVisual">
+                                        <div class="candle-body">
+                                            <div class="candle-flame" id="candleFlame">
+                                                <div class="flame-inner"></div>
+                                                <div class="flame-outer"></div>
+                                            </div>
+                                            <div class="candle-wick"></div>
+                                            <div class="candle-wax"></div>
+                                            <div class="candle-glow"></div>
+                                        </div>
+                                    </div>
+                                    <h3>Light a Candle for Maria</h3>
+                                    <p>Leave a virtual candle to show your love and remembrance</p>
+                                    <div class="candle-message-wrap">
+                                        <input type="text" placeholder="Add a short prayer or message (optional)" maxlength="100" id="candleMessage" class="candle-input">
+                                    </div>
+                                    <button class="btn btn-primary btn-lg candle-btn" id="lightCandleBtn">
+                                        <span class="material-symbols-outlined">local_fire_department</span>
+                                        Light a Candle
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Candle Wall -->
+                            <div class="candle-wall">
+                                <h3 class="cw-title">Candle Wall</h3>
+                                <div class="candle-grid" id="candleGrid">
+                                    <div class="cw-candle lit">
+                                        <div class="cw-flame"></div>
+                                        <div class="cw-body"></div>
+                                        <span class="cw-name">Ana R.</span>
+                                    </div>
+                                    <div class="cw-candle lit">
+                                        <div class="cw-flame"></div>
+                                        <div class="cw-body"></div>
+                                        <span class="cw-name">Miguel G.</span>
+                                    </div>
+                                    <div class="cw-candle lit">
+                                        <div class="cw-flame"></div>
+                                        <div class="cw-body"></div>
+                                        <span class="cw-name">Teresa S.</span>
+                                    </div>
+                                    <div class="cw-candle lit">
+                                        <div class="cw-flame"></div>
+                                        <div class="cw-body"></div>
+                                        <span class="cw-name">Jose S.</span>
+                                    </div>
+                                    <div class="cw-candle lit">
+                                        <div class="cw-flame"></div>
+                                        <div class="cw-body"></div>
+                                        <span class="cw-name">Fr. Lorenzo</span>
+                                    </div>
+                                    <div class="cw-candle lit">
+                                        <div class="cw-flame"></div>
+                                        <div class="cw-body"></div>
+                                        <span class="cw-name">Lisa M.</span>
+                                    </div>
+                                    <div class="cw-candle lit">
+                                        <div class="cw-flame"></div>
+                                        <div class="cw-body"></div>
+                                        <span class="cw-name">Pedro A.</span>
+                                    </div>
+                                    <div class="cw-candle lit">
+                                        <div class="cw-flame"></div>
+                                        <div class="cw-body"></div>
+                                        <span class="cw-name">Rosa C.</span>
+                                    </div>
+                                    <div class="cw-candle lit">
+                                        <div class="cw-flame"></div>
+                                        <div class="cw-body"></div>
+                                        <span class="cw-name">David T.</span>
+                                    </div>
+                                    <div class="cw-candle lit">
+                                        <div class="cw-flame"></div>
+                                        <div class="cw-body"></div>
+                                        <span class="cw-name">Carmen L.</span>
+                                    </div>
+                                    <div class="cw-candle lit">
+                                        <div class="cw-flame"></div>
+                                        <div class="cw-body"></div>
+                                        <span class="cw-name">Renato B.</span>
+                                    </div>
+                                    <div class="cw-candle lit">
+                                        <div class="cw-flame"></div>
+                                        <div class="cw-body"></div>
+                                        <span class="cw-name">Elena G.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ===== SERVICES SECTION ===== -->
+                    <section class="mem-section" id="services">
+                        <div class="mem-card">
+                            <h2 class="mem-section-title">
+                                <span class="material-symbols-outlined">volunteer_activism</span>
+                                Memorial Services
+                            </h2>
+                            <p class="mem-services-desc">Honor Maria's memory with a meaningful service.</p>
+                            <div class="mem-services-grid">
+                                <div class="msrv-card">
+                                    <div class="msrv-icon"><span class="material-symbols-outlined">church</span></div>
+                                    <h4>Mass Offering</h4>
+                                    <p>Request a mass at partner churches in Metro Manila</p>
+                                    <span class="msrv-price">From ₱500</span>
+                                    <button class="btn btn-outline btn-sm">Book Now</button>
+                                </div>
+                                <div class="msrv-card">
+                                    <div class="msrv-icon"><span class="material-symbols-outlined">local_florist</span></div>
+                                    <h4>Send Flowers</h4>
+                                    <p>Fresh flower delivery to the resting place</p>
+                                    <span class="msrv-price">From ₱800</span>
+                                    <button class="btn btn-outline btn-sm">Order</button>
+                                </div>
+                                <div class="msrv-card">
+                                    <div class="msrv-icon"><span class="material-symbols-outlined">videocam</span></div>
+                                    <h4>Live Stream</h4>
+                                    <p>Virtual attendance for memorial events</p>
+                                    <span class="msrv-price">From ₱1,500</span>
+                                    <button class="btn btn-outline btn-sm">Schedule</button>
+                                </div>
+                                <div class="msrv-card">
+                                    <div class="msrv-icon"><span class="material-symbols-outlined">cleaning_services</span></div>
+                                    <h4>Lot Cleaning</h4>
+                                    <p>Professional cleaning of the memorial lot</p>
+                                    <span class="msrv-price">From ₱1,200</span>
+                                    <button class="btn btn-outline btn-sm">Book Now</button>
+                                </div>
+                                <div class="msrv-card">
+                                    <div class="msrv-icon"><span class="material-symbols-outlined">construction</span></div>
+                                    <h4>Tombstone Repair</h4>
+                                    <p>Expert repair and restoration services</p>
+                                    <span class="msrv-price">From ₱2,500</span>
+                                    <button class="btn btn-outline btn-sm">Request</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Right: Sidebar -->
+                <aside class="mem-sidebar">
+                    <!-- Candle Quick Action -->
+                    <div class="sidebar-card candle-quick">
+                        <div class="sq-candle">🕯️</div>
+                        <h3>Light a Candle</h3>
+                        <p>52 candles lit for Maria</p>
+                        <button class="btn btn-primary btn-sm btn-block" onclick="document.getElementById('candles').scrollIntoView({behavior:'smooth'})">
+                            <span class="material-symbols-outlined">local_fire_department</span> Light Candle
+                        </button>
+                    </div>
+
+                    <!-- Share -->
+                    <div class="sidebar-card">
+                        <h3>Share This Memorial</h3>
+                        <div class="share-buttons">
+                            <button class="share-btn facebook" title="Facebook">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                            </button>
+                            <button class="share-btn twitter" title="X/Twitter">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                            </button>
+                            <button class="share-btn messenger" title="Messenger">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 4.974 0 11.111c0 3.498 1.744 6.614 4.469 8.654V24l4.088-2.242c1.092.301 2.246.464 3.443.464 6.627 0 12-4.974 12-11.111S18.627 0 12 0zm1.191 14.963l-3.055-3.26-5.963 3.26L10.732 8.2l3.131 3.26 5.887-3.26-6.559 6.763z"/></svg>
+                            </button>
+                            <button class="share-btn copy" title="Copy link" id="copyLinkBtn">
+                                <span class="material-symbols-outlined">link</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Family Tree -->
+                    <div class="sidebar-card">
+                        <h3>Family</h3>
+                        <div class="family-list">
+                            <div class="fam-member">
+                                <div class="fam-avatar" style="background:#6366f1">JS</div>
+                                <div>
+                                    <strong>Jose Santos</strong>
+                                    <span>Son</span>
+                                </div>
+                            </div>
+                            <div class="fam-member">
+                                <div class="fam-avatar" style="background:#ec4899">AS</div>
+                                <div>
+                                    <strong>Ana Santos</strong>
+                                    <span>Daughter</span>
+                                </div>
+                            </div>
+                            <div class="fam-member">
+                                <div class="fam-avatar" style="background:#10b981">MS</div>
+                                <div>
+                                    <strong>Miguel Santos</strong>
+                                    <span>Son</span>
+                                </div>
+                            </div>
+                            <div class="fam-member">
+                                <div class="fam-avatar" style="background:#f59e0b">TS</div>
+                                <div>
+                                    <strong>Teresa Santos</strong>
+                                    <span>Daughter</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Upcoming -->
+                    <div class="sidebar-card">
+                        <h3>Upcoming</h3>
+                        <div class="sidebar-event">
+                            <div class="se-date">
+                                <span>JAN</span>
+                                <strong>10</strong>
+                            </div>
+                            <div>
+                                <strong>1st Death Anniversary</strong>
+                                <p>Mass at Manila Cathedral</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- QR Code -->
+                    <div class="sidebar-card qr-card">
+                        <h3>Memorial QR Code</h3>
+                        <div class="qr-placeholder">
+                            <div class="qr-fake">
+                                <span class="material-symbols-outlined">qr_code_2</span>
+                            </div>
+                        </div>
+                        <p class="qr-desc">Scan to visit this memorial on your phone</p>
+                        <button class="btn btn-outline btn-sm btn-block">Download QR</button>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="mem-footer">
+        <div class="container">
+            <div class="mf-inner">
+                <p>Memorial created by <strong>Jose Santos</strong> on the Alaala platform</p>
+                <div class="mf-links">
+                    <a href="index.html">Home</a>
+                    <a href="#">Report</a>
+                    <a href="#">Privacy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== SHARE MODAL ===== -->
+    <div class="modal-overlay" id="shareModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Share This Memorial</h3>
+                <button class="modal-close" id="closeShareModal">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Share Maria Santos' memorial with family and friends.</p>
+                <div class="share-url-box">
+                    <input type="text" value="https://alaala.ph/memorial/maria-santos" readonly id="shareUrlInput">
+                    <button class="btn btn-primary btn-sm" id="copyUrlBtn">Copy</button>
+                </div>
+                <div class="share-grid">
+                    <button class="share-grid-btn"><span>📱</span>SMS</button>
+                    <button class="share-grid-btn"><span>📧</span>Email</button>
+                    <button class="share-grid-btn"><span style="color:#1877F2">f</span>Facebook</button>
+                    <button class="share-grid-btn"><span>𝕏</span>Twitter</button>
+                    <button class="share-grid-btn"><span style="color:#25D366">💬</span>WhatsApp</button>
+                    <button class="share-grid-btn"><span>🔗</span>Copy Link</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== TOAST ===== -->
+    <div class="toast" id="toast">
+        <span class="material-symbols-outlined">check_circle</span>
+        <span id="toastMsg">Copied to clipboard!</span>
+    </div>
+
+    <script src="memorial.js"></script>
+    <script src="animations.js"></script>
+</body>
+</html>

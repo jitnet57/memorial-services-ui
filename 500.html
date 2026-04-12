@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Something Went Wrong — Alaala</title>
+    <meta name="description" content="Something went wrong — Alaala is experiencing technical difficulties.">
+    <meta name="keywords" content="memorial, Philippines, tribute, remembrance, Alaala, Filipino families">
+    <meta name="author" content="Alaala Memorial Services">
+    <meta name="robots" content="noindex">
+    <meta name="theme-color" content="#6366f1">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕯️</text></svg>">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Alaala">
+    <meta property="og:title" content="Something Went Wrong — Alaala">
+    <meta property="og:description" content="Something went wrong — Alaala is experiencing technical difficulties.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1200&h=630&fit=crop">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="error.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+    <link rel="stylesheet" href="animations.css">
+</head>
+<body>
+    <!-- Background -->
+    <div class="error-bg"></div>
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="error-navbar">
+        <a href="index.html" class="logo">Alaala</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+            <span class="material-symbols-outlined" id="themeIcon">dark_mode</span>
+        </button>
+    </nav>
+
+    <!-- Page Content -->
+    <main class="error-page">
+        <!-- 500 Number -->
+        <div class="error-code">500</div>
+
+        <!-- Broken Candle -->
+        <div class="error-candle broken-candle">
+            <div class="candle-flame">
+                <div class="flame-glow"></div>
+                <div class="flame-outer"></div>
+                <div class="flame-inner"></div>
+            </div>
+            <div class="candle-wick"></div>
+            <div class="broken-top"></div>
+            <div class="candle-body"></div>
+            <div class="wax-drop"></div>
+            <div class="wax-drop"></div>
+            <div class="wax-drop"></div>
+        </div>
+
+        <!-- Content -->
+        <div class="error-content">
+            <h1 class="error-title">Something went wrong</h1>
+            <p class="error-text">We're experiencing technical difficulties. Our team has been notified and is working to fix this.</p>
+
+            <!-- Countdown -->
+            <div class="countdown">
+                <span class="material-symbols-outlined">refresh</span>
+                This page will automatically retry in <span id="countdown">30</span> seconds
+            </div>
+
+            <!-- Actions -->
+            <div class="error-actions">
+                <button class="btn btn-primary" onclick="location.reload()">
+                    <span class="material-symbols-outlined">refresh</span>
+                    Try Again
+                </button>
+                <a href="index.html" class="btn btn-outline">
+                    <span class="material-symbols-outlined">home</span>
+                    Go Home
+                </a>
+                <a href="mailto:support@alaala.ph" class="btn btn-glass">
+                    <span class="material-symbols-outlined">support_agent</span>
+                    Contact Support
+                </a>
+            </div>
+
+            <!-- Status Link -->
+            <a href="#" class="status-link">
+                Check our status page
+                <span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
+            </a>
+
+            <!-- Error Ref -->
+            <div class="error-ref">Error Reference: ERR-2024-XXXX</div>
+        </div>
+    </main>
+
+    <script>
+        // Theme toggle
+        (function() {
+            const html = document.documentElement;
+            const toggle = document.getElementById('themeToggle');
+            const icon = document.getElementById('themeIcon');
+            const stored = localStorage.getItem('alaala-theme');
+
+            if (stored) {
+                html.setAttribute('data-theme', stored);
+            } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                html.setAttribute('data-theme', 'dark');
+            }
+
+            function updateIcon() {
+                icon.textContent = html.getAttribute('data-theme') === 'dark' ? 'light_mode' : 'dark_mode';
+            }
+            updateIcon();
+
+            toggle.addEventListener('click', function() {
+                const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                html.setAttribute('data-theme', next);
+                localStorage.setItem('alaala-theme', next);
+                updateIcon();
+            });
+        })();
+
+        // Countdown timer
+        (function() {
+            var seconds = 30;
+            var el = document.getElementById('countdown');
+            var timer = setInterval(function() {
+                seconds--;
+                el.textContent = seconds;
+                if (seconds <= 0) {
+                    clearInterval(timer);
+                    location.reload();
+                }
+            }, 1000);
+        })();
+    </script>
+    <script src="animations.js"></script>
+</body>
+</html>

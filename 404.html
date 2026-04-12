@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found — Alaala</title>
+    <meta name="description" content="Page not found — The page you're looking for doesn't exist on Alaala.">
+    <meta name="keywords" content="memorial, Philippines, tribute, remembrance, Alaala, Filipino families">
+    <meta name="author" content="Alaala Memorial Services">
+    <meta name="theme-color" content="#6366f1">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕯️</text></svg>">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Alaala">
+    <meta property="og:title" content="Page Not Found — Alaala">
+    <meta property="og:description" content="Page not found — The page you're looking for doesn't exist on Alaala.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1200&h=630&fit=crop">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="error.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+    <link rel="stylesheet" href="animations.css">
+</head>
+<body>
+    <!-- Background -->
+    <div class="error-bg"></div>
+    <div class="particles">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="error-navbar">
+        <a href="index.html" class="logo">Alaala</a>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+            <span class="material-symbols-outlined" id="themeIcon">dark_mode</span>
+        </button>
+    </nav>
+
+    <!-- Page Content -->
+    <main class="error-page">
+        <!-- 404 Number -->
+        <div class="error-code">404</div>
+
+        <!-- Lost Candle -->
+        <div class="error-candle lost-candle">
+            <div class="candle-flame">
+                <div class="flame-glow"></div>
+                <div class="flame-outer"></div>
+                <div class="flame-inner"></div>
+            </div>
+            <div class="candle-wick"></div>
+            <div class="candle-body"></div>
+        </div>
+
+        <!-- Content -->
+        <div class="error-content">
+            <h1 class="error-title">This page has passed on</h1>
+            <p class="error-text">The page you're looking for doesn't exist or has been moved to a better place.</p>
+
+            <!-- Search -->
+            <form class="error-search" id="searchForm">
+                <span class="material-symbols-outlined search-icon">search</span>
+                <input type="text" placeholder="Try searching for what you need" aria-label="Search">
+            </form>
+
+            <!-- Actions -->
+            <div class="error-actions">
+                <a href="index.html" class="btn btn-primary">
+                    <span class="material-symbols-outlined">home</span>
+                    Go Home
+                </a>
+                <a href="explore.html" class="btn btn-outline">
+                    <span class="material-symbols-outlined">local_florist</span>
+                    Explore Memorials
+                </a>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="error-links">
+                <a href="index.html">Home</a>
+                <a href="dashboard.html">Dashboard</a>
+                <a href="create-memorial.html">Create Memorial</a>
+                <a href="#">Help Center</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Theme toggle
+        (function() {
+            const html = document.documentElement;
+            const toggle = document.getElementById('themeToggle');
+            const icon = document.getElementById('themeIcon');
+            const stored = localStorage.getItem('alaala-theme');
+
+            if (stored) {
+                html.setAttribute('data-theme', stored);
+            } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                html.setAttribute('data-theme', 'dark');
+            }
+
+            function updateIcon() {
+                icon.textContent = html.getAttribute('data-theme') === 'dark' ? 'light_mode' : 'dark_mode';
+            }
+            updateIcon();
+
+            toggle.addEventListener('click', function() {
+                const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                html.setAttribute('data-theme', next);
+                localStorage.setItem('alaala-theme', next);
+                updateIcon();
+            });
+        })();
+
+        // Search form
+        document.getElementById('searchForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var q = this.querySelector('input').value.trim();
+            if (q) {
+                window.location.href = 'index.html?search=' + encodeURIComponent(q);
+            }
+        });
+    </script>
+    <script src="animations.js"></script>
+</body>
+</html>

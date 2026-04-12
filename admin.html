@@ -1,0 +1,1387 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel — Alaala</title>
+    <meta name="description" content="Alaala Admin Panel — Manage users, memorials, orders, and platform settings.">
+    <meta name="keywords" content="memorial, Philippines, tribute, remembrance, Alaala, Filipino families">
+    <meta name="author" content="Alaala Memorial Services">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#6366f1">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕯️</text></svg>">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Alaala">
+    <meta property="og:title" content="Admin Panel — Alaala">
+    <meta property="og:description" content="Alaala Admin Panel — Manage users, memorials, orders, and platform settings.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1200&h=630&fit=crop">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="pages.css">
+    <link rel="stylesheet" href="admin.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+    <link rel="stylesheet" href="animations.css">
+</head>
+<body>
+
+<div class="admin-layout">
+
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="admin-sidebar" id="adminSidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="sidebar-logo">
+                <span class="logo-icon">🕯️</span>
+                <span class="logo-text">Alaala</span>
+                <span class="logo-badge">Admin</span>
+            </a>
+        </div>
+
+        <nav class="sidebar-nav">
+            <ul class="sidebar-nav-list">
+                <li>
+                    <a href="#" class="sidebar-nav-item active" data-tab="dashboard">
+                        <span class="material-symbols-outlined">dashboard</span>
+                        <span class="nav-label">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="sidebar-nav-item" data-tab="users">
+                        <span class="material-symbols-outlined">group</span>
+                        <span class="nav-label">Users</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="sidebar-nav-item" data-tab="memorials">
+                        <span class="material-symbols-outlined">auto_stories</span>
+                        <span class="nav-label">Memorials</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="sidebar-nav-item" data-tab="orders">
+                        <span class="material-symbols-outlined">receipt_long</span>
+                        <span class="nav-label">Orders</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="sidebar-nav-item" data-tab="revenue">
+                        <span class="material-symbols-outlined">payments</span>
+                        <span class="nav-label">Revenue</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="sidebar-nav-item" data-tab="reports">
+                        <span class="material-symbols-outlined">analytics</span>
+                        <span class="nav-label">Reports</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="sidebar-nav-item" data-tab="settings">
+                        <span class="material-symbols-outlined">settings</span>
+                        <span class="nav-label">Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button class="sidebar-collapse-btn" id="sidebarCollapseBtn" title="Collapse sidebar">
+                <span class="material-symbols-outlined">chevron_left</span>
+                <span class="nav-label">Collapse</span>
+            </button>
+            <div class="sidebar-user">
+                <img src="https://ui-avatars.com/api/?name=Admin+User&background=6366f1&color=fff&size=36" alt="Admin" class="sidebar-avatar">
+                <div class="sidebar-user-info">
+                    <span class="sidebar-user-name">Admin User</span>
+                    <span class="sidebar-user-role">Super Admin</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="admin-main">
+
+        <!-- Top Bar -->
+        <header class="admin-topbar">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+            <div class="topbar-breadcrumb">
+                <span class="breadcrumb-item">Admin</span>
+                <span class="material-symbols-outlined breadcrumb-sep">chevron_right</span>
+                <span class="breadcrumb-item active" id="breadcrumbActive">Dashboard</span>
+            </div>
+            <div class="topbar-search">
+                <span class="material-symbols-outlined search-icon">search</span>
+                <input type="text" placeholder="Search anything…" class="topbar-search-input" id="topbarSearch">
+            </div>
+            <div class="topbar-actions">
+                <button class="topbar-action-btn notification-btn" id="notifBtn">
+                    <span class="material-symbols-outlined">notifications</span>
+                    <span class="notif-badge">5</span>
+                </button>
+                <div class="notif-dropdown" id="notifDropdown">
+                    <div class="notif-dropdown-header">
+                        <h4>Notifications</h4>
+                        <button class="notif-mark-read">Mark all read</button>
+                    </div>
+                    <div class="notif-dropdown-list">
+                        <div class="notif-dropdown-item unread">
+                            <span class="material-symbols-outlined">person_add</span>
+                            <div><strong>New user registered</strong><p>Maria Santos joined the platform</p><small>2 min ago</small></div>
+                        </div>
+                        <div class="notif-dropdown-item unread">
+                            <span class="material-symbols-outlined">shopping_cart</span>
+                            <div><strong>New order received</strong><p>Flower Delivery — ₱2,500</p><small>15 min ago</small></div>
+                        </div>
+                        <div class="notif-dropdown-item unread">
+                            <span class="material-symbols-outlined">flag</span>
+                            <div><strong>Memorial flagged</strong><p>Content review needed</p><small>1 hr ago</small></div>
+                        </div>
+                        <div class="notif-dropdown-item">
+                            <span class="material-symbols-outlined">payments</span>
+                            <div><strong>Payment processed</strong><p>₱5,000 received via GCash</p><small>3 hrs ago</small></div>
+                        </div>
+                        <div class="notif-dropdown-item">
+                            <span class="material-symbols-outlined">system_update</span>
+                            <div><strong>System update</strong><p>v2.4.1 deployed successfully</p><small>5 hrs ago</small></div>
+                        </div>
+                    </div>
+                </div>
+                <button class="topbar-action-btn" id="themeToggle" title="Toggle theme">
+                    <span class="material-symbols-outlined">dark_mode</span>
+                </button>
+                <div class="topbar-avatar-wrap">
+                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=6366f1&color=fff&size=36" alt="Admin" class="topbar-avatar">
+                </div>
+            </div>
+        </header>
+
+        <!-- ===== TAB: DASHBOARD ===== -->
+        <section class="admin-tab active" id="tab-dashboard">
+            <div class="admin-content">
+                <!-- Welcome Banner -->
+                <div class="welcome-banner">
+                    <div class="welcome-text">
+                        <h1>Good morning, Admin 👋</h1>
+                        <p>Here's what's happening on Alaala today, <span id="currentDate"></span></p>
+                    </div>
+                </div>
+
+                <!-- Stat Cards -->
+                <div class="stat-cards-row">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: var(--primary-50); color: var(--primary);">
+                            <span class="material-symbols-outlined">group</span>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number" data-target="12847">12,847</span>
+                            <span class="stat-label">Total Users</span>
+                        </div>
+                        <span class="stat-growth positive">+12.5% ↑</span>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #ecfdf5; color: var(--success);">
+                            <span class="material-symbols-outlined">auto_stories</span>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number" data-target="8234">8,234</span>
+                            <span class="stat-label">Active Memorials</span>
+                        </div>
+                        <span class="stat-growth positive">+8.3% ↑</span>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #fef3c7; color: var(--warning);">
+                            <span class="material-symbols-outlined">shopping_cart</span>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number" data-target="3456">3,456</span>
+                            <span class="stat-label">Total Orders</span>
+                        </div>
+                        <span class="stat-growth positive">+15.2% ↑</span>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #fce7f3; color: #ec4899;">
+                            <span class="material-symbols-outlined">payments</span>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number">₱2,847,500</span>
+                            <span class="stat-label">Revenue</span>
+                        </div>
+                        <span class="stat-growth positive">+22.1% ↑</span>
+                    </div>
+                </div>
+
+                <!-- Revenue Chart -->
+                <div class="admin-card chart-card">
+                    <div class="card-header">
+                        <h3>Revenue Overview</h3>
+                        <div class="period-selector">
+                            <button class="period-btn" data-period="7d">7D</button>
+                            <button class="period-btn active" data-period="30d">30D</button>
+                            <button class="period-btn" data-period="90d">90D</button>
+                            <button class="period-btn" data-period="1y">1Y</button>
+                        </div>
+                    </div>
+                    <div class="chart-placeholder">
+                        <div class="chart-area">
+                            <div class="chart-bars">
+                                <div class="chart-bar" style="height:45%"><span>₱180K</span></div>
+                                <div class="chart-bar" style="height:62%"><span>₱248K</span></div>
+                                <div class="chart-bar" style="height:38%"><span>₱152K</span></div>
+                                <div class="chart-bar" style="height:75%"><span>₱300K</span></div>
+                                <div class="chart-bar" style="height:55%"><span>₱220K</span></div>
+                                <div class="chart-bar" style="height:88%"><span>₱352K</span></div>
+                                <div class="chart-bar" style="height:70%"><span>₱280K</span></div>
+                                <div class="chart-bar" style="height:65%"><span>₱260K</span></div>
+                                <div class="chart-bar" style="height:82%"><span>₱328K</span></div>
+                                <div class="chart-bar" style="height:58%"><span>₱232K</span></div>
+                                <div class="chart-bar" style="height:92%"><span>₱368K</span></div>
+                                <div class="chart-bar active" style="height:78%"><span>₱312K</span></div>
+                            </div>
+                            <div class="chart-labels">
+                                <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span>
+                                <span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Two Column: Recent Orders + Top Services -->
+                <div class="admin-two-col">
+                    <!-- Recent Orders -->
+                    <div class="admin-card">
+                        <div class="card-header">
+                            <h3>Recent Orders</h3>
+                            <a href="#" class="card-link" data-tab="orders">View All</a>
+                        </div>
+                        <div class="table-wrap">
+                            <table class="admin-table">
+                                <thead>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Customer</th>
+                                        <th>Service</th>
+                                        <th>Amount</th>
+                                        <th>Status</th>
+                                        <th>Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>#ORD-7841</strong></td>
+                                        <td>Maria Santos</td>
+                                        <td>Flower Delivery</td>
+                                        <td>₱2,500</td>
+                                        <td><span class="badge badge-success">Completed</span></td>
+                                        <td>Apr 11, 2026</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>#ORD-7840</strong></td>
+                                        <td>Juan Dela Cruz</td>
+                                        <td>Mass Offering</td>
+                                        <td>₱1,500</td>
+                                        <td><span class="badge badge-warning">Pending</span></td>
+                                        <td>Apr 11, 2026</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>#ORD-7839</strong></td>
+                                        <td>Ana Reyes</td>
+                                        <td>Live Stream</td>
+                                        <td>₱3,000</td>
+                                        <td><span class="badge badge-info">Processing</span></td>
+                                        <td>Apr 10, 2026</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>#ORD-7838</strong></td>
+                                        <td>Roberto Garcia</td>
+                                        <td>AI Voice Tribute</td>
+                                        <td>₱5,000</td>
+                                        <td><span class="badge badge-success">Completed</span></td>
+                                        <td>Apr 10, 2026</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>#ORD-7837</strong></td>
+                                        <td>Carmen Lim</td>
+                                        <td>Flower Delivery</td>
+                                        <td>₱1,800</td>
+                                        <td><span class="badge badge-error">Cancelled</span></td>
+                                        <td>Apr 9, 2026</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Top Services -->
+                    <div class="admin-card">
+                        <div class="card-header">
+                            <h3>Top Services</h3>
+                        </div>
+                        <div class="top-services-list">
+                            <div class="service-bar-item">
+                                <div class="service-bar-header">
+                                    <span class="service-bar-name">Flower Delivery</span>
+                                    <span class="service-bar-pct">45%</span>
+                                </div>
+                                <div class="service-bar-track">
+                                    <div class="service-bar-fill" style="width:45%; background: var(--primary);"></div>
+                                </div>
+                            </div>
+                            <div class="service-bar-item">
+                                <div class="service-bar-header">
+                                    <span class="service-bar-name">Mass Offering</span>
+                                    <span class="service-bar-pct">28%</span>
+                                </div>
+                                <div class="service-bar-track">
+                                    <div class="service-bar-fill" style="width:28%; background: var(--success);"></div>
+                                </div>
+                            </div>
+                            <div class="service-bar-item">
+                                <div class="service-bar-header">
+                                    <span class="service-bar-name">Live Stream</span>
+                                    <span class="service-bar-pct">15%</span>
+                                </div>
+                                <div class="service-bar-track">
+                                    <div class="service-bar-fill" style="width:15%; background: var(--warning);"></div>
+                                </div>
+                            </div>
+                            <div class="service-bar-item">
+                                <div class="service-bar-header">
+                                    <span class="service-bar-name">AI Voice Tribute</span>
+                                    <span class="service-bar-pct">8%</span>
+                                </div>
+                                <div class="service-bar-track">
+                                    <div class="service-bar-fill" style="width:8%; background: var(--error);"></div>
+                                </div>
+                            </div>
+                            <div class="service-bar-item">
+                                <div class="service-bar-header">
+                                    <span class="service-bar-name">Lot Cleaning</span>
+                                    <span class="service-bar-pct">6%</span>
+                                </div>
+                                <div class="service-bar-track">
+                                    <div class="service-bar-fill" style="width:6%; background: #14b8a6;"></div>
+                                </div>
+                            </div>
+                            <div class="service-bar-item">
+                                <div class="service-bar-header">
+                                    <span class="service-bar-name">Tombstone Repair</span>
+                                    <span class="service-bar-pct">3%</span>
+                                </div>
+                                <div class="service-bar-track">
+                                    <div class="service-bar-fill" style="width:3%; background: #78716c;"></div>
+                                </div>
+                            </div>
+                            <div class="service-bar-item">
+                                <div class="service-bar-header">
+                                    <span class="service-bar-name">Other</span>
+                                    <span class="service-bar-pct">4%</span>
+                                </div>
+                                <div class="service-bar-track">
+                                    <div class="service-bar-fill" style="width:4%; background: var(--text-muted);"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== TAB: USERS ===== -->
+        <section class="admin-tab" id="tab-users">
+            <div class="admin-content">
+                <div class="tab-header">
+                    <h2>User Management</h2>
+                    <div class="tab-header-actions">
+                        <div class="table-search">
+                            <span class="material-symbols-outlined">search</span>
+                            <input type="text" placeholder="Search users…" class="table-search-input">
+                        </div>
+                        <select class="admin-select filter-select">
+                            <option value="all">All Users</option>
+                            <option value="active">Active</option>
+                            <option value="inactive">Inactive</option>
+                        </select>
+                        <button class="btn-admin btn-outline-admin">
+                            <span class="material-symbols-outlined">download</span>
+                            Export
+                        </button>
+                    </div>
+                </div>
+
+                <div class="admin-card">
+                    <div class="table-wrap">
+                        <table class="admin-table sortable-table">
+                            <thead>
+                                <tr>
+                                    <th class="th-check"><input type="checkbox" class="select-all-check"></th>
+                                    <th class="sortable" data-sort="name">User <span class="material-symbols-outlined sort-icon">unfold_more</span></th>
+                                    <th class="sortable" data-sort="plan">Plan <span class="material-symbols-outlined sort-icon">unfold_more</span></th>
+                                    <th class="sortable" data-sort="memorials">Memorials <span class="material-symbols-outlined sort-icon">unfold_more</span></th>
+                                    <th class="sortable" data-sort="joined">Joined <span class="material-symbols-outlined sort-icon">unfold_more</span></th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="checkbox" class="row-check"></td>
+                                    <td class="user-cell">
+                                        <img src="https://ui-avatars.com/api/?name=Maria+Santos&background=6366f1&color=fff&size=36" alt="" class="table-avatar">
+                                        <div><strong>Maria Santos</strong><small>maria.santos@email.com</small></div>
+                                    </td>
+                                    <td><span class="badge badge-premium">Premium</span></td>
+                                    <td>12</td>
+                                    <td>Jan 15, 2025</td>
+                                    <td><span class="badge badge-success">Active</span></td>
+                                    <td class="action-cell">
+                                        <button class="icon-btn" title="View"><span class="material-symbols-outlined">visibility</span></button>
+                                        <button class="icon-btn" title="Edit"><span class="material-symbols-outlined">edit</span></button>
+                                        <button class="icon-btn" title="Disable"><span class="material-symbols-outlined">block</span></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="row-check"></td>
+                                    <td class="user-cell">
+                                        <img src="https://ui-avatars.com/api/?name=Juan+Dela+Cruz&background=10b981&color=fff&size=36" alt="" class="table-avatar">
+                                        <div><strong>Juan Dela Cruz</strong><small>juan.delacruz@email.com</small></div>
+                                    </td>
+                                    <td><span class="badge badge-family">Family</span></td>
+                                    <td>5</td>
+                                    <td>Mar 8, 2025</td>
+                                    <td><span class="badge badge-success">Active</span></td>
+                                    <td class="action-cell">
+                                        <button class="icon-btn" title="View"><span class="material-symbols-outlined">visibility</span></button>
+                                        <button class="icon-btn" title="Edit"><span class="material-symbols-outlined">edit</span></button>
+                                        <button class="icon-btn" title="Disable"><span class="material-symbols-outlined">block</span></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="row-check"></td>
+                                    <td class="user-cell">
+                                        <img src="https://ui-avatars.com/api/?name=Ana+Reyes&background=f59e0b&color=fff&size=36" alt="" class="table-avatar">
+                                        <div><strong>Ana Reyes</strong><small>ana.reyes@email.com</small></div>
+                                    </td>
+                                    <td><span class="badge badge-free">Free</span></td>
+                                    <td>2</td>
+                                    <td>Jun 22, 2025</td>
+                                    <td><span class="badge badge-success">Active</span></td>
+                                    <td class="action-cell">
+                                        <button class="icon-btn" title="View"><span class="material-symbols-outlined">visibility</span></button>
+                                        <button class="icon-btn" title="Edit"><span class="material-symbols-outlined">edit</span></button>
+                                        <button class="icon-btn" title="Disable"><span class="material-symbols-outlined">block</span></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="row-check"></td>
+                                    <td class="user-cell">
+                                        <img src="https://ui-avatars.com/api/?name=Roberto+Garcia&background=ef4444&color=fff&size=36" alt="" class="table-avatar">
+                                        <div><strong>Roberto Garcia</strong><small>roberto.garcia@email.com</small></div>
+                                    </td>
+                                    <td><span class="badge badge-premium">Premium</span></td>
+                                    <td>8</td>
+                                    <td>Feb 14, 2025</td>
+                                    <td><span class="badge badge-success">Active</span></td>
+                                    <td class="action-cell">
+                                        <button class="icon-btn" title="View"><span class="material-symbols-outlined">visibility</span></button>
+                                        <button class="icon-btn" title="Edit"><span class="material-symbols-outlined">edit</span></button>
+                                        <button class="icon-btn" title="Disable"><span class="material-symbols-outlined">block</span></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="row-check"></td>
+                                    <td class="user-cell">
+                                        <img src="https://ui-avatars.com/api/?name=Carmen+Lim&background=ec4899&color=fff&size=36" alt="" class="table-avatar">
+                                        <div><strong>Carmen Lim</strong><small>carmen.lim@email.com</small></div>
+                                    </td>
+                                    <td><span class="badge badge-family">Family</span></td>
+                                    <td>3</td>
+                                    <td>Apr 5, 2025</td>
+                                    <td><span class="badge badge-inactive">Inactive</span></td>
+                                    <td class="action-cell">
+                                        <button class="icon-btn" title="View"><span class="material-symbols-outlined">visibility</span></button>
+                                        <button class="icon-btn" title="Edit"><span class="material-symbols-outlined">edit</span></button>
+                                        <button class="icon-btn" title="Disable"><span class="material-symbols-outlined">block</span></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="row-check"></td>
+                                    <td class="user-cell">
+                                        <img src="https://ui-avatars.com/api/?name=Pedro+Navarro&background=0ea5e9&color=fff&size=36" alt="" class="table-avatar">
+                                        <div><strong>Pedro Navarro</strong><small>pedro.navarro@email.com</small></div>
+                                    </td>
+                                    <td><span class="badge badge-free">Free</span></td>
+                                    <td>1</td>
+                                    <td>Jul 30, 2025</td>
+                                    <td><span class="badge badge-success">Active</span></td>
+                                    <td class="action-cell">
+                                        <button class="icon-btn" title="View"><span class="material-symbols-outlined">visibility</span></button>
+                                        <button class="icon-btn" title="Edit"><span class="material-symbols-outlined">edit</span></button>
+                                        <button class="icon-btn" title="Disable"><span class="material-symbols-outlined">block</span></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="row-check"></td>
+                                    <td class="user-cell">
+                                        <img src="https://ui-avatars.com/api/?name=Luz+Fernandez&background=8b5cf6&color=fff&size=36" alt="" class="table-avatar">
+                                        <div><strong>Luz Fernandez</strong><small>luz.fernandez@email.com</small></div>
+                                    </td>
+                                    <td><span class="badge badge-premium">Premium</span></td>
+                                    <td>15</td>
+                                    <td>Dec 1, 2024</td>
+                                    <td><span class="badge badge-success">Active</span></td>
+                                    <td class="action-cell">
+                                        <button class="icon-btn" title="View"><span class="material-symbols-outlined">visibility</span></button>
+                                        <button class="icon-btn" title="Edit"><span class="material-symbols-outlined">edit</span></button>
+                                        <button class="icon-btn" title="Disable"><span class="material-symbols-outlined">block</span></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="row-check"></td>
+                                    <td class="user-cell">
+                                        <img src="https://ui-avatars.com/api/?name=Diego+Ramos&background=14b8a6&color=fff&size=36" alt="" class="table-avatar">
+                                        <div><strong>Diego Ramos</strong><small>diego.ramos@email.com</small></div>
+                                    </td>
+                                    <td><span class="badge badge-free">Free</span></td>
+                                    <td>1</td>
+                                    <td>Sep 18, 2025</td>
+                                    <td><span class="badge badge-inactive">Inactive</span></td>
+                                    <td class="action-cell">
+                                        <button class="icon-btn" title="View"><span class="material-symbols-outlined">visibility</span></button>
+                                        <button class="icon-btn" title="Edit"><span class="material-symbols-outlined">edit</span></button>
+                                        <button class="icon-btn" title="Disable"><span class="material-symbols-outlined">block</span></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-pagination">
+                        <span class="pagination-info">Showing 1–8 of 12,847</span>
+                        <div class="pagination-btns">
+                            <button class="pagination-btn" disabled>
+                                <span class="material-symbols-outlined">chevron_left</span>
+                            </button>
+                            <button class="pagination-btn active">1</button>
+                            <button class="pagination-btn">2</button>
+                            <button class="pagination-btn">3</button>
+                            <span class="pagination-ellipsis">…</span>
+                            <button class="pagination-btn">1,606</button>
+                            <button class="pagination-btn">
+                                <span class="material-symbols-outlined">chevron_right</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bulk Actions -->
+                <div class="bulk-actions-bar" id="bulkActionsBar">
+                    <span class="bulk-count"><span id="selectedCount">0</span> selected</span>
+                    <button class="btn-admin btn-outline-admin">
+                        <span class="material-symbols-outlined">block</span> Disable
+                    </button>
+                    <button class="btn-admin btn-outline-admin btn-danger">
+                        <span class="material-symbols-outlined">delete</span> Delete
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== TAB: MEMORIALS ===== -->
+        <section class="admin-tab" id="tab-memorials">
+            <div class="admin-content">
+                <div class="tab-header">
+                    <h2>Memorial Management</h2>
+                    <div class="tab-header-actions">
+                        <div class="table-search">
+                            <span class="material-symbols-outlined">search</span>
+                            <input type="text" placeholder="Search memorials…" class="table-search-input">
+                        </div>
+                        <select class="admin-select filter-select">
+                            <option value="all">All Status</option>
+                            <option value="published">Published</option>
+                            <option value="draft">Draft</option>
+                            <option value="flagged">Flagged</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="admin-card">
+                    <div class="table-wrap">
+                        <table class="admin-table sortable-table">
+                            <thead>
+                                <tr>
+                                    <th class="th-check"><input type="checkbox" class="select-all-check"></th>
+                                    <th>Memorial</th>
+                                    <th>Creator</th>
+                                    <th class="sortable" data-sort="visitors">Visitors <span class="material-symbols-outlined sort-icon">unfold_more</span></th>
+                                    <th class="sortable" data-sort="tributes">Tributes <span class="material-symbols-outlined sort-icon">unfold_more</span></th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="checkbox" class="row-check"></td>
+                                    <td class="memorial-cell">
+                                        <div class="memorial-thumb">🕯️</div>
+                                        <div>
+                                            <strong>Lola Remedios Dela Cruz</strong>
+                                            <small>1935 – 2025</small>
+                                        </div>
+                                    </td>
+                                    <td>Maria Santos</td>
+                                    <td>2,345</td>
+                                    <td>187</td>
+                                    <td><span class="badge badge-success">Published</span></td>
+                                    <td class="action-cell">
+                                        <button class="icon-btn" title="View"><span class="material-symbols-outlined">visibility</span></button>
+                                        <button class="icon-btn" title="Edit"><span class="material-symbols-outlined">edit</span></button>
+                                        <button class="icon-btn" title="Flag"><span class="material-symbols-outlined">flag</span></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="row-check"></td>
+                                    <td class="memorial-cell">
+                                        <div class="memorial-thumb">🌸</div>
+                                        <div>
+                                            <strong>Lolo Andres Garcia</strong>
+                                            <small>1940 – 2026</small>
+                                        </div>
+                                    </td>
+                                    <td>Roberto Garcia</td>
+                                    <td>1,892</td>
+                                    <td>143</td>
+                                    <td><span class="badge badge-success">Published</span></td>
+                                    <td class="action-cell">
+                                        <button class="icon-btn" title="View"><span class="material-symbols-outlined">visibility</span></button>
+                                        <button class="icon-btn" title="Edit"><span class="material-symbols-outlined">edit</span></button>
+                                        <button class="icon-btn" title="Flag"><span class="material-symbols-outlined">flag</span></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="row-check"></td>
+                                    <td class="memorial-cell">
+                                        <div class="memorial-thumb">🕊️</div>
+                                        <div>
+                                            <strong>Tita Rosario Navarro</strong>
+                                            <small>1958 – 2025</small>
+                                        </div>
+                                    </td>
+                                    <td>Pedro Navarro</td>
+                                    <td>756</td>
+                                    <td>62</td>
+                                    <td><span class="badge badge-draft">Draft</span></td>
+                                    <td class="action-cell">
+                                        <button class="icon-btn" title="View"><span class="material-symbols-outlined">visibility</span></button>
+                                        <button class="icon-btn" title="Edit"><span class="material-symbols-outlined">edit</span></button>
+                                        <button class="icon-btn" title="Flag"><span class="material-symbols-outlined">flag</span></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="row-check"></td>
+                                    <td class="memorial-cell">
+                                        <div class="memorial-thumb">🙏</div>
+                                        <div>
+                                            <strong>Tatay Jose Reyes Sr.</strong>
+                                            <small>1942 – 2024</small>
+                                        </div>
+                                    </td>
+                                    <td>Ana Reyes</td>
+                                    <td>3,102</td>
+                                    <td>256</td>
+                                    <td><span class="badge badge-success">Published</span></td>
+                                    <td class="action-cell">
+                                        <button class="icon-btn" title="View"><span class="material-symbols-outlined">visibility</span></button>
+                                        <button class="icon-btn" title="Edit"><span class="material-symbols-outlined">edit</span></button>
+                                        <button class="icon-btn" title="Flag"><span class="material-symbols-outlined">flag</span></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="row-check"></td>
+                                    <td class="memorial-cell">
+                                        <div class="memorial-thumb">⚠️</div>
+                                        <div>
+                                            <strong>Test Memorial Page</strong>
+                                            <small>2000 – 2025</small>
+                                        </div>
+                                    </td>
+                                    <td>Unknown User</td>
+                                    <td>45</td>
+                                    <td>3</td>
+                                    <td><span class="badge badge-error">Flagged</span></td>
+                                    <td class="action-cell">
+                                        <button class="icon-btn" title="View"><span class="material-symbols-outlined">visibility</span></button>
+                                        <button class="icon-btn" title="Edit"><span class="material-symbols-outlined">edit</span></button>
+                                        <button class="icon-btn" title="Remove Flag"><span class="material-symbols-outlined">flag</span></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><input type="checkbox" class="row-check"></td>
+                                    <td class="memorial-cell">
+                                        <div class="memorial-thumb">✨</div>
+                                        <div>
+                                            <strong>Nanay Corazon Fernandez</strong>
+                                            <small>1950 – 2026</small>
+                                        </div>
+                                    </td>
+                                    <td>Luz Fernandez</td>
+                                    <td>1,204</td>
+                                    <td>98</td>
+                                    <td><span class="badge badge-success">Published</span></td>
+                                    <td class="action-cell">
+                                        <button class="icon-btn" title="View"><span class="material-symbols-outlined">visibility</span></button>
+                                        <button class="icon-btn" title="Edit"><span class="material-symbols-outlined">edit</span></button>
+                                        <button class="icon-btn" title="Flag"><span class="material-symbols-outlined">flag</span></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-pagination">
+                        <span class="pagination-info">Showing 1–6 of 8,234</span>
+                        <div class="pagination-btns">
+                            <button class="pagination-btn" disabled><span class="material-symbols-outlined">chevron_left</span></button>
+                            <button class="pagination-btn active">1</button>
+                            <button class="pagination-btn">2</button>
+                            <button class="pagination-btn">3</button>
+                            <span class="pagination-ellipsis">…</span>
+                            <button class="pagination-btn">1,373</button>
+                            <button class="pagination-btn"><span class="material-symbols-outlined">chevron_right</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== TAB: ORDERS ===== -->
+        <section class="admin-tab" id="tab-orders">
+            <div class="admin-content">
+                <div class="tab-header">
+                    <h2>Order Management</h2>
+                    <div class="tab-header-actions">
+                        <div class="table-search">
+                            <span class="material-symbols-outlined">search</span>
+                            <input type="text" placeholder="Search orders…" class="table-search-input">
+                        </div>
+                        <input type="date" class="admin-input date-input" value="2026-04-01">
+                        <span class="date-sep">to</span>
+                        <input type="date" class="admin-input date-input" value="2026-04-11">
+                        <select class="admin-select filter-select">
+                            <option value="all">All Status</option>
+                            <option value="completed">Completed</option>
+                            <option value="pending">Pending</option>
+                            <option value="processing">Processing</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Order Summary Cards -->
+                <div class="stat-cards-row mini">
+                    <div class="stat-card mini">
+                        <div class="stat-info">
+                            <span class="stat-number">24</span>
+                            <span class="stat-label">Today's Orders</span>
+                        </div>
+                    </div>
+                    <div class="stat-card mini">
+                        <div class="stat-info">
+                            <span class="stat-number">8</span>
+                            <span class="stat-label">Pending</span>
+                        </div>
+                    </div>
+                    <div class="stat-card mini">
+                        <div class="stat-info">
+                            <span class="stat-number">5</span>
+                            <span class="stat-label">Processing</span>
+                        </div>
+                    </div>
+                    <div class="stat-card mini">
+                        <div class="stat-info">
+                            <span class="stat-number">11</span>
+                            <span class="stat-label">Completed</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="admin-card">
+                    <div class="table-wrap">
+                        <table class="admin-table sortable-table">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Customer</th>
+                                    <th>Service</th>
+                                    <th>Memorial</th>
+                                    <th class="sortable" data-sort="amount">Amount <span class="material-symbols-outlined sort-icon">unfold_more</span></th>
+                                    <th>Status</th>
+                                    <th class="sortable" data-sort="date">Date <span class="material-symbols-outlined sort-icon">unfold_more</span></th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>#ORD-7841</strong></td>
+                                    <td>Maria Santos</td>
+                                    <td>Flower Delivery</td>
+                                    <td>Lola Remedios</td>
+                                    <td>₱2,500</td>
+                                    <td><span class="badge badge-success">Completed</span></td>
+                                    <td>Apr 11, 2026</td>
+                                    <td class="action-cell">
+                                        <button class="icon-btn" title="View"><span class="material-symbols-outlined">visibility</span></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#ORD-7840</strong></td>
+                                    <td>Juan Dela Cruz</td>
+                                    <td>Mass Offering</td>
+                                    <td>Lolo Andres</td>
+                                    <td>₱1,500</td>
+                                    <td><span class="badge badge-warning">Pending</span></td>
+                                    <td>Apr 11, 2026</td>
+                                    <td class="action-cell">
+                                        <button class="icon-btn" title="View"><span class="material-symbols-outlined">visibility</span></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#ORD-7839</strong></td>
+                                    <td>Ana Reyes</td>
+                                    <td>Live Stream</td>
+                                    <td>Tatay Jose Reyes</td>
+                                    <td>₱3,000</td>
+                                    <td><span class="badge badge-info">Processing</span></td>
+                                    <td>Apr 10, 2026</td>
+                                    <td class="action-cell">
+                                        <button class="icon-btn" title="View"><span class="material-symbols-outlined">visibility</span></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#ORD-7838</strong></td>
+                                    <td>Roberto Garcia</td>
+                                    <td>AI Voice Tribute</td>
+                                    <td>Lolo Andres</td>
+                                    <td>₱5,000</td>
+                                    <td><span class="badge badge-success">Completed</span></td>
+                                    <td>Apr 10, 2026</td>
+                                    <td class="action-cell">
+                                        <button class="icon-btn" title="View"><span class="material-symbols-outlined">visibility</span></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#ORD-7837</strong></td>
+                                    <td>Carmen Lim</td>
+                                    <td>Flower Delivery</td>
+                                    <td>Tita Rosario</td>
+                                    <td>₱1,800</td>
+                                    <td><span class="badge badge-error">Cancelled</span></td>
+                                    <td>Apr 9, 2026</td>
+                                    <td class="action-cell">
+                                        <button class="icon-btn" title="View"><span class="material-symbols-outlined">visibility</span></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#ORD-7836</strong></td>
+                                    <td>Pedro Navarro</td>
+                                    <td>Mass Offering</td>
+                                    <td>Tita Rosario</td>
+                                    <td>₱1,500</td>
+                                    <td><span class="badge badge-success">Completed</span></td>
+                                    <td>Apr 9, 2026</td>
+                                    <td class="action-cell">
+                                        <button class="icon-btn" title="View"><span class="material-symbols-outlined">visibility</span></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#ORD-7835</strong></td>
+                                    <td>Luz Fernandez</td>
+                                    <td>Flower Delivery</td>
+                                    <td>Nanay Corazon</td>
+                                    <td>₱3,200</td>
+                                    <td><span class="badge badge-info">Processing</span></td>
+                                    <td>Apr 8, 2026</td>
+                                    <td class="action-cell">
+                                        <button class="icon-btn" title="View"><span class="material-symbols-outlined">visibility</span></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>#ORD-7834</strong></td>
+                                    <td>Diego Ramos</td>
+                                    <td>Live Stream</td>
+                                    <td>Lola Remedios</td>
+                                    <td>₱3,000</td>
+                                    <td><span class="badge badge-warning">Pending</span></td>
+                                    <td>Apr 8, 2026</td>
+                                    <td class="action-cell">
+                                        <button class="icon-btn" title="View"><span class="material-symbols-outlined">visibility</span></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-pagination">
+                        <span class="pagination-info">Showing 1–8 of 3,456</span>
+                        <div class="pagination-btns">
+                            <button class="pagination-btn" disabled><span class="material-symbols-outlined">chevron_left</span></button>
+                            <button class="pagination-btn active">1</button>
+                            <button class="pagination-btn">2</button>
+                            <button class="pagination-btn">3</button>
+                            <span class="pagination-ellipsis">…</span>
+                            <button class="pagination-btn">432</button>
+                            <button class="pagination-btn"><span class="material-symbols-outlined">chevron_right</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== TAB: REVENUE ===== -->
+        <section class="admin-tab" id="tab-revenue">
+            <div class="admin-content">
+                <div class="tab-header">
+                    <h2>Revenue Analytics</h2>
+                    <div class="period-selector large">
+                        <button class="period-btn" data-period="today">Today</button>
+                        <button class="period-btn" data-period="week">This Week</button>
+                        <button class="period-btn active" data-period="month">This Month</button>
+                        <button class="period-btn" data-period="year">This Year</button>
+                    </div>
+                </div>
+
+                <!-- Revenue Stat Cards -->
+                <div class="stat-cards-row">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: var(--primary-50); color: var(--primary);">
+                            <span class="material-symbols-outlined">trending_up</span>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number">₱2,847,500</span>
+                            <span class="stat-label">Gross Revenue</span>
+                        </div>
+                        <span class="stat-growth positive">+22.1% ↑</span>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #ecfdf5; color: var(--success);">
+                            <span class="material-symbols-outlined">account_balance</span>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number">₱2,278,000</span>
+                            <span class="stat-label">Net Revenue</span>
+                        </div>
+                        <span class="stat-growth positive">+18.7% ↑</span>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #fef3c7; color: var(--warning);">
+                            <span class="material-symbols-outlined">shopping_bag</span>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number">₱823</span>
+                            <span class="stat-label">Avg Order Value</span>
+                        </div>
+                        <span class="stat-growth positive">+5.2% ↑</span>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #fef2f2; color: var(--error);">
+                            <span class="material-symbols-outlined">undo</span>
+                        </div>
+                        <div class="stat-info">
+                            <span class="stat-number">₱45,200</span>
+                            <span class="stat-label">Refunds</span>
+                        </div>
+                        <span class="stat-growth negative">-3.1% ↓</span>
+                    </div>
+                </div>
+
+                <!-- Revenue Trend Chart -->
+                <div class="admin-card chart-card">
+                    <div class="card-header">
+                        <h3>Revenue Trend</h3>
+                    </div>
+                    <div class="chart-placeholder large">
+                        <div class="chart-area">
+                            <div class="chart-bars">
+                                <div class="chart-bar" style="height:45%"><span>₱180K</span></div>
+                                <div class="chart-bar" style="height:62%"><span>₱248K</span></div>
+                                <div class="chart-bar" style="height:38%"><span>₱152K</span></div>
+                                <div class="chart-bar" style="height:75%"><span>₱300K</span></div>
+                                <div class="chart-bar" style="height:55%"><span>₱220K</span></div>
+                                <div class="chart-bar" style="height:88%"><span>₱352K</span></div>
+                                <div class="chart-bar" style="height:70%"><span>₱280K</span></div>
+                                <div class="chart-bar" style="height:65%"><span>₱260K</span></div>
+                                <div class="chart-bar" style="height:82%"><span>₱328K</span></div>
+                                <div class="chart-bar" style="height:58%"><span>₱232K</span></div>
+                                <div class="chart-bar" style="height:92%"><span>₱368K</span></div>
+                                <div class="chart-bar active" style="height:78%"><span>₱312K</span></div>
+                            </div>
+                            <div class="chart-labels">
+                                <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span>
+                                <span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Revenue Breakdown -->
+                <div class="admin-two-col">
+                    <div class="admin-card">
+                        <div class="card-header">
+                            <h3>Revenue by Service</h3>
+                        </div>
+                        <div class="top-services-list">
+                            <div class="service-bar-item">
+                                <div class="service-bar-header">
+                                    <span class="service-bar-name">Flower Delivery</span>
+                                    <span class="service-bar-val">₱1,281,375</span>
+                                    <span class="service-bar-pct">45%</span>
+                                </div>
+                                <div class="service-bar-track"><div class="service-bar-fill" style="width:45%; background:var(--primary);"></div></div>
+                            </div>
+                            <div class="service-bar-item">
+                                <div class="service-bar-header">
+                                    <span class="service-bar-name">Mass Offering</span>
+                                    <span class="service-bar-val">₱797,300</span>
+                                    <span class="service-bar-pct">28%</span>
+                                </div>
+                                <div class="service-bar-track"><div class="service-bar-fill" style="width:28%; background:var(--success);"></div></div>
+                            </div>
+                            <div class="service-bar-item">
+                                <div class="service-bar-header">
+                                    <span class="service-bar-name">Live Stream</span>
+                                    <span class="service-bar-val">₱427,125</span>
+                                    <span class="service-bar-pct">15%</span>
+                                </div>
+                                <div class="service-bar-track"><div class="service-bar-fill" style="width:15%; background:var(--warning);"></div></div>
+                            </div>
+                            <div class="service-bar-item">
+                                <div class="service-bar-header">
+                                    <span class="service-bar-name">AI Voice Tribute</span>
+                                    <span class="service-bar-val">₱227,800</span>
+                                    <span class="service-bar-pct">8%</span>
+                                </div>
+                                <div class="service-bar-track"><div class="service-bar-fill" style="width:8%; background:var(--error);"></div></div>
+                            </div>
+                            <div class="service-bar-item">
+                                <div class="service-bar-header">
+                                    <span class="service-bar-name">Other</span>
+                                    <span class="service-bar-val">₱113,900</span>
+                                    <span class="service-bar-pct">4%</span>
+                                </div>
+                                <div class="service-bar-track"><div class="service-bar-fill" style="width:4%; background:var(--text-muted);"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="admin-card">
+                        <div class="card-header">
+                            <h3>Revenue by Payment Method</h3>
+                        </div>
+                        <div class="top-services-list">
+                            <div class="service-bar-item">
+                                <div class="service-bar-header">
+                                    <span class="service-bar-name">GCash</span>
+                                    <span class="service-bar-val">₱1,281,375</span>
+                                    <span class="service-bar-pct">45%</span>
+                                </div>
+                                <div class="service-bar-track"><div class="service-bar-fill" style="width:45%; background:#0070E0;"></div></div>
+                            </div>
+                            <div class="service-bar-item">
+                                <div class="service-bar-header">
+                                    <span class="service-bar-name">PayMaya</span>
+                                    <span class="service-bar-val">₱711,875</span>
+                                    <span class="service-bar-pct">25%</span>
+                                </div>
+                                <div class="service-bar-track"><div class="service-bar-fill" style="width:25%; background:#2FB24B;"></div></div>
+                            </div>
+                            <div class="service-bar-item">
+                                <div class="service-bar-header">
+                                    <span class="service-bar-name">Credit Card</span>
+                                    <span class="service-bar-val">₱569,500</span>
+                                    <span class="service-bar-pct">20%</span>
+                                </div>
+                                <div class="service-bar-track"><div class="service-bar-fill" style="width:20%; background:var(--warning);"></div></div>
+                            </div>
+                            <div class="service-bar-item">
+                                <div class="service-bar-header">
+                                    <span class="service-bar-name">Bank Transfer</span>
+                                    <span class="service-bar-val">₱284,750</span>
+                                    <span class="service-bar-pct">10%</span>
+                                </div>
+                                <div class="service-bar-track"><div class="service-bar-fill" style="width:10%; background:var(--text-muted);"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== TAB: REPORTS ===== -->
+        <section class="admin-tab" id="tab-reports">
+            <div class="admin-content">
+                <div class="tab-header">
+                    <h2>Reports</h2>
+                </div>
+
+                <div class="reports-grid">
+                    <div class="report-card">
+                        <div class="report-icon" style="background: var(--primary-50); color: var(--primary);">
+                            <span class="material-symbols-outlined">group</span>
+                        </div>
+                        <h3>User Growth Report</h3>
+                        <p>Analyze user registration trends, retention rates, and demographic data.</p>
+                        <div class="report-meta">
+                            <small>Last generated: Apr 10, 2026</small>
+                        </div>
+                        <button class="btn-admin btn-primary-admin">
+                            <span class="material-symbols-outlined">download</span>
+                            Generate Report
+                        </button>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-icon" style="background: #ecfdf5; color: var(--success);">
+                            <span class="material-symbols-outlined">auto_stories</span>
+                        </div>
+                        <h3>Memorial Analytics</h3>
+                        <p>Memorial creation trends, visitor statistics, and engagement metrics.</p>
+                        <div class="report-meta">
+                            <small>Last generated: Apr 9, 2026</small>
+                        </div>
+                        <button class="btn-admin btn-primary-admin">
+                            <span class="material-symbols-outlined">download</span>
+                            Generate Report
+                        </button>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-icon" style="background: #fef3c7; color: var(--warning);">
+                            <span class="material-symbols-outlined">shopping_cart</span>
+                        </div>
+                        <h3>Service Performance</h3>
+                        <p>Revenue per service, order completion rates, and popular services.</p>
+                        <div class="report-meta">
+                            <small>Last generated: Apr 8, 2026</small>
+                        </div>
+                        <button class="btn-admin btn-primary-admin">
+                            <span class="material-symbols-outlined">download</span>
+                            Generate Report
+                        </button>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-icon" style="background: #fce7f3; color: #ec4899;">
+                            <span class="material-symbols-outlined">payments</span>
+                        </div>
+                        <h3>Revenue Report</h3>
+                        <p>Detailed financial breakdown, payment method analysis, and projections.</p>
+                        <div class="report-meta">
+                            <small>Last generated: Apr 10, 2026</small>
+                        </div>
+                        <button class="btn-admin btn-primary-admin">
+                            <span class="material-symbols-outlined">download</span>
+                            Generate Report
+                        </button>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-icon" style="background: #fef2f2; color: var(--error);">
+                            <span class="material-symbols-outlined">feedback</span>
+                        </div>
+                        <h3>Customer Feedback</h3>
+                        <p>User satisfaction scores, reviews summary, and complaint analysis.</p>
+                        <div class="report-meta">
+                            <small>Last generated: Apr 7, 2026</small>
+                        </div>
+                        <button class="btn-admin btn-primary-admin">
+                            <span class="material-symbols-outlined">download</span>
+                            Generate Report
+                        </button>
+                    </div>
+                    <div class="report-card">
+                        <div class="report-icon" style="background: #f0fdf4; color: #16a34a;">
+                            <span class="material-symbols-outlined">monitor_heart</span>
+                        </div>
+                        <h3>System Health</h3>
+                        <p>Server uptime, API response times, error rates, and performance metrics.</p>
+                        <div class="report-meta">
+                            <small>Last generated: Apr 11, 2026</small>
+                        </div>
+                        <button class="btn-admin btn-primary-admin">
+                            <span class="material-symbols-outlined">download</span>
+                            Generate Report
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== TAB: SETTINGS ===== -->
+        <section class="admin-tab" id="tab-settings">
+            <div class="admin-content">
+                <div class="tab-header">
+                    <h2>Platform Settings</h2>
+                </div>
+
+                <!-- General Settings -->
+                <div class="admin-card settings-section">
+                    <h3 class="settings-title">
+                        <span class="material-symbols-outlined">tune</span>
+                        General Settings
+                    </h3>
+                    <div class="settings-group">
+                        <div class="settings-field">
+                            <label>Site Name</label>
+                            <input type="text" class="admin-input" value="Alaala — Filipino Memorial Services">
+                        </div>
+                        <div class="settings-field">
+                            <label>Site Description</label>
+                            <textarea class="admin-input admin-textarea" rows="3">Alaala is a premium Filipino memorial services platform that helps families honor and remember their loved ones through beautiful digital memorials.</textarea>
+                        </div>
+                        <div class="settings-field toggle-field">
+                            <div>
+                                <label>Maintenance Mode</label>
+                                <small>When enabled, only admins can access the site.</small>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" class="toggle-input">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Email Settings -->
+                <div class="admin-card settings-section">
+                    <h3 class="settings-title">
+                        <span class="material-symbols-outlined">mail</span>
+                        Email Settings (SMTP)
+                    </h3>
+                    <div class="settings-group">
+                        <div class="settings-row">
+                            <div class="settings-field">
+                                <label>SMTP Host</label>
+                                <input type="text" class="admin-input" value="smtp.gmail.com">
+                            </div>
+                            <div class="settings-field">
+                                <label>SMTP Port</label>
+                                <input type="text" class="admin-input" value="587">
+                            </div>
+                        </div>
+                        <div class="settings-row">
+                            <div class="settings-field">
+                                <label>SMTP Username</label>
+                                <input type="text" class="admin-input" value="noreply@alaala.ph">
+                            </div>
+                            <div class="settings-field">
+                                <label>SMTP Password</label>
+                                <input type="password" class="admin-input" value="••••••••••••">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Settings -->
+                <div class="admin-card settings-section">
+                    <h3 class="settings-title">
+                        <span class="material-symbols-outlined">payments</span>
+                        Payment Settings
+                    </h3>
+                    <div class="settings-group">
+                        <div class="settings-row">
+                            <div class="settings-field">
+                                <label>GCash API Key</label>
+                                <input type="password" class="admin-input" value="••••••••••••••••••••">
+                            </div>
+                            <div class="settings-field">
+                                <label>GCash Secret Key</label>
+                                <input type="password" class="admin-input" value="••••••••••••••••••••">
+                            </div>
+                        </div>
+                        <div class="settings-row">
+                            <div class="settings-field">
+                                <label>PayMaya API Key</label>
+                                <input type="password" class="admin-input" value="••••••••••••••••••••">
+                            </div>
+                            <div class="settings-field">
+                                <label>PayMaya Secret Key</label>
+                                <input type="password" class="admin-input" value="••••••••••••••••••••">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Notification Settings -->
+                <div class="admin-card settings-section">
+                    <h3 class="settings-title">
+                        <span class="material-symbols-outlined">notifications</span>
+                        Notification Settings
+                    </h3>
+                    <div class="settings-group">
+                        <div class="settings-field toggle-field">
+                            <div>
+                                <label>New User Registration</label>
+                                <small>Receive email when a new user registers</small>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" class="toggle-input" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="settings-field toggle-field">
+                            <div>
+                                <label>New Order</label>
+                                <small>Receive email for each new order placed</small>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" class="toggle-input" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="settings-field toggle-field">
+                            <div>
+                                <label>Flagged Content</label>
+                                <small>Receive alert when content is flagged for review</small>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" class="toggle-input" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="settings-field toggle-field">
+                            <div>
+                                <label>Payment Failed</label>
+                                <small>Receive alert when a payment transaction fails</small>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" class="toggle-input">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        <div class="settings-field toggle-field">
+                            <div>
+                                <label>Weekly Summary</label>
+                                <small>Receive weekly platform performance summary</small>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" class="toggle-input" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-actions">
+                    <button class="btn-admin btn-primary-admin">Save Changes</button>
+                    <button class="btn-admin btn-outline-admin">Reset to Default</button>
+                </div>
+            </div>
+        </section>
+
+    </div><!-- .admin-main -->
+</div><!-- .admin-layout -->
+
+<!-- Sidebar overlay for mobile -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<script src="admin.js"></script>
+<script src="animations.js"></script>
+</body>
+</html>

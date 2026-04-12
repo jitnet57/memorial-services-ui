@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Memorial — Alaala</title>
+    <meta name="description" content="Create a beautiful online memorial for your loved one on Alaala. Add photos, stories, and tributes.">
+    <meta name="keywords" content="memorial, Philippines, tribute, remembrance, Alaala, Filipino families">
+    <meta name="author" content="Alaala Memorial Services">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#6366f1">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕯️</text></svg>">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Alaala">
+    <meta property="og:title" content="Create Memorial — Alaala">
+    <meta property="og:description" content="Create a beautiful online memorial for your loved one on Alaala. Add photos, stories, and tributes.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1200&h=630&fit=crop">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="pages.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+    <link rel="stylesheet" href="animations.css">
+</head>
+<body>
+    <!-- ===== TOP NAVBAR ===== -->
+    <nav class="navbar scrolled" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="logo-icon">🕯️</span>
+                <span class="logo-text">Alaala</span>
+            </a>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                    <span class="material-symbols-outlined sun-icon">light_mode</span>
+                    <span class="material-symbols-outlined moon-icon">dark_mode</span>
+                </button>
+                <a href="dashboard.html" class="btn btn-outline btn-sm">
+                    <span class="material-symbols-outlined">dashboard</span> Dashboard
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== CREATE MEMORIAL WIZARD ===== -->
+    <main class="wizard-page">
+        <div class="container">
+            <!-- Progress Steps -->
+            <div class="wizard-progress">
+                <div class="wizard-step active" data-step="1">
+                    <div class="step-circle">1</div>
+                    <span>Basic Info</span>
+                </div>
+                <div class="wizard-step-line"></div>
+                <div class="wizard-step" data-step="2">
+                    <div class="step-circle">2</div>
+                    <span>Photos</span>
+                </div>
+                <div class="wizard-step-line"></div>
+                <div class="wizard-step" data-step="3">
+                    <div class="step-circle">3</div>
+                    <span>Story & Tribute</span>
+                </div>
+                <div class="wizard-step-line"></div>
+                <div class="wizard-step" data-step="4">
+                    <div class="step-circle">4</div>
+                    <span>Services</span>
+                </div>
+                <div class="wizard-step-line"></div>
+                <div class="wizard-step" data-step="5">
+                    <div class="step-circle">5</div>
+                    <span>Review</span>
+                </div>
+            </div>
+
+            <div class="wizard-body">
+                <!-- ===== STEP 1: BASIC INFO ===== -->
+                <div class="wizard-panel active" id="step1">
+                    <div class="wizard-content">
+                        <div class="wizard-form-section">
+                            <h2>Tell us about your loved one</h2>
+                            <p class="wizard-desc">This information will appear on the memorial page.</p>
+
+                            <div class="form-row-2col">
+                                <div class="form-group">
+                                    <label for="deceasedFirst">First Name *</label>
+                                    <div class="input-wrap">
+                                        <span class="material-symbols-outlined input-icon">person</span>
+                                        <input type="text" id="deceasedFirst" placeholder="e.g. Maria" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="deceasedLast">Last Name *</label>
+                                    <div class="input-wrap">
+                                        <span class="material-symbols-outlined input-icon">person</span>
+                                        <input type="text" id="deceasedLast" placeholder="e.g. Santos" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="deceasedMiddle">Middle Name / Nickname</label>
+                                <div class="input-wrap">
+                                    <span class="material-symbols-outlined input-icon">badge</span>
+                                    <input type="text" id="deceasedMiddle" placeholder="Optional">
+                                </div>
+                            </div>
+
+                            <div class="form-row-2col">
+                                <div class="form-group">
+                                    <label for="birthDate">Date of Birth *</label>
+                                    <div class="input-wrap">
+                                        <span class="material-symbols-outlined input-icon">cake</span>
+                                        <input type="date" id="birthDate" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="deathDate">Date of Passing *</label>
+                                    <div class="input-wrap">
+                                        <span class="material-symbols-outlined input-icon">event</span>
+                                        <input type="date" id="deathDate" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="birthPlace">Place of Birth</label>
+                                <div class="input-wrap">
+                                    <span class="material-symbols-outlined input-icon">location_on</span>
+                                    <input type="text" id="birthPlace" placeholder="e.g. Manila, Philippines">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="restingPlace">Resting Place</label>
+                                <div class="input-wrap">
+                                    <span class="material-symbols-outlined input-icon">park</span>
+                                    <input type="text" id="restingPlace" placeholder="e.g. Manila Memorial Park">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Relationship to You</label>
+                                <div class="relationship-tags">
+                                    <label class="tag-option"><input type="radio" name="relationship" value="parent"><span>Parent</span></label>
+                                    <label class="tag-option"><input type="radio" name="relationship" value="grandparent"><span>Grandparent</span></label>
+                                    <label class="tag-option"><input type="radio" name="relationship" value="spouse"><span>Spouse</span></label>
+                                    <label class="tag-option"><input type="radio" name="relationship" value="sibling"><span>Sibling</span></label>
+                                    <label class="tag-option"><input type="radio" name="relationship" value="child"><span>Child</span></label>
+                                    <label class="tag-option"><input type="radio" name="relationship" value="friend"><span>Friend</span></label>
+                                    <label class="tag-option"><input type="radio" name="relationship" value="other"><span>Other</span></label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Memorial Privacy</label>
+                                <div class="privacy-options">
+                                    <label class="privacy-option">
+                                        <input type="radio" name="privacy" value="public" checked>
+                                        <div class="privacy-card">
+                                            <span class="material-symbols-outlined">public</span>
+                                            <strong>Public</strong>
+                                            <p>Anyone can view and leave tributes</p>
+                                        </div>
+                                    </label>
+                                    <label class="privacy-option">
+                                        <input type="radio" name="privacy" value="private">
+                                        <div class="privacy-card">
+                                            <span class="material-symbols-outlined">lock</span>
+                                            <strong>Private</strong>
+                                            <p>Only invited family & friends</p>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Live Preview -->
+                        <div class="wizard-preview">
+                            <div class="preview-label">
+                                <span class="material-symbols-outlined">visibility</span> Live Preview
+                            </div>
+                            <div class="memorial-preview-card">
+                                <div class="preview-cover">
+                                    <div class="cover-gradient"></div>
+                                </div>
+                                <div class="preview-avatar">
+                                    <span class="material-symbols-outlined">person</span>
+                                </div>
+                                <h3 class="preview-name" id="previewName">Full Name</h3>
+                                <p class="preview-dates" id="previewDates">Birth — Passing</p>
+                                <p class="preview-location" id="previewLocation">
+                                    <span class="material-symbols-outlined">location_on</span>
+                                    <span>Resting place</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== STEP 2: PHOTOS ===== -->
+                <div class="wizard-panel" id="step2">
+                    <div class="wizard-content">
+                        <div class="wizard-form-section">
+                            <h2>Add photos & videos</h2>
+                            <p class="wizard-desc">Upload memories to make the memorial more personal.</p>
+
+                            <!-- Profile Photo -->
+                            <div class="upload-section">
+                                <h3><span class="material-symbols-outlined">account_circle</span> Profile Photo</h3>
+                                <div class="profile-upload">
+                                    <div class="profile-upload-area">
+                                        <span class="material-symbols-outlined">add_a_photo</span>
+                                        <p>Click to upload</p>
+                                        <span class="upload-hint">JPG, PNG up to 5MB</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Cover Photo -->
+                            <div class="upload-section">
+                                <h3><span class="material-symbols-outlined">panorama</span> Cover Photo</h3>
+                                <div class="cover-upload">
+                                    <div class="cover-upload-area">
+                                        <span class="material-symbols-outlined">add_photo_alternate</span>
+                                        <p>Drag & drop or click to upload cover image</p>
+                                        <span class="upload-hint">Recommended: 1200 x 400px</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Gallery -->
+                            <div class="upload-section">
+                                <h3><span class="material-symbols-outlined">photo_library</span> Photo Gallery</h3>
+                                <div class="gallery-upload">
+                                    <div class="gallery-upload-area">
+                                        <span class="material-symbols-outlined">cloud_upload</span>
+                                        <p>Drag & drop photos here</p>
+                                        <span class="upload-hint">Upload up to 50 photos</span>
+                                        <button type="button" class="btn btn-outline btn-sm">Browse Files</button>
+                                    </div>
+                                    <div class="gallery-grid" id="galleryGrid">
+                                        <!-- Uploaded thumbnails appear here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="wizard-preview">
+                            <div class="preview-label">
+                                <span class="material-symbols-outlined">visibility</span> Live Preview
+                            </div>
+                            <div class="memorial-preview-card">
+                                <div class="preview-cover">
+                                    <div class="cover-gradient"></div>
+                                </div>
+                                <div class="preview-avatar">
+                                    <span class="material-symbols-outlined">person</span>
+                                </div>
+                                <h3 class="preview-name">Maria Santos</h3>
+                                <p class="preview-dates">1945 — 2024</p>
+                                <div class="preview-gallery-mini">
+                                    <div class="mini-photo"></div>
+                                    <div class="mini-photo"></div>
+                                    <div class="mini-photo"></div>
+                                    <div class="mini-photo more">+12</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== STEP 3: STORY & TRIBUTE ===== -->
+                <div class="wizard-panel" id="step3">
+                    <div class="wizard-content">
+                        <div class="wizard-form-section">
+                            <h2>Share their story</h2>
+                            <p class="wizard-desc">Write a tribute or let AI help you create one.</p>
+
+                            <div class="form-group">
+                                <label for="epitaph">Epitaph / Short Quote</label>
+                                <div class="input-wrap">
+                                    <span class="material-symbols-outlined input-icon">format_quote</span>
+                                    <input type="text" id="epitaph" placeholder='"Forever in our hearts"' maxlength="120">
+                                </div>
+                                <span class="char-count"><span id="epitaphCount">0</span>/120</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="obituary">Obituary / Life Story</label>
+                                <div class="editor-toolbar">
+                                    <button type="button" title="Bold"><span class="material-symbols-outlined">format_bold</span></button>
+                                    <button type="button" title="Italic"><span class="material-symbols-outlined">format_italic</span></button>
+                                    <button type="button" title="List"><span class="material-symbols-outlined">format_list_bulleted</span></button>
+                                    <div class="toolbar-divider"></div>
+                                    <button type="button" class="ai-assist-btn" title="AI Assist">
+                                        <span class="material-symbols-outlined">auto_awesome</span>
+                                        AI Help
+                                    </button>
+                                </div>
+                                <textarea id="obituary" rows="8" placeholder="Share memories, stories, and what made them special..."></textarea>
+                            </div>
+
+                            <!-- AI Voice Tribute -->
+                            <div class="voice-tribute-section">
+                                <div class="voice-tribute-header">
+                                    <h3><span class="material-symbols-outlined">mic</span> Voice Tribute</h3>
+                                    <span class="powered-by">Powered by ElevenLabs</span>
+                                </div>
+                                <div class="voice-options">
+                                    <div class="voice-option">
+                                        <div class="voice-option-icon record">
+                                            <span class="material-symbols-outlined">mic</span>
+                                        </div>
+                                        <div>
+                                            <strong>Record Your Voice</strong>
+                                            <p>Record a personal voice tribute</p>
+                                        </div>
+                                        <button type="button" class="btn btn-outline btn-sm">Record</button>
+                                    </div>
+                                    <div class="voice-option">
+                                        <div class="voice-option-icon ai">
+                                            <span class="material-symbols-outlined">auto_awesome</span>
+                                        </div>
+                                        <div>
+                                            <strong>AI Voice Generation</strong>
+                                            <p>Generate voice from written tribute</p>
+                                        </div>
+                                        <button type="button" class="btn btn-outline btn-sm">Generate</button>
+                                    </div>
+                                    <div class="voice-option">
+                                        <div class="voice-option-icon upload">
+                                            <span class="material-symbols-outlined">upload_file</span>
+                                        </div>
+                                        <div>
+                                            <strong>Upload Audio</strong>
+                                            <p>Upload an existing recording</p>
+                                        </div>
+                                        <button type="button" class="btn btn-outline btn-sm">Upload</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="wizard-preview">
+                            <div class="preview-label">
+                                <span class="material-symbols-outlined">visibility</span> Live Preview
+                            </div>
+                            <div class="memorial-preview-card full">
+                                <div class="preview-cover">
+                                    <div class="cover-gradient"></div>
+                                </div>
+                                <div class="preview-avatar">
+                                    <span class="material-symbols-outlined">person</span>
+                                </div>
+                                <h3 class="preview-name">Maria Santos</h3>
+                                <p class="preview-dates">1945 — 2024</p>
+                                <p class="preview-epitaph" id="previewEpitaph">"Forever in our hearts"</p>
+                                <div class="preview-story" id="previewStory">
+                                    <p>The life story will appear here...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== STEP 4: SERVICES ===== -->
+                <div class="wizard-panel" id="step4">
+                    <div class="wizard-content single-col">
+                        <div class="wizard-form-section">
+                            <h2>Add services</h2>
+                            <p class="wizard-desc">Schedule memorial services for your loved one. You can skip this and add later.</p>
+
+                            <div class="service-cards-grid">
+                                <label class="service-select-card">
+                                    <input type="checkbox" name="services" value="mass">
+                                    <div class="service-select-inner">
+                                        <span class="material-symbols-outlined service-select-icon">church</span>
+                                        <h4>Mass Offering</h4>
+                                        <p>Request a Catholic mass offering at partner churches</p>
+                                        <span class="service-price">From ₱500</span>
+                                        <span class="service-check"><span class="material-symbols-outlined">check_circle</span></span>
+                                    </div>
+                                </label>
+                                <label class="service-select-card">
+                                    <input type="checkbox" name="services" value="flowers">
+                                    <div class="service-select-inner">
+                                        <span class="material-symbols-outlined service-select-icon">local_florist</span>
+                                        <h4>Flower Delivery</h4>
+                                        <p>Send fresh flowers to gravesite or family home</p>
+                                        <span class="service-price">From ₱800</span>
+                                        <span class="service-check"><span class="material-symbols-outlined">check_circle</span></span>
+                                    </div>
+                                </label>
+                                <label class="service-select-card">
+                                    <input type="checkbox" name="services" value="livestream">
+                                    <div class="service-select-inner">
+                                        <span class="material-symbols-outlined service-select-icon">videocam</span>
+                                        <h4>Live Stream</h4>
+                                        <p>Stream memorial service for remote family</p>
+                                        <span class="service-price">From ₱1,500</span>
+                                        <span class="service-check"><span class="material-symbols-outlined">check_circle</span></span>
+                                    </div>
+                                </label>
+                                <label class="service-select-card">
+                                    <input type="checkbox" name="services" value="voice">
+                                    <div class="service-select-inner">
+                                        <span class="material-symbols-outlined service-select-icon">mic</span>
+                                        <h4>AI Voice Tribute</h4>
+                                        <p>Generate natural voice memories via ElevenLabs</p>
+                                        <span class="service-price">From ₱200</span>
+                                        <span class="service-check"><span class="material-symbols-outlined">check_circle</span></span>
+                                    </div>
+                                </label>
+                                <label class="service-select-card">
+                                    <input type="checkbox" name="services" value="reminder">
+                                    <div class="service-select-inner">
+                                        <span class="material-symbols-outlined service-select-icon">notifications_active</span>
+                                        <h4>SMS Reminders</h4>
+                                        <p>Auto death anniversary reminders via Twilio</p>
+                                        <span class="service-price">Free</span>
+                                        <span class="service-check"><span class="material-symbols-outlined">check_circle</span></span>
+                                    </div>
+                                </label>
+                                <label class="service-select-card">
+                                    <input type="checkbox" name="services" value="candles">
+                                    <div class="service-select-inner">
+                                        <span class="material-symbols-outlined service-select-icon">local_fire_department</span>
+                                        <h4>Virtual Candles</h4>
+                                        <p>Let visitors light candles on the memorial</p>
+                                        <span class="service-price">Free</span>
+                                        <span class="service-check"><span class="material-symbols-outlined">check_circle</span></span>
+                                    </div>
+                                </label>
+                                <label class="service-select-card">
+                                    <input type="checkbox" name="services" value="lot-cleaning">
+                                    <div class="service-select-inner">
+                                        <span class="material-symbols-outlined service-select-icon">cleaning_services</span>
+                                        <h4>Memorial Lot Cleaning</h4>
+                                        <p>Professional cleaning of gravesites and lots</p>
+                                        <span class="service-price">From ₱1,200</span>
+                                        <span class="service-check"><span class="material-symbols-outlined">check_circle</span></span>
+                                    </div>
+                                </label>
+                                <label class="service-select-card">
+                                    <input type="checkbox" name="services" value="tombstone-repair">
+                                    <div class="service-select-inner">
+                                        <span class="material-symbols-outlined service-select-icon">construction</span>
+                                        <h4>Tombstone Repair</h4>
+                                        <p>Restoration and repair of tombstones and markers</p>
+                                        <span class="service-price">From ₱2,500</span>
+                                        <span class="service-check"><span class="material-symbols-outlined">check_circle</span></span>
+                                    </div>
+                                </label>
+                            </div>
+
+                            <!-- Schedule Reminder -->
+                            <div class="schedule-reminder-box">
+                                <span class="material-symbols-outlined">info</span>
+                                <div>
+                                    <strong>Anniversary Reminders</strong>
+                                    <p>We'll automatically set up death anniversary SMS reminders (7 days, 1 day, and day-of) once the memorial is published.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ===== STEP 5: REVIEW ===== -->
+                <div class="wizard-panel" id="step5">
+                    <div class="wizard-content single-col">
+                        <div class="wizard-form-section">
+                            <h2>Review & Publish</h2>
+                            <p class="wizard-desc">Review the memorial before publishing.</p>
+
+                            <div class="review-summary">
+                                <div class="review-section">
+                                    <div class="review-section-header">
+                                        <h3><span class="material-symbols-outlined">person</span> Basic Info</h3>
+                                        <button type="button" class="edit-step-btn" data-goto="1">Edit</button>
+                                    </div>
+                                    <div class="review-details">
+                                        <div class="review-row"><span>Name</span><strong>Maria Santos</strong></div>
+                                        <div class="review-row"><span>Born</span><strong>March 15, 1945</strong></div>
+                                        <div class="review-row"><span>Passed</span><strong>January 10, 2024</strong></div>
+                                        <div class="review-row"><span>Resting Place</span><strong>Manila Memorial Park</strong></div>
+                                        <div class="review-row"><span>Privacy</span><strong>Public</strong></div>
+                                    </div>
+                                </div>
+
+                                <div class="review-section">
+                                    <div class="review-section-header">
+                                        <h3><span class="material-symbols-outlined">photo_library</span> Photos</h3>
+                                        <button type="button" class="edit-step-btn" data-goto="2">Edit</button>
+                                    </div>
+                                    <div class="review-details">
+                                        <div class="review-row"><span>Profile Photo</span><strong>Uploaded ✓</strong></div>
+                                        <div class="review-row"><span>Cover Photo</span><strong>Uploaded ✓</strong></div>
+                                        <div class="review-row"><span>Gallery</span><strong>15 photos</strong></div>
+                                    </div>
+                                </div>
+
+                                <div class="review-section">
+                                    <div class="review-section-header">
+                                        <h3><span class="material-symbols-outlined">article</span> Story & Tribute</h3>
+                                        <button type="button" class="edit-step-btn" data-goto="3">Edit</button>
+                                    </div>
+                                    <div class="review-details">
+                                        <div class="review-row"><span>Epitaph</span><strong>"Forever in our hearts"</strong></div>
+                                        <div class="review-row"><span>Obituary</span><strong>Written ✓</strong></div>
+                                        <div class="review-row"><span>Voice Tribute</span><strong>AI Generated ✓</strong></div>
+                                    </div>
+                                </div>
+
+                                <div class="review-section">
+                                    <div class="review-section-header">
+                                        <h3><span class="material-symbols-outlined">receipt_long</span> Services</h3>
+                                        <button type="button" class="edit-step-btn" data-goto="4">Edit</button>
+                                    </div>
+                                    <div class="review-details">
+                                        <div class="review-row"><span>Mass Offering</span><strong>Selected ✓</strong></div>
+                                        <div class="review-row"><span>SMS Reminders</span><strong>Selected ✓</strong></div>
+                                        <div class="review-row"><span>Virtual Candles</span><strong>Selected ✓</strong></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Invite Family -->
+                            <div class="invite-section">
+                                <h3><span class="material-symbols-outlined">group_add</span> Invite Family & Friends</h3>
+                                <p>Share the memorial with loved ones so they can contribute.</p>
+                                <div class="invite-input-row">
+                                    <div class="input-wrap" style="flex:1">
+                                        <span class="material-symbols-outlined input-icon">mail</span>
+                                        <input type="email" placeholder="Enter email address">
+                                    </div>
+                                    <button type="button" class="btn btn-outline btn-sm">
+                                        <span class="material-symbols-outlined">send</span> Invite
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wizard Navigation -->
+                <div class="wizard-nav">
+                    <button type="button" class="btn btn-outline btn-lg" id="prevBtn" style="visibility:hidden">
+                        <span class="material-symbols-outlined">arrow_back</span> Back
+                    </button>
+                    <div class="wizard-step-indicator">
+                        Step <span id="currentStep">1</span> of 5
+                    </div>
+                    <button type="button" class="btn btn-primary btn-lg" id="nextBtn">
+                        Next <span class="material-symbols-outlined">arrow_forward</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="create-memorial.js"></script>
+    <script src="animations.js"></script>
+</body>
+</html>

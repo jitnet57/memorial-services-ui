@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In — Alaala Memorial Services</title>
+    <meta name="description" content="Sign in or create your Alaala account to manage memorials and memorial services for your loved ones.">
+    <meta name="keywords" content="memorial, Philippines, tribute, remembrance, Alaala, Filipino families">
+    <meta name="author" content="Alaala Memorial Services">
+    <meta name="theme-color" content="#6366f1">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕯️</text></svg>">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Alaala">
+    <meta property="og:title" content="Sign In — Alaala Memorial Services">
+    <meta property="og:description" content="Sign in or create your Alaala account to manage memorials and memorial services for your loved ones.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1200&h=630&fit=crop">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="pages.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+    <link rel="stylesheet" href="animations.css">
+</head>
+<body class="auth-page">
+    <div class="auth-layout">
+        <!-- Left Panel — Branding -->
+        <div class="auth-brand-panel">
+            <div class="auth-brand-content">
+                <a href="index.html" class="nav-logo">
+                    <span class="logo-icon">🕯️</span>
+                    <span class="logo-text">Alaala</span>
+                </a>
+                <div class="auth-brand-hero">
+                    <h1>Honor Their Memory,<br><span class="gradient-text">Celebrate Their Life</span></h1>
+                    <p>Join thousands of Filipino families preserving memories and honoring loved ones through beautiful online memorials.</p>
+                </div>
+                <div class="auth-brand-features">
+                    <div class="auth-feature">
+                        <span class="material-symbols-outlined">mic</span>
+                        <span>AI Voice Tributes</span>
+                    </div>
+                    <div class="auth-feature">
+                        <span class="material-symbols-outlined">calendar_month</span>
+                        <span>Smart Scheduling</span>
+                    </div>
+                    <div class="auth-feature">
+                        <span class="material-symbols-outlined">sms</span>
+                        <span>SMS Notifications</span>
+                    </div>
+                </div>
+                <div class="auth-brand-stats">
+                    <div class="auth-stat">
+                        <strong>10,000+</strong>
+                        <span>Memorials</span>
+                    </div>
+                    <div class="auth-stat">
+                        <strong>50,000+</strong>
+                        <span>Families</span>
+                    </div>
+                    <div class="auth-stat">
+                        <strong>500+</strong>
+                        <span>Churches</span>
+                    </div>
+                </div>
+            </div>
+            <div class="auth-brand-bg"></div>
+        </div>
+
+        <!-- Right Panel — Auth Forms -->
+        <div class="auth-form-panel">
+            <div class="auth-form-container">
+                <!-- Theme Toggle -->
+                <div class="auth-top-bar">
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                        <span class="material-symbols-outlined sun-icon">light_mode</span>
+                        <span class="material-symbols-outlined moon-icon">dark_mode</span>
+                    </button>
+                    <div class="lang-switch">
+                        <button class="lang-btn active" data-lang="en">EN</button>
+                        <button class="lang-btn" data-lang="tl">TL</button>
+                    </div>
+                </div>
+
+                <!-- Tab Switcher -->
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-tab="signin">Sign In</button>
+                    <button class="auth-tab" data-tab="signup">Sign Up</button>
+                </div>
+
+                <!-- ===== SIGN IN FORM ===== -->
+                <div class="auth-form active" id="signinForm">
+                    <div class="auth-header">
+                        <h2>Welcome back</h2>
+                        <p>Sign in to manage your memorials and services</p>
+                    </div>
+
+                    <!-- Social Login -->
+                    <div class="social-login">
+                        <button class="social-btn google" data-provider="google">
+                            <svg width="20" height="20" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                            <span class="social-btn-text">Continue with Google</span>
+                        </button>
+                        <button class="social-btn facebook" data-provider="facebook">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                            <span class="social-btn-text">Continue with Facebook</span>
+                        </button>
+                    </div>
+
+                    <div class="auth-divider">
+                        <span>or sign in with</span>
+                    </div>
+
+                    <!-- Phone / Email Toggle -->
+                    <div class="input-method-toggle">
+                        <button class="method-btn active" data-method="phone">
+                            <span class="material-symbols-outlined">phone</span> Phone
+                        </button>
+                        <button class="method-btn" data-method="email">
+                            <span class="material-symbols-outlined">mail</span> Email
+                        </button>
+                    </div>
+
+                    <!-- Phone Input -->
+                    <form class="auth-fields" id="signinPhoneForm">
+                        <div class="form-group" id="phoneGroup">
+                            <label for="signinPhone">Phone Number</label>
+                            <div class="phone-input">
+                                <div class="phone-prefix">
+                                    <span class="flag">🇵🇭</span>
+                                    <span>+63</span>
+                                </div>
+                                <input type="tel" id="signinPhone" placeholder="917 123 4567" maxlength="12" autocomplete="tel">
+                            </div>
+                        </div>
+
+                        <!-- OTP Section (hidden initially) -->
+                        <div class="form-group otp-group hidden" id="otpGroup">
+                            <label>Enter verification code</label>
+                            <p class="otp-info">We sent a 6-digit code via SMS to your phone</p>
+                            <div class="otp-inputs">
+                                <input type="text" maxlength="1" class="otp-digit" data-index="0" inputmode="numeric">
+                                <input type="text" maxlength="1" class="otp-digit" data-index="1" inputmode="numeric">
+                                <input type="text" maxlength="1" class="otp-digit" data-index="2" inputmode="numeric">
+                                <span class="otp-separator">—</span>
+                                <input type="text" maxlength="1" class="otp-digit" data-index="3" inputmode="numeric">
+                                <input type="text" maxlength="1" class="otp-digit" data-index="4" inputmode="numeric">
+                                <input type="text" maxlength="1" class="otp-digit" data-index="5" inputmode="numeric">
+                            </div>
+                            <div class="otp-actions">
+                                <button type="button" class="otp-resend" id="resendBtn" disabled>Resend code in <span id="countdown">60</span>s</button>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block btn-lg" id="signinSubmitBtn">
+                            <span class="material-symbols-outlined">send</span>
+                            Send Verification Code
+                        </button>
+                    </form>
+
+                    <!-- Email Input (hidden) -->
+                    <form class="auth-fields hidden" id="signinEmailForm">
+                        <div class="form-group">
+                            <label for="signinEmail">Email Address</label>
+                            <div class="input-wrap">
+                                <span class="material-symbols-outlined input-icon">mail</span>
+                                <input type="email" id="signinEmail" placeholder="your@email.com" autocomplete="email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="signinPassword">Password</label>
+                            <div class="input-wrap">
+                                <span class="material-symbols-outlined input-icon">lock</span>
+                                <input type="password" id="signinPassword" placeholder="Enter password" autocomplete="current-password">
+                                <button type="button" class="password-toggle" aria-label="Show password">
+                                    <span class="material-symbols-outlined">visibility</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <label class="checkbox-wrap">
+                                <input type="checkbox" checked>
+                                <span class="checkmark"></span>
+                                Remember me
+                            </label>
+                            <a href="#" class="form-link">Forgot password?</a>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block btn-lg">
+                            <span class="material-symbols-outlined">login</span>
+                            Sign In
+                        </button>
+                    </form>
+
+                    <p class="auth-footer-text">
+                        Don't have an account? <button class="form-link switch-tab" data-target="signup">Sign up free</button>
+                    </p>
+                </div>
+
+                <!-- ===== SIGN UP FORM ===== -->
+                <div class="auth-form" id="signupForm">
+                    <div class="auth-header">
+                        <h2>Create your account</h2>
+                        <p>Start honoring your loved ones' memories today</p>
+                    </div>
+
+                    <!-- Social Login -->
+                    <div class="social-login">
+                        <button class="social-btn google" data-provider="google">
+                            <svg width="20" height="20" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+                            <span class="social-btn-text">Continue with Google</span>
+                        </button>
+                        <button class="social-btn facebook" data-provider="facebook">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                            <span class="social-btn-text">Continue with Facebook</span>
+                        </button>
+                    </div>
+
+                    <div class="auth-divider"><span>or sign up with email</span></div>
+
+                    <form class="auth-fields" id="signupFormFields">
+                        <div class="form-row-2col">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <div class="input-wrap">
+                                    <span class="material-symbols-outlined input-icon">person</span>
+                                    <input type="text" id="firstName" placeholder="Juan" autocomplete="given-name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <div class="input-wrap">
+                                    <span class="material-symbols-outlined input-icon">person</span>
+                                    <input type="text" id="lastName" placeholder="Dela Cruz" autocomplete="family-name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="signupEmail">Email Address</label>
+                            <div class="input-wrap">
+                                <span class="material-symbols-outlined input-icon">mail</span>
+                                <input type="email" id="signupEmail" placeholder="your@email.com" autocomplete="email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="signupPhone">Phone Number</label>
+                            <div class="phone-input">
+                                <div class="phone-prefix">
+                                    <span class="flag">🇵🇭</span>
+                                    <span>+63</span>
+                                </div>
+                                <input type="tel" id="signupPhone" placeholder="917 123 4567" maxlength="12" autocomplete="tel">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="signupPassword">Password</label>
+                            <div class="input-wrap">
+                                <span class="material-symbols-outlined input-icon">lock</span>
+                                <input type="password" id="signupPassword" placeholder="Min. 8 characters" autocomplete="new-password">
+                                <button type="button" class="password-toggle" aria-label="Show password">
+                                    <span class="material-symbols-outlined">visibility</span>
+                                </button>
+                            </div>
+                            <div class="password-strength" id="passwordStrength">
+                                <div class="strength-bar"><div class="strength-fill"></div></div>
+                                <span class="strength-label">Password strength</span>
+                            </div>
+                        </div>
+                        <label class="checkbox-wrap">
+                            <input type="checkbox">
+                            <span class="checkmark"></span>
+                            I agree to the <a href="#" class="form-link">Terms of Service</a> and <a href="#" class="form-link">Privacy Policy</a>
+                        </label>
+                        <button type="submit" class="btn btn-primary btn-block btn-lg">
+                            <span class="material-symbols-outlined">person_add</span>
+                            Create Account
+                        </button>
+                    </form>
+
+                    <p class="auth-footer-text">
+                        Already have an account? <button class="form-link switch-tab" data-target="signin">Sign in</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Social Login Toast -->
+    <div class="social-toast" id="socialToast">
+        <div class="toast-icon" id="toastIcon">
+            <span class="material-symbols-outlined">check_circle</span>
+        </div>
+        <div class="toast-body">
+            <strong id="toastTitle">Connecting...</strong>
+            <span id="toastMsg">Redirecting to dashboard</span>
+        </div>
+    </div>
+
+    <script src="auth.js"></script>
+    <script src="animations.js"></script>
+</body>
+</html>

@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alaala — Memorial Services Philippines</title>
+    <meta name="description" content="Alaala — The premier Filipino memorial services platform. Honor your loved ones with beautiful online memorials, AI voice tributes, and memorial services.">
+    <meta name="keywords" content="memorial, Philippines, tribute, remembrance, Alaala, Filipino families">
+    <meta name="author" content="Alaala Memorial Services">
+    <meta name="theme-color" content="#6366f1">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕯️</text></svg>">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Alaala">
+    <meta property="og:title" content="Alaala — Memorial Services Philippines">
+    <meta property="og:description" content="Alaala — The premier Filipino memorial services platform. Honor your loved ones with beautiful online memorials, AI voice tributes, and memorial services.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1200&h=630&fit=crop">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Alaala">
+    <link rel="stylesheet" href="animations.css">
+</head>
+<body>
+    <!-- ========== NAVIGATION ========== -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="logo-icon">🕯️</span>
+                <span class="logo-text">Alaala</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#services" class="nav-link">Services</a></li>
+                <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
+                <li><a href="#memorials" class="nav-link">Memorials</a></li>
+                <li><a href="#pricing" class="nav-link">Pricing</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                    <span class="material-symbols-outlined sun-icon">light_mode</span>
+                    <span class="material-symbols-outlined moon-icon">dark_mode</span>
+                </button>
+                <div class="lang-switch">
+                    <button class="lang-btn active" data-lang="en">EN</button>
+                    <button class="lang-btn" data-lang="tl">TL</button>
+                </div>
+                <a href="auth.html" class="btn btn-outline btn-sm">Sign In</a>
+                <a href="auth.html" class="btn btn-primary btn-sm">Get Started</a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ========== HERO SECTION ========== -->
+    <section class="hero" id="home">
+        <div class="hero-bg">
+            <div class="hero-gradient"></div>
+            <div class="hero-particles" id="particles"></div>
+        </div>
+        <div class="container hero-content">
+            <div class="hero-text">
+                <span class="hero-badge">
+                    <span class="badge-dot"></span>
+                    Trusted by 10,000+ Filipino families
+                </span>
+                <h1 class="hero-title">
+                    Honor Their Memory,<br>
+                    <span class="gradient-text">Celebrate Their Life</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Create beautiful online memorials, schedule services, and stay connected 
+                    with loved ones. Powered by AI voice tributes, smart scheduling, and 
+                    instant notifications.
+                </p>
+                <div class="hero-cta">
+                    <a href="create-memorial.html" class="btn btn-primary btn-lg">
+                        <span class="material-symbols-outlined">add_circle</span>
+                        Create Memorial
+                    </a>
+                    <a href="#" class="btn btn-glass btn-lg">
+                        <span class="material-symbols-outlined">play_circle</span>
+                        Watch Demo
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="10000">0</span>
+                        <span class="stat-label">Memorials Created</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="500">0</span>
+                        <span class="stat-label">Partner Churches</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-count="50000">0</span>
+                        <span class="stat-label">Families Served</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-card-stack">
+                    <div class="hero-card card-back"></div>
+                    <div class="hero-card card-mid"></div>
+                    <div class="hero-card card-front">
+                        <div class="memorial-preview">
+                            <div class="memorial-cover">
+                                <div class="cover-gradient"></div>
+                            </div>
+                            <div class="memorial-avatar">
+                                <span class="material-symbols-outlined">person</span>
+                            </div>
+                            <h3 class="memorial-name">Maria Santos</h3>
+                            <p class="memorial-dates">1945 — 2024</p>
+                            <p class="memorial-quote">"Forever in our hearts"</p>
+                            <div class="memorial-actions-preview">
+                                <button class="preview-btn">
+                                    <span class="material-symbols-outlined">local_florist</span>
+                                    Send Flowers
+                                </button>
+                                <button class="preview-btn">
+                                    <span class="material-symbols-outlined">church</span>
+                                    Mass Offering
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll-indicator">
+            <span class="material-symbols-outlined">keyboard_arrow_down</span>
+        </div>
+    </section>
+
+    <!-- ========== INTEGRATION BANNER ========== -->
+    <section class="integrations-banner">
+        <div class="container">
+            <p class="integrations-label">Powered by world-class technology</p>
+            <div class="integrations-logos">
+                <div class="integration-item">
+                    <span class="integration-icon">🔊</span>
+                    <span>ElevenLabs</span>
+                </div>
+                <div class="integration-item">
+                    <span class="integration-icon">📅</span>
+                    <span>Cal.com</span>
+                </div>
+                <div class="integration-item">
+                    <span class="integration-icon">📱</span>
+                    <span>Twilio</span>
+                </div>
+                <div class="integration-item">
+                    <span class="integration-icon">💳</span>
+                    <span>GCash</span>
+                </div>
+                <div class="integration-item">
+                    <span class="integration-icon">💰</span>
+                    <span>PayMaya</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SERVICES SECTION ========== -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Our Services</span>
+                <h2 class="section-title">Everything You Need to<br><span class="gradient-text">Honor Their Legacy</span></h2>
+                <p class="section-desc">Comprehensive memorial services designed with Filipino families in mind</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card featured">
+                    <div class="service-icon-wrap">
+                        <span class="material-symbols-outlined">mic</span>
+                    </div>
+                    <span class="service-badge">AI Powered</span>
+                    <h3>Voice Tributes</h3>
+                    <p>Record heartfelt voice messages or let AI create natural-sounding tributes in Filipino or English using ElevenLabs technology.</p>
+                    <ul class="service-features">
+                        <li><span class="material-symbols-outlined">check_circle</span> Natural AI voices in Tagalog & English</li>
+                        <li><span class="material-symbols-outlined">check_circle</span> Record personal voice memories</li>
+                        <li><span class="material-symbols-outlined">check_circle</span> Auto-generate from written tributes</li>
+                    </ul>
+                    <a href="#" class="service-link">Learn more <span class="material-symbols-outlined">arrow_forward</span></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon-wrap">
+                        <span class="material-symbols-outlined">calendar_month</span>
+                    </div>
+                    <h3>Smart Scheduling</h3>
+                    <p>Book masses, memorial services, and flower deliveries with our Cal.com-powered scheduling system.</p>
+                    <ul class="service-features">
+                        <li><span class="material-symbols-outlined">check_circle</span> Real-time availability</li>
+                        <li><span class="material-symbols-outlined">check_circle</span> Auto death anniversary reminders</li>
+                        <li><span class="material-symbols-outlined">check_circle</span> Calendar sync (Google, Apple)</li>
+                    </ul>
+                    <a href="#" class="service-link">Learn more <span class="material-symbols-outlined">arrow_forward</span></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon-wrap">
+                        <span class="material-symbols-outlined">sms</span>
+                    </div>
+                    <h3>Instant Notifications</h3>
+                    <p>Stay informed with Twilio-powered SMS alerts for service updates, delivery tracking, and anniversary reminders.</p>
+                    <ul class="service-features">
+                        <li><span class="material-symbols-outlined">check_circle</span> SMS & voice call alerts</li>
+                        <li><span class="material-symbols-outlined">check_circle</span> Delivery tracking updates</li>
+                        <li><span class="material-symbols-outlined">check_circle</span> Two-way messaging support</li>
+                    </ul>
+                    <a href="#" class="service-link">Learn more <span class="material-symbols-outlined">arrow_forward</span></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon-wrap">
+                        <span class="material-symbols-outlined">church</span>
+                    </div>
+                    <h3>Mass Offerings</h3>
+                    <p>Request Catholic mass offerings at partner churches across the Philippines with verified completion reports.</p>
+                    <ul class="service-features">
+                        <li><span class="material-symbols-outlined">check_circle</span> 500+ partner churches</li>
+                        <li><span class="material-symbols-outlined">check_circle</span> Verified completion certificates</li>
+                        <li><span class="material-symbols-outlined">check_circle</span> Recurring schedules</li>
+                    </ul>
+                    <a href="#" class="service-link">Learn more <span class="material-symbols-outlined">arrow_forward</span></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon-wrap">
+                        <span class="material-symbols-outlined">local_florist</span>
+                    </div>
+                    <h3>Flower & Gift Delivery</h3>
+                    <p>Send fresh flowers, candles, and memorial gifts to gravesites or family homes through local partner shops.</p>
+                    <ul class="service-features">
+                        <li><span class="material-symbols-outlined">check_circle</span> Same-day delivery available</li>
+                        <li><span class="material-symbols-outlined">check_circle</span> Photo confirmation on delivery</li>
+                        <li><span class="material-symbols-outlined">check_circle</span> Local florist partnerships</li>
+                    </ul>
+                    <a href="#" class="service-link">Learn more <span class="material-symbols-outlined">arrow_forward</span></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon-wrap">
+                        <span class="material-symbols-outlined">videocam</span>
+                    </div>
+                    <h3>Live Stream Memorials</h3>
+                    <p>Stream memorial services and masses live for family members who can't attend in person.</p>
+                    <ul class="service-features">
+                        <li><span class="material-symbols-outlined">check_circle</span> HD live streaming</li>
+                        <li><span class="material-symbols-outlined">check_circle</span> Recording & playback</li>
+                        <li><span class="material-symbols-outlined">check_circle</span> Private or public access</li>
+                    </ul>
+                    <a href="#" class="service-link">Learn more <span class="material-symbols-outlined">arrow_forward</span></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon-wrap">
+                        <span class="material-symbols-outlined">cleaning_services</span>
+                    </div>
+                    <h3>Memorial Lot Cleaning</h3>
+                    <p>Professional cleaning and maintenance of memorial lots, gravesites, and mausoleums across the Philippines.</p>
+                    <ul class="service-features">
+                        <li><span class="material-symbols-outlined">check_circle</span> Scheduled or one-time cleaning</li>
+                        <li><span class="material-symbols-outlined">check_circle</span> Before & after photo reports</li>
+                        <li><span class="material-symbols-outlined">check_circle</span> 200+ cemetery partners</li>
+                    </ul>
+                    <a href="#" class="service-link">Learn more <span class="material-symbols-outlined">arrow_forward</span></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon-wrap">
+                        <span class="material-symbols-outlined">construction</span>
+                    </div>
+                    <h3>Tombstone Repair</h3>
+                    <p>Expert restoration and repair of tombstones, markers, and memorial structures by certified craftsmen.</p>
+                    <ul class="service-features">
+                        <li><span class="material-symbols-outlined">check_circle</span> Free damage assessment</li>
+                        <li><span class="material-symbols-outlined">check_circle</span> Restoration & engraving</li>
+                        <li><span class="material-symbols-outlined">check_circle</span> 1-year warranty</li>
+                    </ul>
+                    <a href="#" class="service-link">Learn more <span class="material-symbols-outlined">arrow_forward</span></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== HOW IT WORKS ========== -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">How It Works</span>
+                <h2 class="section-title">Simple Steps to<br><span class="gradient-text">Create a Memorial</span></h2>
+                <p class="section-desc">Get started in minutes with our guided process</p>
+            </div>
+            <div class="steps-timeline">
+                <div class="step-item">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <div class="step-icon">
+                            <span class="material-symbols-outlined">person_add</span>
+                        </div>
+                        <h3>Create an Account</h3>
+                        <p>Sign up with your phone number. We'll verify via Twilio SMS for security.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <div class="step-icon">
+                            <span class="material-symbols-outlined">edit_note</span>
+                        </div>
+                        <h3>Build the Memorial</h3>
+                        <p>Add photos, stories, voice tributes, and invite family to collaborate.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <div class="step-icon">
+                            <span class="material-symbols-outlined">event</span>
+                        </div>
+                        <h3>Schedule Services</h3>
+                        <p>Book masses, flower deliveries, and set up anniversary reminders via Cal.com.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-number">04</div>
+                    <div class="step-content">
+                        <div class="step-icon">
+                            <span class="material-symbols-outlined">favorite</span>
+                        </div>
+                        <h3>Share & Remember</h3>
+                        <p>Share with family, receive automated reminders, and keep memories alive forever.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== MEMORIAL SHOWCASE ========== -->
+    <section class="memorials-showcase" id="memorials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Recent Memorials</span>
+                <h2 class="section-title">Beautiful Tributes from<br><span class="gradient-text">Filipino Families</span></h2>
+            </div>
+            <div class="memorials-grid">
+                <div class="memorial-card">
+                    <div class="memorial-card-cover" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                        <div class="memorial-card-avatar">
+                            <span class="material-symbols-outlined">person</span>
+                        </div>
+                    </div>
+                    <div class="memorial-card-body">
+                        <h3>Lola Remedios Cruz</h3>
+                        <p class="memorial-card-dates">March 12, 1938 — January 5, 2025</p>
+                        <p class="memorial-card-excerpt">"The best lola who made the most amazing adobo and told the best bedtime stories..."</p>
+                        <div class="memorial-card-meta">
+                            <span><span class="material-symbols-outlined">local_florist</span> 24 tributes</span>
+                            <span><span class="material-symbols-outlined">mic</span> 8 voice memories</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="memorial-card">
+                    <div class="memorial-card-cover" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                        <div class="memorial-card-avatar">
+                            <span class="material-symbols-outlined">person</span>
+                        </div>
+                    </div>
+                    <div class="memorial-card-body">
+                        <h3>Tatay Jose Reyes</h3>
+                        <p class="memorial-card-dates">August 20, 1950 — November 18, 2024</p>
+                        <p class="memorial-card-excerpt">"A devoted father, carpenter, and community leader who built our home with his own hands..."</p>
+                        <div class="memorial-card-meta">
+                            <span><span class="material-symbols-outlined">local_florist</span> 42 tributes</span>
+                            <span><span class="material-symbols-outlined">mic</span> 15 voice memories</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="memorial-card">
+                    <div class="memorial-card-cover" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+                        <div class="memorial-card-avatar">
+                            <span class="material-symbols-outlined">person</span>
+                        </div>
+                    </div>
+                    <div class="memorial-card-body">
+                        <h3>Nanay Elena Garcia</h3>
+                        <p class="memorial-card-dates">June 3, 1942 — April 22, 2025</p>
+                        <p class="memorial-card-excerpt">"A beloved teacher who inspired thousands of students throughout her 40-year career..."</p>
+                        <div class="memorial-card-meta">
+                            <span><span class="material-symbols-outlined">local_florist</span> 67 tributes</span>
+                            <span><span class="material-symbols-outlined">mic</span> 22 voice memories</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="memorials-cta">
+                <a href="explore.html" class="btn btn-outline btn-lg">View All Memorials <span class="material-symbols-outlined">arrow_forward</span></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== VOICE TRIBUTE DEMO ========== -->
+    <section class="voice-demo">
+        <div class="container">
+            <div class="voice-demo-grid">
+                <div class="voice-demo-text">
+                    <span class="section-tag">ElevenLabs Integration</span>
+                    <h2 class="section-title">Hear Their Stories<br><span class="gradient-text">Come Alive</span></h2>
+                    <p>Transform written tributes into natural-sounding voice memories. Our AI-powered voice technology creates heartfelt audio tributes in Filipino, English, and more.</p>
+                    <div class="voice-features">
+                        <div class="voice-feature">
+                            <span class="material-symbols-outlined">record_voice_over</span>
+                            <div>
+                                <h4>Natural AI Voices</h4>
+                                <p>Lifelike voices in Tagalog & English dialects</p>
+                            </div>
+                        </div>
+                        <div class="voice-feature">
+                            <span class="material-symbols-outlined">upload_file</span>
+                            <div>
+                                <h4>Personal Recordings</h4>
+                                <p>Upload your own voice memories and stories</p>
+                            </div>
+                        </div>
+                        <div class="voice-feature">
+                            <span class="material-symbols-outlined">translate</span>
+                            <div>
+                                <h4>Multi-language</h4>
+                                <p>Support for Filipino, English, Cebuano, and more</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="voice-demo-player">
+                    <div class="player-card">
+                        <div class="player-visual">
+                            <div class="sound-waves">
+                                <span></span><span></span><span></span><span></span><span></span>
+                                <span></span><span></span><span></span><span></span><span></span>
+                                <span></span><span></span><span></span><span></span><span></span>
+                                <span></span><span></span><span></span><span></span><span></span>
+                            </div>
+                        </div>
+                        <div class="player-info">
+                            <p class="player-title">Voice Tribute for Lola Remedios</p>
+                            <p class="player-subtitle">AI Voice — Tagalog</p>
+                        </div>
+                        <div class="player-controls">
+                            <button class="play-btn" id="playBtn">
+                                <span class="material-symbols-outlined">play_arrow</span>
+                            </button>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 35%"></div>
+                            </div>
+                            <span class="player-time">1:23 / 3:45</span>
+                        </div>
+                        <div class="player-actions">
+                            <button class="player-action-btn">
+                                <span class="material-symbols-outlined">share</span> Share
+                            </button>
+                            <button class="player-action-btn">
+                                <span class="material-symbols-outlined">download</span> Download
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== SCHEDULING SECTION ========== -->
+    <section class="scheduling-section">
+        <div class="container">
+            <div class="scheduling-grid">
+                <div class="scheduling-visual">
+                    <div class="calendar-widget">
+                        <div class="calendar-header-widget">
+                            <button class="cal-nav"><span class="material-symbols-outlined">chevron_left</span></button>
+                            <h4>April 2026</h4>
+                            <button class="cal-nav"><span class="material-symbols-outlined">chevron_right</span></button>
+                        </div>
+                        <div class="calendar-days">
+                            <span class="day-label">Sun</span><span class="day-label">Mon</span>
+                            <span class="day-label">Tue</span><span class="day-label">Wed</span>
+                            <span class="day-label">Thu</span><span class="day-label">Fri</span>
+                            <span class="day-label">Sat</span>
+                            <span class="day-empty"></span><span class="day-empty"></span>
+                            <span class="day-empty"></span><span class="day-num">1</span>
+                            <span class="day-num">2</span><span class="day-num">3</span>
+                            <span class="day-num">4</span><span class="day-num">5</span>
+                            <span class="day-num">6</span><span class="day-num">7</span>
+                            <span class="day-num">8</span><span class="day-num">9</span>
+                            <span class="day-num">10</span><span class="day-num today">11</span>
+                            <span class="day-num">12</span><span class="day-num">13</span>
+                            <span class="day-num">14</span><span class="day-num">15</span>
+                            <span class="day-num">16</span><span class="day-num">17</span>
+                            <span class="day-num event">18</span><span class="day-num">19</span>
+                            <span class="day-num event">20</span><span class="day-num">21</span>
+                            <span class="day-num">22</span><span class="day-num">23</span>
+                            <span class="day-num">24</span><span class="day-num">25</span>
+                            <span class="day-num">26</span><span class="day-num">27</span>
+                            <span class="day-num">28</span><span class="day-num">29</span>
+                            <span class="day-num">30</span>
+                        </div>
+                        <div class="calendar-events">
+                            <div class="cal-event">
+                                <span class="cal-event-dot mass"></span>
+                                <div>
+                                    <strong>Apr 18 — Mass Offering</strong>
+                                    <p>San Agustin Church, 9:00 AM</p>
+                                </div>
+                            </div>
+                            <div class="cal-event">
+                                <span class="cal-event-dot flower"></span>
+                                <div>
+                                    <strong>Apr 20 — Flower Delivery</strong>
+                                    <p>Manila Memorial Park, 2:00 PM</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="scheduling-text">
+                    <span class="section-tag">Cal.com Integration</span>
+                    <h2 class="section-title">Never Miss an<br><span class="gradient-text">Important Date</span></h2>
+                    <p>Our smart scheduling system powered by Cal.com ensures you never forget a death anniversary, mass offering, or memorial event.</p>
+                    <div class="scheduling-features">
+                        <div class="sched-feature">
+                            <div class="sched-feature-icon">
+                                <span class="material-symbols-outlined">notifications_active</span>
+                            </div>
+                            <div>
+                                <h4>Auto Anniversary Reminders</h4>
+                                <p>Get notified 7 days, 1 day, and on the actual anniversary date via SMS and push notification.</p>
+                            </div>
+                        </div>
+                        <div class="sched-feature">
+                            <div class="sched-feature-icon">
+                                <span class="material-symbols-outlined">event_available</span>
+                            </div>
+                            <div>
+                                <h4>One-Click Booking</h4>
+                                <p>See real-time church availability and book mass offerings or services instantly.</p>
+                            </div>
+                        </div>
+                        <div class="sched-feature">
+                            <div class="sched-feature-icon">
+                                <span class="material-symbols-outlined">sync</span>
+                            </div>
+                            <div>
+                                <h4>Calendar Sync</h4>
+                                <p>Automatically sync with Google Calendar, Apple Calendar, or Outlook.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== NOTIFICATIONS SECTION ========== -->
+    <section class="notifications-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Twilio Integration</span>
+                <h2 class="section-title">Stay Connected<br><span class="gradient-text">Every Step of the Way</span></h2>
+                <p class="section-desc">Real-time SMS and voice notifications keep you informed about every service</p>
+            </div>
+            <div class="notifications-demo">
+                <div class="phone-mockup">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <div class="phone-status-bar">
+                            <span>9:41</span>
+                            <span>Globe 📶 🔋</span>
+                        </div>
+                        <div class="sms-thread">
+                            <div class="sms-bubble incoming">
+                                <p class="sms-sender">Alaala</p>
+                                <p>Magandang umaga! 🕯️ Reminder: 故 Lola Remedios' death anniversary is in 7 days (April 18).</p>
+                                <p class="sms-time">8:00 AM</p>
+                            </div>
+                            <div class="sms-bubble incoming">
+                                <p class="sms-sender">Alaala</p>
+                                <p>Would you like to schedule a mass offering? Reply YES to book or visit alaala.ph/book</p>
+                                <p class="sms-time">8:01 AM</p>
+                            </div>
+                            <div class="sms-bubble outgoing">
+                                <p>YES</p>
+                                <p class="sms-time">8:05 AM</p>
+                            </div>
+                            <div class="sms-bubble incoming">
+                                <p class="sms-sender">Alaala</p>
+                                <p>✅ Mass offering booked! San Agustin Church, April 18, 9:00 AM. You'll receive a confirmation SMS with details.</p>
+                                <p class="sms-time">8:05 AM</p>
+                            </div>
+                            <div class="sms-bubble incoming">
+                                <p class="sms-sender">Alaala</p>
+                                <p>🌸 Your flower delivery is on the way! Track: alaala.ph/track/FL2026041</p>
+                                <p class="sms-time">1:30 PM</p>
+                            </div>
+                            <div class="sms-bubble incoming">
+                                <p class="sms-sender">Alaala</p>
+                                <p>📸 Delivery complete! View photo confirmation: alaala.ph/delivery/FL2026041 ⭐ Rate your experience: alaala.ph/rate</p>
+                                <p class="sms-time">2:15 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="notifications-features">
+                    <div class="notif-card">
+                        <span class="material-symbols-outlined">schedule_send</span>
+                        <h4>Smart Reminders</h4>
+                        <p>Automated death anniversary reminders via SMS, 7 days before, 1 day before, and on the day.</p>
+                    </div>
+                    <div class="notif-card">
+                        <span class="material-symbols-outlined">local_shipping</span>
+                        <h4>Delivery Tracking</h4>
+                        <p>Real-time SMS updates for flower and gift deliveries with photo confirmations.</p>
+                    </div>
+                    <div class="notif-card">
+                        <span class="material-symbols-outlined">verified</span>
+                        <h4>Service Confirmations</h4>
+                        <p>Instant SMS confirmations for mass offerings, bookings, and payment receipts.</p>
+                    </div>
+                    <div class="notif-card">
+                        <span class="material-symbols-outlined">security</span>
+                        <h4>OTP Verification</h4>
+                        <p>Secure account access with SMS-based one-time passwords via Twilio.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PRICING ========== -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Pricing</span>
+                <h2 class="section-title">Choose Your<br><span class="gradient-text">Memorial Plan</span></h2>
+                <p class="section-desc">Start free and upgrade when you need more features</p>
+            </div>
+            <div class="pricing-toggle">
+                <span class="toggle-label active" data-period="monthly">Monthly</span>
+                <button class="toggle-switch" id="pricingToggle">
+                    <span class="toggle-knob"></span>
+                </button>
+                <span class="toggle-label" data-period="annual">Annual <span class="save-badge">Save 20%</span></span>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-card-header">
+                        <h3>Free</h3>
+                        <p class="pricing-tagline">For individuals</p>
+                    </div>
+                    <div class="pricing-price">
+                        <span class="price-currency">₱</span>
+                        <span class="price-amount" data-monthly="0" data-annual="0">0</span>
+                        <span class="price-period">/month</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><span class="material-symbols-outlined">check</span> 1 memorial page</li>
+                        <li><span class="material-symbols-outlined">check</span> 10 photos</li>
+                        <li><span class="material-symbols-outlined">check</span> Basic tribute wall</li>
+                        <li><span class="material-symbols-outlined">check</span> Death anniversary reminders</li>
+                        <li class="disabled"><span class="material-symbols-outlined">close</span> Voice tributes</li>
+                        <li class="disabled"><span class="material-symbols-outlined">close</span> SMS notifications</li>
+                    </ul>
+                    <a href="auth.html" class="btn btn-outline btn-block">Get Started Free</a>
+                </div>
+                <div class="pricing-card popular">
+                    <span class="popular-badge">Most Popular</span>
+                    <div class="pricing-card-header">
+                        <h3>Family</h3>
+                        <p class="pricing-tagline">For families</p>
+                    </div>
+                    <div class="pricing-price">
+                        <span class="price-currency">₱</span>
+                        <span class="price-amount" data-monthly="299" data-annual="239">299</span>
+                        <span class="price-period">/month</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><span class="material-symbols-outlined">check</span> 5 memorial pages</li>
+                        <li><span class="material-symbols-outlined">check</span> Unlimited photos & videos</li>
+                        <li><span class="material-symbols-outlined">check</span> AI voice tributes (10/month)</li>
+                        <li><span class="material-symbols-outlined">check</span> SMS reminders (20/month)</li>
+                        <li><span class="material-symbols-outlined">check</span> Smart scheduling</li>
+                        <li><span class="material-symbols-outlined">check</span> Family collaboration (10 members)</li>
+                    </ul>
+                    <a href="auth.html" class="btn btn-primary btn-block">Start 14-Day Trial</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-card-header">
+                        <h3>Premium</h3>
+                        <p class="pricing-tagline">For extended families</p>
+                    </div>
+                    <div class="pricing-price">
+                        <span class="price-currency">₱</span>
+                        <span class="price-amount" data-monthly="599" data-annual="479">599</span>
+                        <span class="price-period">/month</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><span class="material-symbols-outlined">check</span> Unlimited memorials</li>
+                        <li><span class="material-symbols-outlined">check</span> Unlimited everything</li>
+                        <li><span class="material-symbols-outlined">check</span> AI voice tributes (unlimited)</li>
+                        <li><span class="material-symbols-outlined">check</span> SMS & voice call alerts</li>
+                        <li><span class="material-symbols-outlined">check</span> Live stream memorials</li>
+                        <li><span class="material-symbols-outlined">check</span> Priority support</li>
+                    </ul>
+                    <a href="auth.html" class="btn btn-outline btn-block">Start 14-Day Trial</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== TESTIMONIALS ========== -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Testimonials</span>
+                <h2 class="section-title">Loved by<br><span class="gradient-text">Filipino Families</span></h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p>"Alaala made it so easy to organize my lola's anniversary mass. The SMS reminders are a lifesaver — I never forget important dates now."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MC</div>
+                        <div>
+                            <strong>Maria Clara Santos</strong>
+                            <span>Quezon City</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p>"The voice tribute feature is amazing. Hearing my father's favorite prayer in his language brought our whole family to tears. Thank you, Alaala."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">JR</div>
+                        <div>
+                            <strong>Juan Reyes</strong>
+                            <span>Cebu City</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p>"I'm an OFW in Dubai and Alaala lets me send flowers to my nanay's grave every anniversary. The photo confirmation gives me peace of mind."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AG</div>
+                        <div>
+                            <strong>Ana Garcia</strong>
+                            <span>OFW — Dubai, UAE</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== CTA SECTION ========== -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Start Honoring Their Memory Today</h2>
+                <p>Create a beautiful memorial in minutes. Free forever for your first memorial.</p>
+                <div class="cta-buttons">
+                    <a href="create-memorial.html" class="btn btn-white btn-lg">
+                        <span class="material-symbols-outlined">add_circle</span>
+                        Create Free Memorial
+                    </a>
+                    <a href="#" class="btn btn-glass-white btn-lg">
+                        <span class="material-symbols-outlined">call</span>
+                        Talk to Us
+                    </a>
+                </div>
+                <p class="cta-note">No credit card required · Setup in under 5 minutes</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="nav-logo">
+                        <span class="logo-icon">🕯️</span>
+                        <span class="logo-text">Alaala</span>
+                    </a>
+                    <p>Honoring lives, preserving memories. The Philippines' premier online memorial service platform.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook">FB</a>
+                        <a href="#" aria-label="Instagram">IG</a>
+                        <a href="#" aria-label="Twitter">X</a>
+                        <a href="#" aria-label="YouTube">YT</a>
+                    </div>
+                </div>
+                <div class="footer-links-group">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="#">Memorial Pages</a></li>
+                        <li><a href="#">Mass Offerings</a></li>
+                        <li><a href="#">Flower Delivery</a></li>
+                        <li><a href="#">Live Streaming</a></li>
+                        <li><a href="#">Voice Tributes</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-group">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Partners</a></li>
+                        <li><a href="#">Press</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links-group">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Alaala Memorial Services. All rights reserved.</p>
+                <div class="footer-payments">
+                    <span>💳 GCash</span>
+                    <span>💰 PayMaya</span>
+                    <span>🏦 BPI</span>
+                    <span>💳 Visa</span>
+                    <span>💳 Mastercard</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========== FLOATING QUICK ACTIONS ========== -->
+    <div class="floating-quick-actions" id="quickActions">
+        <button class="quick-action-toggle" id="quickActionToggle" aria-label="Quick services">
+            <span class="material-symbols-outlined qa-icon-open">widgets</span>
+            <span class="material-symbols-outlined qa-icon-close">close</span>
+        </button>
+        <div class="quick-action-menu" id="quickActionMenu">
+            <div class="qa-header">
+                <span class="qa-status-dot"></span>
+                Quick Services
+            </div>
+            <a href="booking.html" class="qa-item" data-service="mass">
+                <span class="qa-item-icon mass"><span class="material-symbols-outlined">church</span></span>
+                <div>
+                    <strong>Book a Mass</strong>
+                    <p>Schedule mass offering</p>
+                </div>
+                <span class="material-symbols-outlined qa-arrow">chevron_right</span>
+            </a>
+            <a href="booking.html" class="qa-item" data-service="flowers">
+                <span class="qa-item-icon flowers"><span class="material-symbols-outlined">local_florist</span></span>
+                <div>
+                    <strong>Send Flowers</strong>
+                    <p>Same-day delivery</p>
+                </div>
+                <span class="material-symbols-outlined qa-arrow">chevron_right</span>
+            </a>
+            <a href="booking.html" class="qa-item" data-service="schedule">
+                <span class="qa-item-icon schedule"><span class="material-symbols-outlined">calendar_month</span></span>
+                <div>
+                    <strong>Schedule Service</strong>
+                    <p>Book via Cal.com</p>
+                </div>
+                <span class="material-symbols-outlined qa-arrow">chevron_right</span>
+            </a>
+            <a href="create-memorial.html" class="qa-item" data-service="memorial">
+                <span class="qa-item-icon memorial"><span class="material-symbols-outlined">add_circle</span></span>
+                <div>
+                    <strong>Create Memorial</strong>
+                    <p>Start a tribute page</p>
+                </div>
+                <span class="material-symbols-outlined qa-arrow">chevron_right</span>
+            </a>
+            <div class="qa-footer">
+                <span class="material-symbols-outlined">support_agent</span>
+                Talk to AI Assistant below →
+            </div>
+        </div>
+    </div>
+
+    <!-- ElevenLabs Conversational AI Widget -->
+    <elevenlabs-convai agent-id="agent_7201knx5dan0e86thhdm1gdqcmga"></elevenlabs-convai>
+    <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+
+    <script src="script.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => console.log('SW registered:', reg.scope))
+                    .catch(err => console.log('SW registration failed:', err));
+            });
+        }
+    </script>
+    <script src="animations.js"></script>
+</body>
+</html>

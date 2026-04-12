@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Memorials — Alaala</title>
+    <meta name="description" content="Explore and search memorials on Alaala. Discover tributes and honor loved ones across the Philippines.">
+    <meta name="keywords" content="memorial, Philippines, tribute, remembrance, Alaala, Filipino families">
+    <meta name="author" content="Alaala Memorial Services">
+    <meta name="theme-color" content="#6366f1">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕯️</text></svg>">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Alaala">
+    <meta property="og:title" content="Explore Memorials — Alaala">
+    <meta property="og:description" content="Explore and search memorials on Alaala. Discover tributes and honor loved ones across the Philippines.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=1200&h=630&fit=crop">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="pages.css">
+    <link rel="stylesheet" href="explore.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+    <link rel="stylesheet" href="animations.css">
+</head>
+<body>
+    <!-- ===== TOP NAVBAR ===== -->
+    <nav class="navbar scrolled" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="logo-icon">🕯️</span>
+                <span class="logo-text">Alaala</span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="explore.html" class="nav-link active">Explore</a>
+            </div>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                    <span class="material-symbols-outlined sun-icon">light_mode</span>
+                    <span class="material-symbols-outlined moon-icon">dark_mode</span>
+                </button>
+                <a href="auth.html" class="btn btn-outline btn-sm">Sign In</a>
+                <a href="auth.html#register" class="btn btn-primary btn-sm">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HERO SEARCH SECTION ===== -->
+    <section class="explore-hero">
+        <div class="explore-hero-bg"></div>
+        <div class="container explore-hero-content">
+            <h1 class="explore-hero-title">Explore Memorials</h1>
+            <p class="explore-hero-subtitle">Search and discover memorials to honor and remember loved ones</p>
+            <form class="explore-search-form" id="searchForm">
+                <div class="explore-search-bar">
+                    <span class="material-symbols-outlined explore-search-icon">search</span>
+                    <input type="text" class="explore-search-input" id="searchInput" placeholder="Search by name, location, or keyword..." autocomplete="off">
+                    <button type="submit" class="btn btn-primary explore-search-btn">Search</button>
+                </div>
+            </form>
+            <div class="explore-filter-chips" id="filterChips">
+                <button class="filter-chip active" data-filter="all">All</button>
+                <button class="filter-chip" data-filter="recent">Recent</button>
+                <button class="filter-chip" data-filter="most-visited">Most Visited</button>
+                <button class="filter-chip" data-filter="most-tributes">Most Tributes</button>
+                <button class="filter-chip" data-filter="near-me">
+                    <span class="material-symbols-outlined" style="font-size:16px">near_me</span> Near Me
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SEARCH STATS BAR ===== -->
+    <section class="explore-stats-bar">
+        <div class="container explore-stats-inner">
+            <p class="explore-results-count">Showing <strong>2,847</strong> memorials</p>
+            <div class="explore-stats-actions">
+                <div class="explore-view-toggle" id="viewToggle">
+                    <button class="view-btn active" data-view="grid" aria-label="Grid view">
+                        <span class="material-symbols-outlined">grid_view</span>
+                    </button>
+                    <button class="view-btn" data-view="list" aria-label="List view">
+                        <span class="material-symbols-outlined">view_list</span>
+                    </button>
+                </div>
+                <div class="explore-sort">
+                    <label for="sortSelect" class="explore-sort-label">Sort by:</label>
+                    <select class="explore-sort-select" id="sortSelect">
+                        <option value="newest">Newest</option>
+                        <option value="most-visited">Most Visited</option>
+                        <option value="most-tributes">Most Tributes</option>
+                        <option value="alphabetical">Alphabetical</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="explore-main">
+        <div class="container explore-layout">
+
+            <!-- Memorial Cards Grid -->
+            <div class="explore-grid" id="memorialGrid">
+
+                <!-- Card 1: Maria Santos -->
+                <article class="memorial-card reveal-card">
+                    <div class="memorial-card-cover">
+                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=200&fit=crop" alt="Memorial cover" loading="lazy">
+                    </div>
+                    <div class="memorial-card-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Maria+Santos&background=6366f1&color=fff&size=48" alt="Maria Santos">
+                    </div>
+                    <div class="memorial-card-body">
+                        <h3 class="memorial-card-name">Maria Santos</h3>
+                        <p class="memorial-card-dates">1945 — 2024</p>
+                        <p class="memorial-card-epitaph"><em>"A loving mother whose warmth touched every heart."</em></p>
+                        <p class="memorial-card-location">
+                            <span class="material-symbols-outlined">location_on</span> Manila, Metro Manila
+                        </p>
+                        <div class="memorial-card-stats">
+                            <span><span class="material-symbols-outlined">local_fire_department</span> 342</span>
+                            <span><span class="material-symbols-outlined">favorite</span> 128</span>
+                            <span><span class="material-symbols-outlined">visibility</span> 1.2k</span>
+                        </div>
+                        <a href="memorial.html" class="btn btn-outline btn-sm memorial-card-btn">Visit Memorial</a>
+                    </div>
+                </article>
+
+                <!-- Card 2: Jose Reyes -->
+                <article class="memorial-card reveal-card">
+                    <div class="memorial-card-cover">
+                        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=400&h=200&fit=crop" alt="Memorial cover" loading="lazy">
+                    </div>
+                    <div class="memorial-card-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Jose+Reyes&background=6366f1&color=fff&size=48" alt="Jose Reyes">
+                    </div>
+                    <div class="memorial-card-body">
+                        <h3 class="memorial-card-name">Jose Reyes</h3>
+                        <p class="memorial-card-dates">1938 — 2023</p>
+                        <p class="memorial-card-epitaph"><em>"His courage and faith guided us through every storm."</em></p>
+                        <p class="memorial-card-location">
+                            <span class="material-symbols-outlined">location_on</span> Quezon City, Metro Manila
+                        </p>
+                        <div class="memorial-card-stats">
+                            <span><span class="material-symbols-outlined">local_fire_department</span> 218</span>
+                            <span><span class="material-symbols-outlined">favorite</span> 94</span>
+                            <span><span class="material-symbols-outlined">visibility</span> 876</span>
+                        </div>
+                        <a href="memorial.html" class="btn btn-outline btn-sm memorial-card-btn">Visit Memorial</a>
+                    </div>
+                </article>
+
+                <!-- Card 3: Carmen Dela Cruz -->
+                <article class="memorial-card reveal-card">
+                    <div class="memorial-card-cover">
+                        <img src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=400&h=200&fit=crop" alt="Memorial cover" loading="lazy">
+                    </div>
+                    <div class="memorial-card-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Carmen+Dela+Cruz&background=6366f1&color=fff&size=48" alt="Carmen Dela Cruz">
+                    </div>
+                    <div class="memorial-card-body">
+                        <h3 class="memorial-card-name">Carmen Dela Cruz</h3>
+                        <p class="memorial-card-dates">1952 — 2024</p>
+                        <p class="memorial-card-epitaph"><em>"She danced through life with grace and kindness."</em></p>
+                        <p class="memorial-card-location">
+                            <span class="material-symbols-outlined">location_on</span> Cebu City, Cebu
+                        </p>
+                        <div class="memorial-card-stats">
+                            <span><span class="material-symbols-outlined">local_fire_department</span> 456</span>
+                            <span><span class="material-symbols-outlined">favorite</span> 201</span>
+                            <span><span class="material-symbols-outlined">visibility</span> 2.1k</span>
+                        </div>
+                        <a href="memorial.html" class="btn btn-outline btn-sm memorial-card-btn">Visit Memorial</a>
+                    </div>
+                </article>
+
+                <!-- Card 4: Roberto Garcia -->
+                <article class="memorial-card reveal-card">
+                    <div class="memorial-card-cover">
+                        <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=200&fit=crop" alt="Memorial cover" loading="lazy">
+                    </div>
+                    <div class="memorial-card-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Roberto+Garcia&background=6366f1&color=fff&size=48" alt="Roberto Garcia">
+                    </div>
+                    <div class="memorial-card-body">
+                        <h3 class="memorial-card-name">Roberto Garcia</h3>
+                        <p class="memorial-card-dates">1940 — 2022</p>
+                        <p class="memorial-card-epitaph"><em>"A dedicated father and servant of the community."</em></p>
+                        <p class="memorial-card-location">
+                            <span class="material-symbols-outlined">location_on</span> Davao City, Davao del Sur
+                        </p>
+                        <div class="memorial-card-stats">
+                            <span><span class="material-symbols-outlined">local_fire_department</span> 189</span>
+                            <span><span class="material-symbols-outlined">favorite</span> 67</span>
+                            <span><span class="material-symbols-outlined">visibility</span> 543</span>
+                        </div>
+                        <a href="memorial.html" class="btn btn-outline btn-sm memorial-card-btn">Visit Memorial</a>
+                    </div>
+                </article>
+
+                <!-- Card 5: Luisa Mendoza -->
+                <article class="memorial-card reveal-card">
+                    <div class="memorial-card-cover">
+                        <img src="https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?w=400&h=200&fit=crop" alt="Memorial cover" loading="lazy">
+                    </div>
+                    <div class="memorial-card-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Luisa+Mendoza&background=6366f1&color=fff&size=48" alt="Luisa Mendoza">
+                    </div>
+                    <div class="memorial-card-body">
+                        <h3 class="memorial-card-name">Luisa Mendoza</h3>
+                        <p class="memorial-card-dates">1960 — 2024</p>
+                        <p class="memorial-card-epitaph"><em>"Her laughter was the music of our home."</em></p>
+                        <p class="memorial-card-location">
+                            <span class="material-symbols-outlined">location_on</span> Makati, Metro Manila
+                        </p>
+                        <div class="memorial-card-stats">
+                            <span><span class="material-symbols-outlined">local_fire_department</span> 278</span>
+                            <span><span class="material-symbols-outlined">favorite</span> 145</span>
+                            <span><span class="material-symbols-outlined">visibility</span> 1.5k</span>
+                        </div>
+                        <a href="memorial.html" class="btn btn-outline btn-sm memorial-card-btn">Visit Memorial</a>
+                    </div>
+                </article>
+
+                <!-- Card 6: Antonio Ramos -->
+                <article class="memorial-card reveal-card">
+                    <div class="memorial-card-cover">
+                        <img src="https://images.unsplash.com/photo-1465056836900-8f1e940f3404?w=400&h=200&fit=crop" alt="Memorial cover" loading="lazy">
+                    </div>
+                    <div class="memorial-card-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Antonio+Ramos&background=6366f1&color=fff&size=48" alt="Antonio Ramos">
+                    </div>
+                    <div class="memorial-card-body">
+                        <h3 class="memorial-card-name">Antonio Ramos</h3>
+                        <p class="memorial-card-dates">1935 — 2023</p>
+                        <p class="memorial-card-epitaph"><em>"A man of honor, wisdom, and boundless generosity."</em></p>
+                        <p class="memorial-card-location">
+                            <span class="material-symbols-outlined">location_on</span> Baguio City, Benguet
+                        </p>
+                        <div class="memorial-card-stats">
+                            <span><span class="material-symbols-outlined">local_fire_department</span> 312</span>
+                            <span><span class="material-symbols-outlined">favorite</span> 156</span>
+                            <span><span class="material-symbols-outlined">visibility</span> 1.8k</span>
+                        </div>
+                        <a href="memorial.html" class="btn btn-outline btn-sm memorial-card-btn">Visit Memorial</a>
+                    </div>
+                </article>
+
+                <!-- Card 7: Teresa Villanueva -->
+                <article class="memorial-card reveal-card">
+                    <div class="memorial-card-cover">
+                        <img src="https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=400&h=200&fit=crop" alt="Memorial cover" loading="lazy">
+                    </div>
+                    <div class="memorial-card-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Teresa+Villanueva&background=6366f1&color=fff&size=48" alt="Teresa Villanueva">
+                    </div>
+                    <div class="memorial-card-body">
+                        <h3 class="memorial-card-name">Teresa Villanueva</h3>
+                        <p class="memorial-card-dates">1948 — 2024</p>
+                        <p class="memorial-card-epitaph"><em>"Her prayers carried our family through everything."</em></p>
+                        <p class="memorial-card-location">
+                            <span class="material-symbols-outlined">location_on</span> Iloilo City, Iloilo
+                        </p>
+                        <div class="memorial-card-stats">
+                            <span><span class="material-symbols-outlined">local_fire_department</span> 167</span>
+                            <span><span class="material-symbols-outlined">favorite</span> 89</span>
+                            <span><span class="material-symbols-outlined">visibility</span> 634</span>
+                        </div>
+                        <a href="memorial.html" class="btn btn-outline btn-sm memorial-card-btn">Visit Memorial</a>
+                    </div>
+                </article>
+
+                <!-- Card 8: Pedro Aquino -->
+                <article class="memorial-card reveal-card">
+                    <div class="memorial-card-cover">
+                        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=400&h=200&fit=crop" alt="Memorial cover" loading="lazy">
+                    </div>
+                    <div class="memorial-card-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Pedro+Aquino&background=6366f1&color=fff&size=48" alt="Pedro Aquino">
+                    </div>
+                    <div class="memorial-card-body">
+                        <h3 class="memorial-card-name">Pedro Aquino</h3>
+                        <p class="memorial-card-dates">1942 — 2023</p>
+                        <p class="memorial-card-epitaph"><em>"He built bridges — between people, and between hearts."</em></p>
+                        <p class="memorial-card-location">
+                            <span class="material-symbols-outlined">location_on</span> Tagaytay, Cavite
+                        </p>
+                        <div class="memorial-card-stats">
+                            <span><span class="material-symbols-outlined">local_fire_department</span> 245</span>
+                            <span><span class="material-symbols-outlined">favorite</span> 112</span>
+                            <span><span class="material-symbols-outlined">visibility</span> 987</span>
+                        </div>
+                        <a href="memorial.html" class="btn btn-outline btn-sm memorial-card-btn">Visit Memorial</a>
+                    </div>
+                </article>
+
+                <!-- Card 9: Sofia Tan -->
+                <article class="memorial-card reveal-card">
+                    <div class="memorial-card-cover">
+                        <img src="https://images.unsplash.com/photo-1518173946687-a1e0e2a7aecb?w=400&h=200&fit=crop" alt="Memorial cover" loading="lazy">
+                    </div>
+                    <div class="memorial-card-avatar">
+                        <img src="https://ui-avatars.com/api/?name=Sofia+Tan&background=6366f1&color=fff&size=48" alt="Sofia Tan">
+                    </div>
+                    <div class="memorial-card-body">
+                        <h3 class="memorial-card-name">Sofia Tan</h3>
+                        <p class="memorial-card-dates">1955 — 2024</p>
+                        <p class="memorial-card-epitaph"><em>"Forever our guiding star and gentle soul."</em></p>
+                        <p class="memorial-card-location">
+                            <span class="material-symbols-outlined">location_on</span> Zamboanga City, Zamboanga del Sur
+                        </p>
+                        <div class="memorial-card-stats">
+                            <span><span class="material-symbols-outlined">local_fire_department</span> 398</span>
+                            <span><span class="material-symbols-outlined">favorite</span> 176</span>
+                            <span><span class="material-symbols-outlined">visibility</span> 2.4k</span>
+                        </div>
+                        <a href="memorial.html" class="btn btn-outline btn-sm memorial-card-btn">Visit Memorial</a>
+                    </div>
+                </article>
+
+            </div>
+
+            <!-- Sidebar -->
+            <aside class="explore-sidebar">
+                <!-- Recently Viewed -->
+                <div class="explore-sidebar-card">
+                    <h3 class="explore-sidebar-title">
+                        <span class="material-symbols-outlined">history</span> Recently Viewed
+                    </h3>
+                    <div class="explore-recent-list">
+                        <a href="memorial.html" class="explore-recent-item">
+                            <img src="https://ui-avatars.com/api/?name=Carmen+Dela+Cruz&background=6366f1&color=fff&size=36" alt="Carmen Dela Cruz">
+                            <div>
+                                <p class="explore-recent-name">Carmen Dela Cruz</p>
+                                <p class="explore-recent-meta">Cebu City · 2.1k visits</p>
+                            </div>
+                        </a>
+                        <a href="memorial.html" class="explore-recent-item">
+                            <img src="https://ui-avatars.com/api/?name=Antonio+Ramos&background=6366f1&color=fff&size=36" alt="Antonio Ramos">
+                            <div>
+                                <p class="explore-recent-name">Antonio Ramos</p>
+                                <p class="explore-recent-meta">Baguio City · 1.8k visits</p>
+                            </div>
+                        </a>
+                        <a href="memorial.html" class="explore-recent-item">
+                            <img src="https://ui-avatars.com/api/?name=Maria+Santos&background=6366f1&color=fff&size=36" alt="Maria Santos">
+                            <div>
+                                <p class="explore-recent-name">Maria Santos</p>
+                                <p class="explore-recent-meta">Manila · 1.2k visits</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Create Memorial CTA -->
+                <div class="explore-sidebar-card explore-cta-card">
+                    <div class="explore-cta-icon">
+                        <span class="material-symbols-outlined">add_circle</span>
+                    </div>
+                    <h3 class="explore-cta-title">Create a Memorial</h3>
+                    <p class="explore-cta-text">Honor a loved one by creating a beautiful, lasting memorial page for family and friends.</p>
+                    <a href="create-memorial.html" class="btn btn-primary btn-block">
+                        <span class="material-symbols-outlined">edit</span> Get Started
+                    </a>
+                </div>
+            </aside>
+
+        </div>
+    </main>
+
+    <!-- ===== PAGINATION ===== -->
+    <section class="explore-pagination-section">
+        <div class="container">
+            <nav class="explore-pagination" id="pagination" aria-label="Pagination">
+                <button class="pagination-btn pagination-prev" disabled>
+                    <span class="material-symbols-outlined">chevron_left</span> Previous
+                </button>
+                <div class="pagination-pages">
+                    <button class="pagination-page active">1</button>
+                    <button class="pagination-page">2</button>
+                    <button class="pagination-page">3</button>
+                    <span class="pagination-ellipsis">…</span>
+                    <button class="pagination-page">12</button>
+                </div>
+                <button class="pagination-btn pagination-next">
+                    Next <span class="material-symbols-outlined">chevron_right</span>
+                </button>
+            </nav>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="explore-footer">
+        <div class="container explore-footer-inner">
+            <p class="explore-footer-copy">&copy; 2024 Alaala. Honoring memories, one tribute at a time.</p>
+            <div class="explore-footer-links">
+                <a href="#">About</a>
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="explore.js"></script>
+    <script src="animations.js"></script>
+</body>
+</html>
