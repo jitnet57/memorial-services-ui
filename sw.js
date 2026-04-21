@@ -3,7 +3,7 @@
    Cache-first for static, network-first for pages
    ======================================== */
 
-const CACHE_NAME = 'alaala-v2';
+const CACHE_NAME = 'alaala-v3';
 const STATIC_ASSETS = [
     '/',
     '/index.html',
@@ -43,15 +43,18 @@ self.addEventListener('install', (event) => {
     self.skipWaiting();
 });
 
-// Activate — clean old caches
+// Activate — clean old caches and reload all clients
 self.addEventListener('activate', (event) => {
     event.waitUntil(
-        caches.keys().then((keys) => {
-            return Promise.all(
+        caches.keys()
+            .then((keys) => Promise.all(
                 keys.filter((key) => key !== CACHE_NAME)
                     .map((key) => caches.delete(key))
-            );
-        })
+            ))
+            .then(() => self.clients.matchAll({ type: 'window' }))
+            .then((clients) => {
+                clients.forEach((client) => client.navigate(client.url));
+            })
     );
     self.clients.claim();
 });

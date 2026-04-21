@@ -919,10 +919,15 @@
 .explore-map-container {
     display: none;
     border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-    overflow: hidden;
     border: 1px solid var(--border-light);
     border-bottom: none;
     position: relative;
+}
+
+#memorialMap .gm-style,
+#memorialMap .gm-style iframe,
+#memorialMap canvas {
+    z-index: 1 !important;
 }
 
 .explore-map-container.active {
