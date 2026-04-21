@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alaala — Color Improvement Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #0f0f14; color: #e2e8f0; line-height: 1.6; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+/* Header */
+.header { padding: 40px 0 20px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.header h1 { font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 8px; background: linear-gradient(135deg, #a78bfa, #f0abfc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.header p { color: #94a3b8; font-size: 1rem; }
+.badge { display: inline-block; background: rgba(239,68,68,0.15); color: #f87171; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; margin-top: 12px; }
+
+/* Section */
+.section { padding: 48px 0; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.section-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 8px; color: #f1f5f9; }
+.section-desc { color: #64748b; margin-bottom: 32px; font-size: 0.95rem; }
+
+/* Palette Grid */
+.palette-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; }
+@media (max-width: 900px) { .palette-grid { grid-template-columns: 1fr; } }
+
+.palette-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 28px; transition: all 0.3s; }
+.palette-card:hover { border-color: rgba(255,255,255,0.15); transform: translateY(-2px); }
+.palette-card.current { border-color: rgba(99,102,241,0.3); }
+.palette-card.recommended { border-color: rgba(168,85,247,0.4); box-shadow: 0 0 30px rgba(168,85,247,0.08); }
+.palette-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px; font-weight: 600; }
+.palette-label.cur { color: #6366f1; }
+.palette-label.opt-a { color: #a855f7; }
+.palette-label.opt-b { color: #14b8a6; }
+.rec-badge { background: linear-gradient(135deg, #a855f7, #6366f1); color: #fff; font-size: 0.65rem; padding: 3px 10px; border-radius: 20px; margin-left: 8px; letter-spacing: 1px; }
+.palette-name { font-family: 'Playfair Display', serif; font-size: 1.35rem; color: #f1f5f9; margin-bottom: 6px; }
+.palette-vibe { color: #64748b; font-size: 0.85rem; margin-bottom: 20px; }
+
+/* Color Swatches */
+.swatch-row { display: flex; gap: 6px; margin-bottom: 16px; }
+.swatch { flex: 1; height: 48px; border-radius: 10px; position: relative; cursor: pointer; transition: transform 0.2s; }
+.swatch:hover { transform: scale(1.05); z-index: 1; }
+.swatch-label { position: absolute; bottom: -20px; left: 0; right: 0; text-align: center; font-size: 0.6rem; color: #64748b; white-space: nowrap; }
+.swatch-row-label { font-size: 0.7rem; color: #94a3b8; margin-bottom: 6px; font-weight: 500; }
+
+/* Mini Preview Cards */
+.mini-preview { background: var(--prev-bg, #ffffff); border-radius: 14px; padding: 20px; margin-top: 20px; overflow: hidden; }
+.mini-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.mini-logo { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--prev-primary, #6366f1); }
+.mini-btn-group { display: flex; gap: 6px; }
+.mini-btn { padding: 5px 14px; border-radius: 8px; font-size: 0.7rem; font-weight: 600; border: none; cursor: pointer; }
+.mini-btn.primary { background: var(--prev-primary, #6366f1); color: white; }
+.mini-btn.outline { background: transparent; border: 1.5px solid var(--prev-border, #e2e8f0); color: var(--prev-text-sec, #475569); }
+.mini-hero { text-align: center; padding: 24px 12px; }
+.mini-hero h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--prev-text, #0f172a); margin-bottom: 4px; }
+.mini-hero p { font-size: 0.75rem; color: var(--prev-text-sec, #475569); margin-bottom: 14px; }
+.mini-hero .cta { display: inline-block; padding: 8px 24px; border-radius: 10px; font-size: 0.75rem; font-weight: 600; background: var(--prev-primary, #6366f1); color: white; text-decoration: none; }
+.mini-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 14px; }
+.mini-card { background: var(--prev-card, #f8fafc); border-radius: 10px; padding: 12px; text-align: center; }
+.mini-card .icon { width: 32px; height: 32px; border-radius: 8px; background: var(--prev-primary-light, #eef2ff); display: flex; align-items: center; justify-content: center; margin: 0 auto 6px; font-size: 0.85rem; color: var(--prev-primary, #6366f1); }
+.mini-card h5 { font-size: 0.7rem; color: var(--prev-text, #0f172a); margin-bottom: 2px; }
+.mini-card p { font-size: 0.6rem; color: var(--prev-text-sec, #475569); }
+.mini-pricing { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; margin-top: 14px; }
+.mini-price-card { background: var(--prev-card, #f8fafc); border-radius: 10px; padding: 10px 6px; text-align: center; border: 1.5px solid transparent; }
+.mini-price-card.featured { border-color: var(--prev-primary, #6366f1); background: var(--prev-primary-light, #eef2ff); }
+.mini-price-card h5 { font-size: 0.65rem; font-weight: 600; color: var(--prev-text, #0f172a); }
+.mini-price-card .price { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--prev-primary, #6366f1); font-weight: 700; }
+.mini-price-card .period { font-size: 0.55rem; color: var(--prev-text-sec, #475569); }
+
+/* Comparison Section */
+.compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+@media (max-width: 768px) { .compare-grid { grid-template-columns: 1fr; } }
+.compare-card { border-radius: 14px; overflow: hidden; }
+.compare-label { padding: 10px 16px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; }
+.compare-label.before { background: rgba(239,68,68,0.1); color: #f87171; }
+.compare-label.after { background: rgba(34,197,94,0.1); color: #4ade80; }
+
+/* Issues List */
+.issues-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; }
+@media (max-width: 768px) { .issues-grid { grid-template-columns: 1fr; } }
+.issue-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 20px; }
+.issue-card .icon { font-size: 1.5rem; margin-bottom: 8px; }
+.issue-card h4 { font-size: 0.9rem; color: #f1f5f9; margin-bottom: 4px; }
+.issue-card p { font-size: 0.8rem; color: #64748b; }
+
+/* Dark mode previews */
+.dark-preview { margin-top: 14px; }
+.dark-preview .mini-preview { background: var(--prev-bg-dark, #0f172a); }
+.dark-preview .mini-nav { border-bottom: 1px solid var(--prev-border-dark, rgba(255,255,255,0.08)); padding-bottom: 10px; }
+.dark-preview .mini-hero h3 { color: var(--prev-text-dark, #f1f5f9); }
+.dark-preview .mini-hero p { color: var(--prev-text-sec-dark, #94a3b8); }
+.dark-preview .mini-card { background: var(--prev-card-dark, #1e293b); }
+.dark-preview .mini-card h5 { color: var(--prev-text-dark, #f1f5f9); }
+.dark-preview .mini-card p { color: var(--prev-text-sec-dark, #94a3b8); }
+.dark-preview .mini-card .icon { background: rgba(99,102,241,0.15); }
+.dark-preview .mini-price-card { background: var(--prev-card-dark, #1e293b); }
+.dark-preview .mini-price-card.featured { background: rgba(99,102,241,0.1); }
+.dark-preview .mini-price-card h5 { color: var(--prev-text-dark, #f1f5f9); }
+.dark-preview .mini-price-card .period { color: var(--prev-text-sec-dark, #94a3b8); }
+.dark-preview .mini-btn.outline { border-color: rgba(255,255,255,0.15); color: var(--prev-text-sec-dark, #94a3b8); }
+
+/* Vote / Decision */
+.vote-section { padding: 48px 0; text-align: center; }
+.vote-cards { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 24px; }
+.vote-card { background: rgba(255,255,255,0.04); border: 2px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 24px 36px; cursor: pointer; transition: all 0.3s; min-width: 200px; }
+.vote-card:hover { transform: translateY(-4px); }
+.vote-card.a:hover { border-color: #a855f7; box-shadow: 0 8px 30px rgba(168,85,247,0.2); }
+.vote-card.b:hover { border-color: #14b8a6; box-shadow: 0 8px 30px rgba(20,184,166,0.2); }
+.vote-card.c:hover { border-color: #6366f1; box-shadow: 0 8px 30px rgba(99,102,241,0.2); }
+.vote-card h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; margin-bottom: 4px; }
+.vote-card p { font-size: 0.8rem; color: #64748b; }
+
+/* Scroll hint */
+.scroll-hint { text-align: center; padding: 16px; color: #475569; font-size: 0.8rem; animation: bounce 2s infinite; }
+@keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(6px); } }
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<div class="header">
+    <div class="container">
+        <h1>Alaala Color Improvement Plan</h1>
+        <p>Design proposal — Review before applying to codebase</p>
+        <div class="badge">⚠ PREVIEW ONLY — No code changes made</div>
+    </div>
+</div>
+
+<div class="scroll-hint">↓ Scroll to explore options ↓</div>
+
+<!-- ===== CURRENT ISSUES ===== -->
+<div class="section">
+    <div class="container">
+        <h2 class="section-title">Current Pain Points</h2>
+        <p class="section-desc">What can be improved with the existing color scheme</p>
+        <div class="issues-grid">
+            <div class="issue-card">
+                <div class="icon">🎨</div>
+                <h4>Indigo feels too "tech/SaaS"</h4>
+                <p>The current #6366f1 indigo primary reads more like a productivity app than a warm memorial service for Filipino families.</p>
+            </div>
+            <div class="issue-card">
+                <div class="icon">🌡️</div>
+                <h4>Low emotional warmth</h4>
+                <p>Cool blue-purple tones lack the compassion and reverence expected from a memorial platform. Needs more warmth.</p>
+            </div>
+            <div class="issue-card">
+                <div class="icon">⚡</div>
+                <h4>Accent color underused</h4>
+                <p>The amber accent (#f59e0b) clashes slightly with indigo. A more harmonious secondary would elevate the design.</p>
+            </div>
+            <div class="issue-card">
+                <div class="icon">🌙</div>
+                <h4>Dark mode could be richer</h4>
+                <p>Current dark bg (#0b0f1a) is very flat. A subtle warm undertone would feel more intimate and premium.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== THREE OPTIONS ===== -->
+<div class="section">
+    <div class="container">
+        <h2 class="section-title">Three Palette Options</h2>
+        <p class="section-desc">Each option keeps the premium Playfair + Inter typography. Hover swatches to compare.</p>
+
+        <div class="palette-grid">
+
+            <!-- CURRENT -->
+            <div class="palette-card current">
+                <div class="palette-label cur">CURRENT</div>
+                <h3 class="palette-name">Tech Indigo</h3>
+                <p class="palette-vibe">Cool, modern, SaaS-like</p>
+
+                <div class="swatch-row-label">Primary</div>
+                <div class="swatch-row">
+                    <div class="swatch" style="background:#eef2ff;"><span class="swatch-label">#eef2ff</span></div>
+                    <div class="swatch" style="background:#818cf8;"><span class="swatch-label">#818cf8</span></div>
+                    <div class="swatch" style="background:#6366f1;"><span class="swatch-label">#6366f1</span></div>
+                    <div class="swatch" style="background:#4f46e5;"><span class="swatch-label">#4f46e5</span></div>
+                </div>
+                <div style="height:24px;"></div>
+
+                <div class="swatch-row-label">Accent & Status</div>
+                <div class="swatch-row">
+                    <div class="swatch" style="background:#f59e0b;"><span class="swatch-label">Accent</span></div>
+                    <div class="swatch" style="background:#10b981;"><span class="swatch-label">Success</span></div>
+                    <div class="swatch" style="background:#ef4444;"><span class="swatch-label">Error</span></div>
+                </div>
+                <div style="height:24px;"></div>
+
+                <!-- Light Mode Preview -->
+                <div class="mini-preview" style="--prev-bg:#fff; --prev-primary:#6366f1; --prev-primary-light:#eef2ff; --prev-text:#0f172a; --prev-text-sec:#475569; --prev-border:#e2e8f0; --prev-card:#f8fafc;">
+                    <div class="mini-nav">
+                        <span class="mini-logo">🕯️ Alaala</span>
+                        <div class="mini-btn-group">
+                            <button class="mini-btn outline">Sign In</button>
+                            <button class="mini-btn primary">Get Started</button>
+                        </div>
+                    </div>
+                    <div class="mini-hero">
+                        <h3>Honor Their Memory</h3>
+                        <p>Create beautiful digital memorials</p>
+                        <a class="cta" href="#">Create Memorial</a>
+                    </div>
+                    <div class="mini-cards">
+                        <div class="mini-card"><div class="icon">⛪</div><h5>Mass Offering</h5><p>₱500</p></div>
+                        <div class="mini-card"><div class="icon">🌸</div><h5>Flowers</h5><p>₱800</p></div>
+                    </div>
+                    <div class="mini-pricing">
+                        <div class="mini-price-card"><h5>Free</h5><div class="price" style="color:#6366f1;">₱0</div><div class="period">/month</div></div>
+                        <div class="mini-price-card featured" style="border-color:#6366f1; background:#eef2ff;"><h5>Family</h5><div class="price" style="color:#6366f1;">₱299</div><div class="period">/month</div></div>
+                        <div class="mini-price-card"><h5>Premium</h5><div class="price" style="color:#6366f1;">₱599</div><div class="period">/month</div></div>
+                    </div>
+                </div>
+
+                <!-- Dark Mode Preview -->
+                <div class="dark-preview">
+                    <div class="mini-preview" style="--prev-bg:#0b0f1a; --prev-primary:#818cf8; --prev-primary-light:rgba(99,102,241,0.15); --prev-text:#f1f5f9; --prev-text-sec:#94a3b8; --prev-border:rgba(255,255,255,0.08); --prev-card:#1e293b; background:#0b0f1a;">
+                        <div class="mini-nav" style="border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:10px;">
+                            <span class="mini-logo" style="color:#818cf8;">🕯️ Alaala</span>
+                            <div class="mini-btn-group">
+                                <button class="mini-btn outline" style="border-color:rgba(255,255,255,0.15); color:#94a3b8;">Sign In</button>
+                                <button class="mini-btn primary" style="background:#818cf8;">Get Started</button>
+                            </div>
+                        </div>
+                        <div class="mini-hero">
+                            <h3 style="color:#f1f5f9;">Honor Their Memory</h3>
+                            <p style="color:#94a3b8;">Create beautiful digital memorials</p>
+                            <a class="cta" href="#" style="background:#818cf8;">Create Memorial</a>
+                        </div>
+                        <div class="mini-cards">
+                            <div class="mini-card" style="background:#1e293b;"><div class="icon" style="background:rgba(99,102,241,0.15); color:#818cf8;">⛪</div><h5 style="color:#f1f5f9;">Mass</h5><p style="color:#94a3b8;">₱500</p></div>
+                            <div class="mini-card" style="background:#1e293b;"><div class="icon" style="background:rgba(99,102,241,0.15); color:#818cf8;">🌸</div><h5 style="color:#f1f5f9;">Flowers</h5><p style="color:#94a3b8;">₱800</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OPTION A — Warm Plum & Gold -->
+            <div class="palette-card recommended">
+                <div class="palette-label opt-a">OPTION A <span class="rec-badge">★ RECOMMENDED</span></div>
+                <h3 class="palette-name">Warm Plum & Gold</h3>
+                <p class="palette-vibe">Reverent, premium, emotionally warm</p>
+
+                <div class="swatch-row-label">Primary (Plum)</div>
+                <div class="swatch-row">
+                    <div class="swatch" style="background:#faf5ff;"><span class="swatch-label">#faf5ff</span></div>
+                    <div class="swatch" style="background:#c084fc;"><span class="swatch-label">#c084fc</span></div>
+                    <div class="swatch" style="background:#7c3aed;"><span class="swatch-label">#7c3aed</span></div>
+                    <div class="swatch" style="background:#5b21b6;"><span class="swatch-label">#5b21b6</span></div>
+                </div>
+                <div style="height:24px;"></div>
+
+                <div class="swatch-row-label">Accent (Warm Gold) & Status</div>
+                <div class="swatch-row">
+                    <div class="swatch" style="background:#d4a574;"><span class="swatch-label">Gold</span></div>
+                    <div class="swatch" style="background:#059669;"><span class="swatch-label">Success</span></div>
+                    <div class="swatch" style="background:#dc2626;"><span class="swatch-label">Error</span></div>
+                </div>
+                <div style="height:24px;"></div>
+
+                <!-- Light Mode Preview -->
+                <div class="mini-preview" style="--prev-bg:#fffcf9; --prev-primary:#7c3aed; --prev-primary-light:#faf5ff; --prev-text:#1c1017; --prev-text-sec:#5d4e5c; --prev-border:#ede4df; --prev-card:#faf7f5;">
+                    <div class="mini-nav">
+                        <span class="mini-logo" style="color:#7c3aed;">🕯️ Alaala</span>
+                        <div class="mini-btn-group">
+                            <button class="mini-btn outline" style="border-color:#ede4df; color:#5d4e5c;">Sign In</button>
+                            <button class="mini-btn primary" style="background:linear-gradient(135deg, #7c3aed, #9333ea);">Get Started</button>
+                        </div>
+                    </div>
+                    <div class="mini-hero">
+                        <h3 style="color:#1c1017;">Honor Their Memory</h3>
+                        <p style="color:#5d4e5c;">Create beautiful digital memorials</p>
+                        <a class="cta" href="#" style="background:linear-gradient(135deg, #7c3aed, #9333ea);">Create Memorial</a>
+                    </div>
+                    <div class="mini-cards">
+                        <div class="mini-card" style="background:#faf7f5;"><div class="icon" style="background:#faf5ff; color:#7c3aed;">⛪</div><h5 style="color:#1c1017;">Mass Offering</h5><p style="color:#5d4e5c;">₱500</p></div>
+                        <div class="mini-card" style="background:#faf7f5;"><div class="icon" style="background:#faf5ff; color:#7c3aed;">🌸</div><h5 style="color:#1c1017;">Flowers</h5><p style="color:#5d4e5c;">₱800</p></div>
+                    </div>
+                    <div class="mini-pricing">
+                        <div class="mini-price-card" style="background:#faf7f5;"><h5 style="color:#1c1017;">Free</h5><div class="price" style="color:#7c3aed;">₱0</div><div class="period" style="color:#5d4e5c;">/month</div></div>
+                        <div class="mini-price-card featured" style="border-color:#7c3aed; background:#faf5ff;"><h5 style="color:#1c1017;">Family</h5><div class="price" style="color:#7c3aed;">₱299</div><div class="period" style="color:#5d4e5c;">/month</div></div>
+                        <div class="mini-price-card" style="background:#faf7f5;"><h5 style="color:#1c1017;">Premium</h5><div class="price" style="color:#7c3aed;">₱599</div><div class="period" style="color:#5d4e5c;">/month</div></div>
+                    </div>
+                </div>
+
+                <!-- Dark Mode Preview -->
+                <div class="dark-preview">
+                    <div class="mini-preview" style="background:#120c18; --prev-bg:#120c18;">
+                        <div class="mini-nav" style="border-bottom:1px solid rgba(192,132,252,0.12); padding-bottom:10px;">
+                            <span class="mini-logo" style="color:#c084fc;">🕯️ Alaala</span>
+                            <div class="mini-btn-group">
+                                <button class="mini-btn outline" style="border-color:rgba(192,132,252,0.2); color:#a89bb0;">Sign In</button>
+                                <button class="mini-btn primary" style="background:linear-gradient(135deg, #7c3aed, #9333ea);">Get Started</button>
+                            </div>
+                        </div>
+                        <div class="mini-hero">
+                            <h3 style="color:#f5f0ff;">Honor Their Memory</h3>
+                            <p style="color:#a89bb0;">Create beautiful digital memorials</p>
+                            <a class="cta" href="#" style="background:linear-gradient(135deg, #7c3aed, #9333ea);">Create Memorial</a>
+                        </div>
+                        <div class="mini-cards">
+                            <div class="mini-card" style="background:#1e1528;"><div class="icon" style="background:rgba(124,58,237,0.15); color:#c084fc;">⛪</div><h5 style="color:#f5f0ff;">Mass</h5><p style="color:#a89bb0;">₱500</p></div>
+                            <div class="mini-card" style="background:#1e1528;"><div class="icon" style="background:rgba(124,58,237,0.15); color:#c084fc;">🌸</div><h5 style="color:#f5f0ff;">Flowers</h5><p style="color:#a89bb0;">₱800</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- OPTION B — Sage & Copper -->
+            <div class="palette-card">
+                <div class="palette-label opt-b">OPTION B</div>
+                <h3 class="palette-name">Sage & Copper</h3>
+                <p class="palette-vibe">Natural, serene, grounded warmth</p>
+
+                <div class="swatch-row-label">Primary (Sage Teal)</div>
+                <div class="swatch-row">
+                    <div class="swatch" style="background:#f0fdfa;"><span class="swatch-label">#f0fdfa</span></div>
+                    <div class="swatch" style="background:#5eead4;"><span class="swatch-label">#5eead4</span></div>
+                    <div class="swatch" style="background:#0d9488;"><span class="swatch-label">#0d9488</span></div>
+                    <div class="swatch" style="background:#115e59;"><span class="swatch-label">#115e59</span></div>
+                </div>
+                <div style="height:24px;"></div>
+
+                <div class="swatch-row-label">Accent (Copper) & Status</div>
+                <div class="swatch-row">
+                    <div class="swatch" style="background:#c2956a;"><span class="swatch-label">Copper</span></div>
+                    <div class="swatch" style="background:#22c55e;"><span class="swatch-label">Success</span></div>
+                    <div class="swatch" style="background:#e11d48;"><span class="swatch-label">Error</span></div>
+                </div>
+                <div style="height:24px;"></div>
+
+                <!-- Light Mode Preview -->
+                <div class="mini-preview" style="--prev-bg:#fafdfb; --prev-primary:#0d9488; --prev-primary-light:#f0fdfa; --prev-text:#0f1f1d; --prev-text-sec:#4a6460; --prev-border:#d5e5e2; --prev-card:#f5faf8;">
+                    <div class="mini-nav">
+                        <span class="mini-logo" style="color:#0d9488;">🕯️ Alaala</span>
+                        <div class="mini-btn-group">
+                            <button class="mini-btn outline" style="border-color:#d5e5e2; color:#4a6460;">Sign In</button>
+                            <button class="mini-btn primary" style="background:linear-gradient(135deg, #0d9488, #14b8a6);">Get Started</button>
+                        </div>
+                    </div>
+                    <div class="mini-hero">
+                        <h3 style="color:#0f1f1d;">Honor Their Memory</h3>
+                        <p style="color:#4a6460;">Create beautiful digital memorials</p>
+                        <a class="cta" href="#" style="background:linear-gradient(135deg, #0d9488, #14b8a6);">Create Memorial</a>
+                    </div>
+                    <div class="mini-cards">
+                        <div class="mini-card" style="background:#f5faf8;"><div class="icon" style="background:#f0fdfa; color:#0d9488;">⛪</div><h5 style="color:#0f1f1d;">Mass Offering</h5><p style="color:#4a6460;">₱500</p></div>
+                        <div class="mini-card" style="background:#f5faf8;"><div class="icon" style="background:#f0fdfa; color:#0d9488;">🌸</div><h5 style="color:#0f1f1d;">Flowers</h5><p style="color:#4a6460;">₱800</p></div>
+                    </div>
+                    <div class="mini-pricing">
+                        <div class="mini-price-card" style="background:#f5faf8;"><h5 style="color:#0f1f1d;">Free</h5><div class="price" style="color:#0d9488;">₱0</div><div class="period" style="color:#4a6460;">/month</div></div>
+                        <div class="mini-price-card featured" style="border-color:#0d9488; background:#f0fdfa;"><h5 style="color:#0f1f1d;">Family</h5><div class="price" style="color:#0d9488;">₱299</div><div class="period" style="color:#4a6460;">/month</div></div>
+                        <div class="mini-price-card" style="background:#f5faf8;"><h5 style="color:#0f1f1d;">Premium</h5><div class="price" style="color:#0d9488;">₱599</div><div class="period" style="color:#4a6460;">/month</div></div>
+                    </div>
+                </div>
+
+                <!-- Dark Mode Preview -->
+                <div class="dark-preview">
+                    <div class="mini-preview" style="background:#0a1514; --prev-bg:#0a1514;">
+                        <div class="mini-nav" style="border-bottom:1px solid rgba(94,234,212,0.1); padding-bottom:10px;">
+                            <span class="mini-logo" style="color:#5eead4;">🕯️ Alaala</span>
+                            <div class="mini-btn-group">
+                                <button class="mini-btn outline" style="border-color:rgba(94,234,212,0.15); color:#7dada6;">Sign In</button>
+                                <button class="mini-btn primary" style="background:linear-gradient(135deg, #0d9488, #14b8a6);">Get Started</button>
+                            </div>
+                        </div>
+                        <div class="mini-hero">
+                            <h3 style="color:#ecfdf5;">Honor Their Memory</h3>
+                            <p style="color:#7dada6;">Create beautiful digital memorials</p>
+                            <a class="cta" href="#" style="background:linear-gradient(135deg, #0d9488, #14b8a6);">Create Memorial</a>
+                        </div>
+                        <div class="mini-cards">
+                            <div class="mini-card" style="background:#132220;"><div class="icon" style="background:rgba(13,148,136,0.15); color:#5eead4;">⛪</div><h5 style="color:#ecfdf5;">Mass</h5><p style="color:#7dada6;">₱500</p></div>
+                            <div class="mini-card" style="background:#132220;"><div class="icon" style="background:rgba(13,148,136,0.15); color:#5eead4;">🌸</div><h5 style="color:#ecfdf5;">Flowers</h5><p style="color:#7dada6;">₱800</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- ===== KEY DIFFERENCES SUMMARY ===== -->
+<div class="section">
+    <div class="container">
+        <h2 class="section-title">Side-by-Side Comparison</h2>
+        <p class="section-desc">Key design differences at a glance</p>
+
+        <table style="width:100%; border-collapse:collapse; font-size:0.85rem;">
+            <thead>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <th style="text-align:left; padding:12px 8px; color:#64748b; font-weight:500;">Property</th>
+                    <th style="text-align:center; padding:12px 8px; color:#6366f1;">Current</th>
+                    <th style="text-align:center; padding:12px 8px; color:#a855f7;">Option A ★</th>
+                    <th style="text-align:center; padding:12px 8px; color:#14b8a6;">Option B</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
+                    <td style="padding:12px 8px; color:#94a3b8;">Primary</td>
+                    <td style="text-align:center; padding:12px 8px;"><span style="display:inline-block; width:20px; height:20px; border-radius:50%; background:#6366f1; vertical-align:middle;"></span> #6366f1</td>
+                    <td style="text-align:center; padding:12px 8px;"><span style="display:inline-block; width:20px; height:20px; border-radius:50%; background:#7c3aed; vertical-align:middle;"></span> #7c3aed</td>
+                    <td style="text-align:center; padding:12px 8px;"><span style="display:inline-block; width:20px; height:20px; border-radius:50%; background:#0d9488; vertical-align:middle;"></span> #0d9488</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
+                    <td style="padding:12px 8px; color:#94a3b8;">Accent</td>
+                    <td style="text-align:center; padding:12px 8px;"><span style="display:inline-block; width:20px; height:20px; border-radius:50%; background:#f59e0b; vertical-align:middle;"></span> Amber</td>
+                    <td style="text-align:center; padding:12px 8px;"><span style="display:inline-block; width:20px; height:20px; border-radius:50%; background:#d4a574; vertical-align:middle;"></span> Warm Gold</td>
+                    <td style="text-align:center; padding:12px 8px;"><span style="display:inline-block; width:20px; height:20px; border-radius:50%; background:#c2956a; vertical-align:middle;"></span> Copper</td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
+                    <td style="padding:12px 8px; color:#94a3b8;">Light BG</td>
+                    <td style="text-align:center; padding:12px 8px;">#ffffff<br><span style="color:#475569;">Pure white</span></td>
+                    <td style="text-align:center; padding:12px 8px;">#fffcf9<br><span style="color:#475569;">Warm cream</span></td>
+                    <td style="text-align:center; padding:12px 8px;">#fafdfb<br><span style="color:#475569;">Sage tint</span></td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
+                    <td style="padding:12px 8px; color:#94a3b8;">Dark BG</td>
+                    <td style="text-align:center; padding:12px 8px;">#0b0f1a<br><span style="color:#475569;">Cold navy</span></td>
+                    <td style="text-align:center; padding:12px 8px;">#120c18<br><span style="color:#475569;">Warm plum black</span></td>
+                    <td style="text-align:center; padding:12px 8px;">#0a1514<br><span style="color:#475569;">Deep forest</span></td>
+                </tr>
+                <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
+                    <td style="padding:12px 8px; color:#94a3b8;">Mood</td>
+                    <td style="text-align:center; padding:12px 8px; color:#475569;">Professional, techy</td>
+                    <td style="text-align:center; padding:12px 8px; color:#475569;">Reverent, warm, premium</td>
+                    <td style="text-align:center; padding:12px 8px; color:#475569;">Natural, peaceful, calm</td>
+                </tr>
+                <tr>
+                    <td style="padding:12px 8px; color:#94a3b8;">Best For</td>
+                    <td style="text-align:center; padding:12px 8px; color:#475569;">Tech-savvy users</td>
+                    <td style="text-align:center; padding:12px 8px; color:#475569;">Filipino families, emotional depth</td>
+                    <td style="text-align:center; padding:12px 8px; color:#475569;">Minimalist, zen approach</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ===== VOTE ===== -->
+<div class="vote-section">
+    <div class="container">
+        <h2 class="section-title" style="text-align:center;">Which palette should we apply?</h2>
+        <p class="section-desc" style="text-align:center;">Tell me your pick and I'll update all CSS variables across the codebase</p>
+        <div class="vote-cards">
+            <div class="vote-card a">
+                <h3 style="color:#a855f7;">Option A</h3>
+                <p>Warm Plum & Gold</p>
+            </div>
+            <div class="vote-card b">
+                <h3 style="color:#14b8a6;">Option B</h3>
+                <p>Sage & Copper</p>
+            </div>
+            <div class="vote-card c">
+                <h3 style="color:#6366f1;">Keep Current</h3>
+                <p>Just polish what we have</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="text-align:center; padding: 40px 0; color:#334155; font-size:0.8rem; border-top: 1px solid rgba(255,255,255,0.06);">
+    This is a preview page — delete <code>_preview-colors.html</code> after deciding
+</div>
+
+</body>
+</html>
