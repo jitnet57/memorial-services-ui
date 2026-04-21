@@ -431,6 +431,41 @@
     outline-offset: 2px;
 }
 
+/* Popup nav buttons (Google Maps / Waze) */
+.memorial-map-popup-nav {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+
+.memorial-map-nav-btn {
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 6px 8px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity 0.15s;
+}
+
+.memorial-map-nav-btn:hover {
+    opacity: 0.85;
+}
+
+.gmaps-btn {
+    background: #4285F4;
+    color: #fff;
+}
+
+.waze-btn {
+    background: #33ccff;
+    color: #1a1a2e;
+}
+
 /* Popup "See card" button */
 .memorial-map-popup-actions {
     display: flex;
@@ -924,12 +959,6 @@
     position: relative;
 }
 
-#memorialMap .gm-style,
-#memorialMap .gm-style iframe,
-#memorialMap canvas {
-    z-index: 1 !important;
-}
-
 .explore-map-container.active {
     display: block;
 }
@@ -937,7 +966,6 @@
 #memorialMap {
     width: 100%;
     height: 420px;
-    background: var(--bg-alt);
 }
 
 .map-legend {

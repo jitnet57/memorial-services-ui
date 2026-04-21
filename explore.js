@@ -156,27 +156,31 @@
 
     var gMap = null;
     var mapMarkers = {};
-    var activeInfoWindow = null;
+    var activePopup = null;
 
     function createPinIcon(initial, pinned) {
-        var fill = pinned ? '#f59e0b' : '#7c3aed';
+        var fill = pinned ? '#f59e0b' : '#5ba4d3';
         var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="46" viewBox="0 0 36 46">' +
             '<circle cx="18" cy="18" r="16" fill="' + fill + '" stroke="white" stroke-width="2.5"/>' +
             '<text x="18" y="24" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" font-weight="bold" fill="white">' + initial + '</text>' +
             '<polygon points="10,32 26,32 18,46" fill="' + fill + '"/>' +
             '</svg>';
-        return {
-            url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg),
-            scaledSize: new google.maps.Size(36, 46),
-            anchor: new google.maps.Point(18, 46)
-        };
+        return L.divIcon({
+            html: '<img src="data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg) + '" width="36" height="46"/>',
+            iconSize: [36, 46],
+            iconAnchor: [18, 46],
+            popupAnchor: [0, -46],
+            className: ''
+        });
     }
 
     function makePopupContent(m) {
         var initial = m.name.charAt(0).toUpperCase();
+        var gmapsUrl = 'https://www.google.com/maps?q=' + m.lat + ',' + m.lng;
+        var wazeUrl = 'https://waze.com/ul?ll=' + m.lat + ',' + m.lng + '&navigate=yes';
         return '<div class="memorial-map-popup">' +
             '<div class="memorial-map-popup-header">' +
-            '<div style="width:40px;height:40px;border-radius:50%;background:#7c3aed;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:16px;flex-shrink:0;">' + initial + '</div>' +
+            '<div style="width:40px;height:40px;border-radius:50%;background:#5ba4d3;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:16px;flex-shrink:0;">' + initial + '</div>' +
             '<div><div class="memorial-map-popup-name">' + m.name + '</div>' +
             '<div class="memorial-map-popup-dates">' + m.dates + '</div>' +
             '</div></div>' +
@@ -184,6 +188,14 @@
             '<div class="memorial-map-popup-stats">' +
             '<span>🕯️ ' + m.candles + ' candles</span>' +
             '<span>❤️ ' + m.tributes + ' tributes</span>' +
+            '</div>' +
+            '<div class="memorial-map-popup-nav">' +
+            '<a href="' + gmapsUrl + '" target="_blank" rel="noopener" class="memorial-map-nav-btn gmaps-btn">' +
+            '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>' +
+            'Google Maps</a>' +
+            '<a href="' + wazeUrl + '" target="_blank" rel="noopener" class="memorial-map-nav-btn waze-btn">' +
+            '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.54 6.63C19.08 4.04 16.6 2.23 13.69 1.8c-4.34-.63-8.52 2.17-9.6 6.41-.38 1.51-.25 3.07.24 4.5L2 20l7.5-2.25c.85.28 1.74.42 2.64.42 4.42 0 8.05-3.45 8.37-7.86.15-1.93-.41-3.78-1.47-5.27v-.41z"/></svg>' +
+            'Waze</a>' +
             '</div>' +
             '<div class="memorial-map-popup-actions">' +
             '<a href="' + m.link + '" class="memorial-map-popup-link">Visit Memorial →</a>' +
@@ -194,18 +206,14 @@
     function initMap() {
         if (gMap) return;
         var mapEl = document.getElementById('memorialMap');
-        if (!mapEl) return;
-        gMap = new google.maps.Map(mapEl, {
-            center: { lat: 12.5, lng: 122.5 },
-            zoom: 6,
-            mapTypeControl: false,
-            streetViewControl: false,
-            fullscreenControl: true
-        });
+        if (!mapEl || typeof L === 'undefined') return;
+        gMap = L.map(mapEl, { zoomControl: true }).setView([12.5, 122.5], 6);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            maxZoom: 19
+        }).addTo(gMap);
         memorialsMapData.forEach(function (m) { addMapMarker(m); });
     }
-
-    window.initAlaalaMap = initMap;
 
     function focusCard(id) {
         var card = document.querySelector('.memorial-card[data-memorial-id="' + id + '"]');
@@ -221,55 +229,45 @@
         if (!m || !data || !gMap) return;
         document.getElementById('memorialMap').scrollIntoView({ behavior: 'smooth', block: 'center' });
         setTimeout(function () {
-            gMap.panTo({ lat: m.lat, lng: m.lng });
-            gMap.setZoom(13);
-            setTimeout(function () {
-                if (activeInfoWindow) activeInfoWindow.close();
-                data.infoWindow.open(gMap, data.marker);
-                activeInfoWindow = data.infoWindow;
-            }, 500);
+            gMap.setView([m.lat, m.lng], 13);
+            setTimeout(function () { data.marker.openPopup(); }, 400);
         }, 400);
     }
 
     function addMapMarker(m) {
         var pinned = isPinned(m.id);
-        var marker = new google.maps.Marker({
-            position: { lat: m.lat, lng: m.lng },
-            map: gMap,
-            title: m.name,
-            icon: createPinIcon(m.name.charAt(0).toUpperCase(), pinned)
-        });
+        var marker = L.marker([m.lat, m.lng], {
+            icon: createPinIcon(m.name.charAt(0).toUpperCase(), pinned),
+            title: m.name
+        }).addTo(gMap);
 
-        var infoWindow = new google.maps.InfoWindow({ content: makePopupContent(m) });
+        marker.bindPopup(makePopupContent(m), { maxWidth: 260 });
 
-        marker.addListener('click', function () {
-            if (activeInfoWindow) activeInfoWindow.close();
-            infoWindow.open(gMap, marker);
-            activeInfoWindow = infoWindow;
-        });
-
-        google.maps.event.addListener(infoWindow, 'domready', function () {
+        marker.on('popupopen', function () {
             var btn = document.querySelector('.memorial-map-popup-scroll[data-scroll-to="' + m.id + '"]');
             if (btn) {
                 btn.onclick = function () {
-                    infoWindow.close();
+                    marker.closePopup();
                     focusCard(m.id);
                 };
             }
         });
 
-        mapMarkers[m.id] = { marker: marker, infoWindow: infoWindow };
+        mapMarkers[m.id] = { marker: marker };
     }
 
     function refreshMapMarker(id) {
         if (!gMap || !mapMarkers[id]) return;
         var m = memorialsMapData.find(function (d) { return d.id === id; });
         if (!m) return;
-        mapMarkers[id].marker.setMap(null);
-        mapMarkers[id].infoWindow.close();
+        mapMarkers[id].marker.remove();
         delete mapMarkers[id];
         addMapMarker(m);
     }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        setTimeout(initMap, 100);
+    });
 
     // ===== VIEW TOGGLE (Grid / List) =====
     const viewToggle = document.getElementById('viewToggle');
@@ -292,7 +290,6 @@
         });
     }
 
-    // Map is initialized via window.initAlaalaMap callback from Google Maps API
 
     // ===== SORT DROPDOWN =====
     var sortSelect = document.getElementById('sortSelect');

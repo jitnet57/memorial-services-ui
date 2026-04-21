@@ -1,3 +1,4 @@
 .wrangler/
 node_modules/
 memorial-services-ui/
+.claude/worktrees/
