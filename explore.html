@@ -7,7 +7,7 @@
     <meta name="description" content="Explore and search memorials on Alaala. Discover tributes and honor loved ones across the Philippines.">
     <meta name="keywords" content="memorial, Philippines, tribute, remembrance, Alaala, Filipino families">
     <meta name="author" content="Alaala Memorial Services">
-    <meta name="theme-color" content="#6366f1">
+    <meta name="theme-color" content="#7c3aed">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕯️</text></svg>">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="Alaala">
@@ -23,6 +23,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
     <link rel="stylesheet" href="animations.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
 </head>
 <body>
     <!-- ===== TOP NAVBAR ===== -->
@@ -84,6 +85,9 @@
                     <button class="view-btn" data-view="list" aria-label="List view">
                         <span class="material-symbols-outlined">view_list</span>
                     </button>
+                    <button class="view-btn" data-view="map" aria-label="Map view">
+                        <span class="material-symbols-outlined">map</span>
+                    </button>
                 </div>
                 <div class="explore-sort">
                     <label for="sortSelect" class="explore-sort-label">Sort by:</label>
@@ -106,9 +110,12 @@
             <div class="explore-grid" id="memorialGrid">
 
                 <!-- Card 1: Maria Santos -->
-                <article class="memorial-card reveal-card">
+                <article class="memorial-card reveal-card" data-memorial-id="maria-santos">
                     <div class="memorial-card-cover">
                         <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=200&fit=crop" alt="Memorial cover" loading="lazy">
+                        <button class="memorial-card-pin-btn" title="Pin for easy access" aria-label="Pin memorial">
+                            <span class="material-symbols-outlined">push_pin</span>
+                        </button>
                     </div>
                     <div class="memorial-card-avatar">
                         <img src="https://ui-avatars.com/api/?name=Maria+Santos&background=6366f1&color=fff&size=48" alt="Maria Santos">
@@ -130,9 +137,12 @@
                 </article>
 
                 <!-- Card 2: Jose Reyes -->
-                <article class="memorial-card reveal-card">
+                <article class="memorial-card reveal-card" data-memorial-id="jose-reyes">
                     <div class="memorial-card-cover">
                         <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=400&h=200&fit=crop" alt="Memorial cover" loading="lazy">
+                        <button class="memorial-card-pin-btn" title="Pin for easy access" aria-label="Pin memorial">
+                            <span class="material-symbols-outlined">push_pin</span>
+                        </button>
                     </div>
                     <div class="memorial-card-avatar">
                         <img src="https://ui-avatars.com/api/?name=Jose+Reyes&background=6366f1&color=fff&size=48" alt="Jose Reyes">
@@ -154,9 +164,12 @@
                 </article>
 
                 <!-- Card 3: Carmen Dela Cruz -->
-                <article class="memorial-card reveal-card">
+                <article class="memorial-card reveal-card" data-memorial-id="carmen-dela-cruz">
                     <div class="memorial-card-cover">
                         <img src="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=400&h=200&fit=crop" alt="Memorial cover" loading="lazy">
+                        <button class="memorial-card-pin-btn" title="Pin for easy access" aria-label="Pin memorial">
+                            <span class="material-symbols-outlined">push_pin</span>
+                        </button>
                     </div>
                     <div class="memorial-card-avatar">
                         <img src="https://ui-avatars.com/api/?name=Carmen+Dela+Cruz&background=6366f1&color=fff&size=48" alt="Carmen Dela Cruz">
@@ -178,9 +191,12 @@
                 </article>
 
                 <!-- Card 4: Roberto Garcia -->
-                <article class="memorial-card reveal-card">
+                <article class="memorial-card reveal-card" data-memorial-id="roberto-garcia">
                     <div class="memorial-card-cover">
                         <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=400&h=200&fit=crop" alt="Memorial cover" loading="lazy">
+                        <button class="memorial-card-pin-btn" title="Pin for easy access" aria-label="Pin memorial">
+                            <span class="material-symbols-outlined">push_pin</span>
+                        </button>
                     </div>
                     <div class="memorial-card-avatar">
                         <img src="https://ui-avatars.com/api/?name=Roberto+Garcia&background=6366f1&color=fff&size=48" alt="Roberto Garcia">
@@ -202,9 +218,12 @@
                 </article>
 
                 <!-- Card 5: Luisa Mendoza -->
-                <article class="memorial-card reveal-card">
+                <article class="memorial-card reveal-card" data-memorial-id="luisa-mendoza">
                     <div class="memorial-card-cover">
                         <img src="https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?w=400&h=200&fit=crop" alt="Memorial cover" loading="lazy">
+                        <button class="memorial-card-pin-btn" title="Pin for easy access" aria-label="Pin memorial">
+                            <span class="material-symbols-outlined">push_pin</span>
+                        </button>
                     </div>
                     <div class="memorial-card-avatar">
                         <img src="https://ui-avatars.com/api/?name=Luisa+Mendoza&background=6366f1&color=fff&size=48" alt="Luisa Mendoza">
@@ -226,9 +245,12 @@
                 </article>
 
                 <!-- Card 6: Antonio Ramos -->
-                <article class="memorial-card reveal-card">
+                <article class="memorial-card reveal-card" data-memorial-id="antonio-ramos">
                     <div class="memorial-card-cover">
                         <img src="https://images.unsplash.com/photo-1465056836900-8f1e940f3404?w=400&h=200&fit=crop" alt="Memorial cover" loading="lazy">
+                        <button class="memorial-card-pin-btn" title="Pin for easy access" aria-label="Pin memorial">
+                            <span class="material-symbols-outlined">push_pin</span>
+                        </button>
                     </div>
                     <div class="memorial-card-avatar">
                         <img src="https://ui-avatars.com/api/?name=Antonio+Ramos&background=6366f1&color=fff&size=48" alt="Antonio Ramos">
@@ -250,9 +272,12 @@
                 </article>
 
                 <!-- Card 7: Teresa Villanueva -->
-                <article class="memorial-card reveal-card">
+                <article class="memorial-card reveal-card" data-memorial-id="teresa-villanueva">
                     <div class="memorial-card-cover">
                         <img src="https://images.unsplash.com/photo-1490750967868-88aa4f44baee?w=400&h=200&fit=crop" alt="Memorial cover" loading="lazy">
+                        <button class="memorial-card-pin-btn" title="Pin for easy access" aria-label="Pin memorial">
+                            <span class="material-symbols-outlined">push_pin</span>
+                        </button>
                     </div>
                     <div class="memorial-card-avatar">
                         <img src="https://ui-avatars.com/api/?name=Teresa+Villanueva&background=6366f1&color=fff&size=48" alt="Teresa Villanueva">
@@ -274,9 +299,12 @@
                 </article>
 
                 <!-- Card 8: Pedro Aquino -->
-                <article class="memorial-card reveal-card">
+                <article class="memorial-card reveal-card" data-memorial-id="pedro-aquino">
                     <div class="memorial-card-cover">
                         <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=400&h=200&fit=crop" alt="Memorial cover" loading="lazy">
+                        <button class="memorial-card-pin-btn" title="Pin for easy access" aria-label="Pin memorial">
+                            <span class="material-symbols-outlined">push_pin</span>
+                        </button>
                     </div>
                     <div class="memorial-card-avatar">
                         <img src="https://ui-avatars.com/api/?name=Pedro+Aquino&background=6366f1&color=fff&size=48" alt="Pedro Aquino">
@@ -298,9 +326,12 @@
                 </article>
 
                 <!-- Card 9: Sofia Tan -->
-                <article class="memorial-card reveal-card">
+                <article class="memorial-card reveal-card" data-memorial-id="sofia-tan">
                     <div class="memorial-card-cover">
                         <img src="https://images.unsplash.com/photo-1518173946687-a1e0e2a7aecb?w=400&h=200&fit=crop" alt="Memorial cover" loading="lazy">
+                        <button class="memorial-card-pin-btn" title="Pin for easy access" aria-label="Pin memorial">
+                            <span class="material-symbols-outlined">push_pin</span>
+                        </button>
                     </div>
                     <div class="memorial-card-avatar">
                         <img src="https://ui-avatars.com/api/?name=Sofia+Tan&background=6366f1&color=fff&size=48" alt="Sofia Tan">
@@ -323,8 +354,27 @@
 
             </div>
 
+            <!-- Map View Container (hidden by default) -->
+            <div class="explore-map-container" id="exploreMapContainer">
+                <div id="memorialMap"></div>
+                <div class="map-legend">
+                    <span class="map-legend-pin"></span> Memorial locations
+                    <span class="map-legend-pin pinned-legend"></span> Pinned
+                </div>
+            </div>
+
             <!-- Sidebar -->
             <aside class="explore-sidebar">
+                <!-- Pinned Memorials -->
+                <div class="explore-sidebar-card" id="pinnedSidebarCard">
+                    <h3 class="explore-sidebar-title">
+                        <span class="material-symbols-outlined">push_pin</span> Pinned
+                    </h3>
+                    <div class="explore-pinned-list" id="pinnedList">
+                        <p class="explore-pinned-empty">Pin a memorial to access it quickly here.</p>
+                    </div>
+                </div>
+
                 <!-- Recently Viewed -->
                 <div class="explore-sidebar-card">
                     <h3 class="explore-sidebar-title">
@@ -405,6 +455,7 @@
         </div>
     </footer>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN2GGnM=" crossorigin=""></script>
     <script src="explore.js"></script>
     <script src="animations.js"></script>
 </body>

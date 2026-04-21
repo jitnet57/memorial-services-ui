@@ -99,7 +99,7 @@
 
 .sidebar-nav-item.active {
     color: #fff;
-    background: rgba(99,102,241,0.15);
+    background: rgba(91,164,211,0.15);
     border-left-color: var(--primary);
 }
 
@@ -484,7 +484,7 @@
 
 /* ===== WELCOME BANNER ===== */
 .welcome-banner {
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    background: var(--primary);
     border-radius: var(--radius-lg);
     padding: 1.5rem 2rem;
     margin-bottom: 1.5rem;
@@ -1042,12 +1042,12 @@
 }
 
 .badge-premium {
-    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    background: var(--primary);
     color: #fff;
 }
 
 .badge-family {
-    background: linear-gradient(135deg, #10b981, #14b8a6);
+    background: #10b981;
     color: #fff;
 }
 
@@ -1550,7 +1550,7 @@ input[type="checkbox"] {
 }
 
 [data-theme="dark"] .welcome-banner {
-    background: linear-gradient(135deg, #4338ca, #312e81);
+    background: var(--primary-dark);
 }
 
 [data-theme="dark"] .stat-growth.positive {
@@ -1566,11 +1566,11 @@ input[type="checkbox"] {
 }
 
 [data-theme="dark"] .chart-bar {
-    background: rgba(99,102,241,0.2);
+    background: rgba(91,164,211,0.2);
 }
 
 [data-theme="dark"] .chart-bar:hover {
-    background: rgba(99,102,241,0.35);
+    background: rgba(91,164,211,0.35);
 }
 
 [data-theme="dark"] .chart-bar.active {

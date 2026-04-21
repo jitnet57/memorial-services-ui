@@ -13,18 +13,12 @@
 .explore-hero-bg {
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, #312e81, #4338ca 40%, #6366f1 70%, #818cf8);
+    background: var(--primary-dark);
     z-index: 0;
 }
 
 .explore-hero-bg::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-        radial-gradient(circle at 20% 80%, rgba(139, 92, 246, 0.35), transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(99, 102, 241, 0.3), transparent 50%),
-        radial-gradient(circle at 50% 50%, rgba(165, 180, 252, 0.15), transparent 60%);
+    content: none;
 }
 
 .explore-hero-content {
@@ -390,6 +384,133 @@
     font-size: 0.8rem;
 }
 
+/* ===== PIN BUTTON ===== */
+.memorial-card-pin-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(8px);
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background var(--transition-fast), transform var(--transition-fast);
+    z-index: 3;
+    opacity: 0;
+}
+
+.memorial-card:hover .memorial-card-pin-btn,
+.memorial-card-pin-btn.pinned {
+    opacity: 1;
+}
+
+.memorial-card-pin-btn:hover {
+    background: rgba(0, 0, 0, 0.65);
+    transform: scale(1.1);
+}
+
+.memorial-card-pin-btn.pinned {
+    background: var(--primary);
+}
+
+.memorial-card-pin-btn .material-symbols-outlined {
+    font-size: 16px;
+}
+
+/* ===== PINNED SIDEBAR ===== */
+.explore-pinned-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.explore-pinned-empty {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    text-align: center;
+    padding: 8px 0;
+    line-height: 1.5;
+}
+
+.explore-pinned-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 8px;
+    border-radius: var(--radius-sm);
+    transition: background var(--transition-fast);
+    text-decoration: none;
+}
+
+.explore-pinned-item:hover {
+    background: var(--bg-alt);
+}
+
+.explore-pinned-item img {
+    width: 34px;
+    height: 34px;
+    border-radius: var(--radius-full);
+    flex-shrink: 0;
+}
+
+.explore-pinned-item-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.explore-pinned-item-name {
+    font-size: 0.84rem;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.explore-pinned-item-meta {
+    font-size: 0.74rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.explore-pinned-unpin {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background var(--transition-fast), color var(--transition-fast);
+    opacity: 0;
+}
+
+.explore-pinned-item:hover .explore-pinned-unpin {
+    opacity: 1;
+}
+
+.explore-pinned-unpin:hover {
+    background: var(--bg-alt);
+    color: var(--danger, #ef4444);
+}
+
+.explore-pinned-unpin .material-symbols-outlined {
+    font-size: 14px;
+}
+
 /* ===== LIST VIEW ===== */
 .explore-grid.list-view {
     grid-template-columns: 1fr;
@@ -532,15 +653,15 @@
 
 /* CTA Card */
 .explore-cta-card {
-    background: linear-gradient(135deg, var(--primary-50), var(--primary-100));
+    background: var(--primary-50);
     border-color: transparent;
     text-align: center;
     padding: 1.5rem;
 }
 
 [data-theme="dark"] .explore-cta-card {
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(99, 102, 241, 0.08));
-    border-color: rgba(99, 102, 241, 0.2);
+    background: rgba(91, 164, 211, 0.15);
+    border-color: rgba(91, 164, 211, 0.2);
 }
 
 .explore-cta-icon {
@@ -640,7 +761,7 @@
     background: var(--primary);
     color: #fff;
     font-weight: 600;
-    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+    box-shadow: 0 2px 8px rgba(91, 164, 211, 0.3);
 }
 
 .pagination-ellipsis {
@@ -684,6 +805,176 @@
 
 .explore-footer-links a:hover {
     color: var(--primary);
+}
+
+/* ===== MAP VIEW ===== */
+.explore-map-container {
+    display: none;
+    grid-column: 1;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--border-light);
+    position: relative;
+}
+
+.explore-map-container.active {
+    display: block;
+}
+
+#memorialMap {
+    width: 100%;
+    height: 560px;
+    background: var(--bg-alt);
+}
+
+.map-legend {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    z-index: 500;
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    padding: 6px 12px;
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: var(--shadow-sm);
+}
+
+.map-legend-pin {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    background: var(--primary);
+    flex-shrink: 0;
+    margin-right: 4px;
+}
+
+.map-legend-pin.pinned-legend {
+    background: #f59e0b;
+}
+
+/* Leaflet marker overrides */
+.memorial-map-marker {
+    width: 42px;
+    height: 42px;
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    background: var(--primary, #7c3aed);
+    border: 3px solid #fff;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.memorial-map-marker:hover {
+    transform: rotate(-45deg) scale(1.15);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+
+.memorial-map-marker.is-pinned {
+    background: #f59e0b;
+    border-color: #fff;
+}
+
+.memorial-map-marker img {
+    width: 100%;
+    height: 100%;
+    transform: rotate(45deg);
+    object-fit: cover;
+    display: block;
+}
+
+/* Leaflet popup */
+.memorial-map-popup {
+    font-family: var(--font-body, 'Inter', sans-serif);
+    min-width: 190px;
+}
+
+.memorial-map-popup-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.memorial-map-popup-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 2px solid #e5e7eb;
+}
+
+.memorial-map-popup-name {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #1e293b;
+    line-height: 1.3;
+    margin-bottom: 2px;
+}
+
+.memorial-map-popup-dates {
+    font-size: 0.75rem;
+    color: #64748b;
+}
+
+.memorial-map-popup-location {
+    font-size: 0.78rem;
+    color: #64748b;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.memorial-map-popup-stats {
+    display: flex;
+    gap: 10px;
+    font-size: 0.74rem;
+    color: #64748b;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.memorial-map-popup-link {
+    display: block;
+    text-align: center;
+    background: #7c3aed;
+    color: #fff;
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 7px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.15s;
+}
+
+.memorial-map-popup-link:hover {
+    background: #6d28d9;
+    color: #fff;
+}
+
+.leaflet-popup-content-wrapper {
+    border-radius: 12px !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
+    padding: 0 !important;
+}
+
+.leaflet-popup-content {
+    margin: 14px 16px !important;
+}
+
+.leaflet-popup-tip-container {
+    margin-top: -1px;
 }
 
 /* ===== SCROLL REVEAL ===== */
@@ -735,7 +1026,7 @@
 }
 
 [data-theme="dark"] .pagination-btn:hover:not(:disabled) {
-    background: rgba(99, 102, 241, 0.1);
+    background: rgba(91, 164, 211, 0.1);
 }
 
 /* ===== RESPONSIVE ===== */

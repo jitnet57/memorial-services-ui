@@ -1190,12 +1190,12 @@
 
 /* ===== DARK MODE ===== */
 [data-theme="dark"] .service-card.selected {
-    background: rgba(99, 102, 241, 0.1);
+    background: rgba(91, 164, 211, 0.1);
     border-color: var(--primary);
 }
 
 [data-theme="dark"] .arrangement-card input:checked + .arrangement-inner {
-    background: rgba(99, 102, 241, 0.1);
+    background: rgba(91, 164, 211, 0.1);
 }
 
 /* ===== RESPONSIVE — TABLET ===== */
@@ -1364,7 +1364,7 @@
 
 [data-theme="dark"] .payment-method-card.active .pm-inner,
 [data-theme="dark"] .payment-method-card input:checked ~ .pm-inner {
-    background: rgba(99, 102, 241, 0.1);
+    background: rgba(91, 164, 211, 0.1);
 }
 
 [data-theme="dark"] .phone-prefix {
