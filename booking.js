@@ -477,9 +477,38 @@
 
     // Pay button → confirmation
     if (payBtn) {
-        payBtn.addEventListener('click', function () {
+        payBtn.addEventListener('click', async function () {
             if (!agreeTerms || !agreeTerms.checked) return;
             if (!validatePayment()) return;
+
+            payBtn.disabled = true;
+            payBtn.textContent = 'Processing...';
+
+            // Save order to Supabase
+            if (typeof sb !== 'undefined') {
+                try {
+                    const { data: { session } } = await sb.auth.getSession();
+                    var memSelect = document.getElementById('memorialSelect');
+                    var memorialIdVal = memSelect ? memSelect.value : null;
+                    var total = servicePrice + SERVICE_FEE;
+                    var paymentMethodEl = document.querySelector('.payment-method-card.active');
+                    var paymentMethod = paymentMethodEl ? paymentMethodEl.getAttribute('data-method') : 'unknown';
+
+                    var orderData = {
+                        service_type: selectedService,
+                        amount: total,
+                        status: 'confirmed',
+                        payment_method: paymentMethod,
+                        scheduled_at: calBookedStart || null
+                    };
+                    if (session) orderData.user_id = session.user.id;
+                    if (memorialIdVal) orderData.memorial_id = memorialIdVal;
+
+                    await sb.from('orders').insert(orderData);
+                } catch (err) {
+                    console.error('Order save error:', err);
+                }
+            }
 
             setupStep4();
             goToStep(4);

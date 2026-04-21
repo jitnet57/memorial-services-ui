@@ -250,4 +250,50 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // ===== Load Recent Memorials from Supabase =====
+    if (typeof sb !== 'undefined') {
+        const grid = document.getElementById('memorialsGrid');
+        if (grid) {
+            sb.from('memorials')
+                .select('id, full_name, slug, birth_date, death_date, biography, cover_photo_url')
+                .eq('status', 'published')
+                .order('created_at', { ascending: false })
+                .limit(3)
+                .then(({ data: memorials }) => {
+                    if (!memorials || memorials.length === 0) return;
+                    const gradients = [
+                        'linear-gradient(135deg,#667eea,#764ba2)',
+                        'linear-gradient(135deg,#f093fb,#f5576c)',
+                        'linear-gradient(135deg,#4facfe,#00f2fe)'
+                    ];
+                    grid.innerHTML = memorials.map((m, i) => {
+                        const bg = m.cover_photo_url
+                            ? `background:url(${m.cover_photo_url}) center/cover`
+                            : `background:${gradients[i % gradients.length]}`;
+                        const b = m.birth_date ? new Date(m.birth_date).toLocaleDateString('en-PH', { month: 'long', day: 'numeric', year: 'numeric' }) : '?';
+                        const d = m.death_date ? new Date(m.death_date).toLocaleDateString('en-PH', { month: 'long', day: 'numeric', year: 'numeric' }) : 'Present';
+                        const excerpt = m.biography ? m.biography.substring(0, 120) + (m.biography.length > 120 ? '...' : '') : '';
+                        return `<a href="memorial.html?id=${m.slug}" class="memorial-card" style="text-decoration:none">
+                            <div class="memorial-card-cover" style="${bg};">
+                                <div class="memorial-card-avatar">
+                                    <span class="material-symbols-outlined">person</span>
+                                </div>
+                            </div>
+                            <div class="memorial-card-body">
+                                <h3>${escHtml(m.full_name)}</h3>
+                                <p class="memorial-card-dates">${b} — ${d}</p>
+                                ${excerpt ? `<p class="memorial-card-excerpt">"${escHtml(excerpt)}"</p>` : ''}
+                            </div>
+                        </a>`;
+                    }).join('');
+                });
+        }
+    }
+
+    function escHtml(str) {
+        const d = document.createElement('div');
+        d.textContent = str;
+        return d.innerHTML;
+    }
 });

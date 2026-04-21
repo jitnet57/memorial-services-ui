@@ -2,7 +2,7 @@
    ALAALA — Memorial Detail Page JS
    ======================================== */
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     /* ===== Theme Toggle ===== */
     const theme = localStorage.getItem('alaala-theme') || 'light';
     document.documentElement.setAttribute('data-theme', theme);
@@ -277,5 +277,144 @@ document.addEventListener('DOMContentLoaded', () => {
         const div = document.createElement('div');
         div.textContent = str;
         return div.innerHTML;
+    }
+
+    /* ===== Supabase: Load Memorial ===== */
+    const slug = new URLSearchParams(window.location.search).get('id');
+    let memorialId = null;
+    let currentUserId = null;
+
+    if (slug && typeof sb !== 'undefined') {
+        try {
+            const { data: { session } } = await sb.auth.getSession();
+            if (session) currentUserId = session.user.id;
+
+            const { data: memorial } = await sb.from('memorials')
+                .select('id, full_name, birth_date, death_date, location_name, biography, cover_photo_url, profile_photo_url, visitor_count')
+                .eq('slug', slug)
+                .single();
+
+            if (memorial) {
+                memorialId = memorial.id;
+
+                // Populate page elements
+                document.querySelectorAll('.mem-hero-name, .mem-name').forEach(el => {
+                    el.textContent = memorial.full_name;
+                });
+                if (memorial.birth_date || memorial.death_date) {
+                    const b = memorial.birth_date ? new Date(memorial.birth_date).getFullYear() : '?';
+                    const d = memorial.death_date ? new Date(memorial.death_date).getFullYear() : '?';
+                    document.querySelectorAll('.mem-dates').forEach(el => { el.textContent = `${b} — ${d}`; });
+                }
+                if (memorial.location_name) {
+                    document.querySelectorAll('.mem-location').forEach(el => { el.textContent = memorial.location_name; });
+                }
+                if (memorial.biography) {
+                    const storyEl = document.querySelector('.mem-story-text');
+                    if (storyEl) storyEl.innerHTML = `<p>${escapeHtml(memorial.biography)}</p>`;
+                }
+                if (memorial.cover_photo_url) {
+                    const hero = document.querySelector('.mem-hero-bg');
+                    if (hero) hero.style.backgroundImage = `url(${memorial.cover_photo_url})`;
+                }
+                if (memorial.profile_photo_url) {
+                    const avatar = document.querySelector('.mem-avatar img');
+                    if (avatar) avatar.src = memorial.profile_photo_url;
+                }
+
+                // Increment visitor count
+                const newCount = (memorial.visitor_count || 0) + 1;
+                sb.from('memorials').update({ visitor_count: newCount }).eq('id', memorialId);
+                document.querySelectorAll('.visitor-count').forEach(el => { el.textContent = newCount.toLocaleString(); });
+
+                // Update share URL
+                const shareInput = document.querySelector('.share-url-box input');
+                if (shareInput) shareInput.value = window.location.href;
+
+                // Load candle count
+                const { count: candleCount } = await sb.from('tributes')
+                    .select('id', { count: 'exact', head: true })
+                    .eq('memorial_id', memorialId)
+                    .eq('type', 'candle');
+                if (candleCount !== null) {
+                    const candleStatEl = document.querySelector('.mem-hstat strong');
+                    if (candleStatEl) candleStatEl.textContent = candleCount.toLocaleString();
+                }
+
+                // Load tributes
+                const { data: tributes } = await sb.from('tributes')
+                    .select('id, content, author_name, created_at')
+                    .eq('memorial_id', memorialId)
+                    .eq('type', 'comment')
+                    .order('created_at', { ascending: false })
+                    .limit(20);
+
+                if (tributes && tributes.length > 0 && tributesList) {
+                    tributesList.innerHTML = '';
+                    tributes.forEach(t => {
+                        const item = document.createElement('div');
+                        item.className = 'tribute-item';
+                        const initials = (t.author_name || 'A').substring(0, 2).toUpperCase();
+                        const timeAgo = formatTimeAgo(new Date(t.created_at));
+                        item.innerHTML = `
+                            <div class="tri-avatar" style="background:var(--primary);display:flex;align-items:center;justify-content:center;border-radius:50%;width:40px;height:40px;flex-shrink:0">
+                                <span style="color:#fff;font-weight:600;font-size:14px">${initials}</span>
+                            </div>
+                            <div class="tri-body">
+                                <div class="tri-header">
+                                    <strong>${escapeHtml(t.author_name || 'Anonymous')}</strong>
+                                    <span class="tri-time">${timeAgo}</span>
+                                </div>
+                                <p>${escapeHtml(t.content)}</p>
+                            </div>`;
+                        tributesList.appendChild(item);
+                    });
+                }
+            }
+        } catch (err) {
+            console.error('Memorial load error:', err);
+        }
+    }
+
+    /* Supabase: Save candle */
+    if (candleBtn) {
+        const origCandleHandler = candleBtn.onclick;
+        candleBtn.addEventListener('click', async () => {
+            if (memorialId && typeof sb !== 'undefined') {
+                const name = candleInput ? candleInput.value.trim() : 'Anonymous';
+                await sb.from('tributes').insert({
+                    memorial_id: memorialId,
+                    type: 'candle',
+                    author_name: name || 'Anonymous',
+                    user_id: currentUserId || null
+                });
+            }
+        });
+    }
+
+    /* Supabase: Save tribute */
+    if (postBtn && tributeTextarea) {
+        postBtn.addEventListener('click', async () => {
+            if (memorialId && typeof sb !== 'undefined') {
+                const text = tributeTextarea.value.trim();
+                if (text) {
+                    await sb.from('tributes').insert({
+                        memorial_id: memorialId,
+                        type: 'comment',
+                        content: text,
+                        author_name: currentUserId ? 'You' : 'Anonymous',
+                        user_id: currentUserId || null
+                    });
+                }
+            }
+        });
+    }
+
+    function formatTimeAgo(date) {
+        const diff = Math.floor((Date.now() - date.getTime()) / 1000);
+        if (diff < 60) return 'Just now';
+        if (diff < 3600) return Math.floor(diff / 60) + 'm ago';
+        if (diff < 86400) return Math.floor(diff / 3600) + 'h ago';
+        return Math.floor(diff / 86400) + 'd ago';
     }
 });

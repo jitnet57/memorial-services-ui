@@ -61,12 +61,42 @@ document.addEventListener('DOMContentLoaded', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    nextBtn?.addEventListener('click', () => {
+    nextBtn?.addEventListener('click', async () => {
         if (currentStep < totalSteps) {
             goToStep(currentStep + 1);
         } else {
-            // Publish action (prototype — show alert)
-            alert('Memorial published! 🕯️\n\nThis is a prototype — in production, this would save to the database and redirect to the memorial page.');
+            const { data: { session } } = await sb.auth.getSession();
+            if (!session) { window.location.href = 'auth.html'; return; }
+
+            const firstName = document.getElementById('deceasedFirst')?.value?.trim() || '';
+            const lastName = document.getElementById('deceasedLast')?.value?.trim() || '';
+            const fullName = [firstName, lastName].filter(Boolean).join(' ');
+            if (!fullName) { alert('Please enter the deceased\'s name.'); goToStep(1); return; }
+
+            const slug = fullName.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '-' + Date.now();
+
+            nextBtn.disabled = true;
+            nextBtn.innerHTML = '<span class="material-symbols-outlined" style="animation:spin .6s linear infinite">progress_activity</span> Publishing...';
+
+            const { data, error } = await sb.from('memorials').insert({
+                owner_id: session.user.id,
+                full_name: fullName,
+                slug,
+                birth_date: document.getElementById('birthDate')?.value || null,
+                death_date: document.getElementById('deathDate')?.value || null,
+                location_name: document.getElementById('restingPlace')?.value || null,
+                biography: document.getElementById('obituary')?.value || null,
+                status: 'published'
+            }).select().single();
+
+            if (error) {
+                nextBtn.disabled = false;
+                nextBtn.innerHTML = '<span class="material-symbols-outlined">check</span> Publish Memorial';
+                nextBtn.classList.add('publish');
+                alert('Error: ' + error.message);
+                return;
+            }
+            window.location.href = 'memorial.html?id=' + data.slug;
         }
     });
 

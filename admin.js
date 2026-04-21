@@ -281,12 +281,119 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===== Settings Toggle Switches =====
     document.querySelectorAll('.toggle-input').forEach(toggle => {
         toggle.addEventListener('change', () => {
-            // Visual feedback
             const slider = toggle.nextElementSibling;
-            if (slider) {
-                slider.style.transition = 'all 0.3s ease';
-            }
+            if (slider) slider.style.transition = 'all 0.3s ease';
         });
     });
+
+    // ===== Supabase Admin Data =====
+    if (typeof sb !== 'undefined') {
+        (async () => {
+            // Auth guard
+            const { data: { session } } = await sb.auth.getSession();
+            if (!session) { window.location.href = 'auth.html'; return; }
+
+            // Update admin avatar/name
+            const adminName = document.querySelectorAll('.admin-name, .topbar-user-name');
+            const adminEmail = document.querySelectorAll('.admin-role, .topbar-user-email');
+            adminName.forEach(el => { el.textContent = session.user.user_metadata?.full_name || session.user.email; });
+            adminEmail.forEach(el => { el.textContent = session.user.email; });
+
+            // Sign out
+            document.getElementById('signOutBtn')?.addEventListener('click', async () => {
+                await sb.auth.signOut();
+                window.location.href = 'auth.html';
+            });
+
+            // Load counts in parallel
+            const [usersRes, memorialsRes, ordersRes, revenueRes] = await Promise.all([
+                sb.from('profiles').select('id', { count: 'exact', head: true }),
+                sb.from('memorials').select('id', { count: 'exact', head: true }),
+                sb.from('orders').select('id', { count: 'exact', head: true }),
+                sb.from('orders').select('amount').eq('status', 'confirmed')
+            ]);
+
+            const setStatEl = (id, val) => {
+                const el = document.getElementById(id);
+                if (el) el.textContent = typeof val === 'number' ? val.toLocaleString() : val;
+            };
+
+            setStatEl('statUsers', usersRes.count || 0);
+            setStatEl('statMemorials', memorialsRes.count || 0);
+            setStatEl('statOrders', ordersRes.count || 0);
+
+            if (revenueRes.data) {
+                const total = revenueRes.data.reduce((sum, r) => sum + (r.amount || 0), 0);
+                setStatEl('statRevenue', '₱' + total.toLocaleString('en-PH'));
+            }
+
+            // Load recent orders for dashboard
+            const { data: recentOrders } = await sb.from('orders')
+                .select('id, service_type, amount, status, created_at, memorials(full_name)')
+                .order('created_at', { ascending: false })
+                .limit(10);
+
+            const ordersTableBody = document.querySelector('#tab-orders .admin-table tbody, #ordersTableBody');
+            if (ordersTableBody && recentOrders && recentOrders.length > 0) {
+                ordersTableBody.innerHTML = recentOrders.map(o => {
+                    const statusClass = o.status === 'confirmed' ? 'active' : o.status === 'pending' ? 'pending' : 'inactive';
+                    const d = new Date(o.created_at);
+                    const dateStr = d.toLocaleDateString('en-PH', { month: 'short', day: 'numeric', year: 'numeric' });
+                    return `<tr>
+                        <td><label class="table-check"><input type="checkbox" class="row-check"><span class="check-mark"></span></label></td>
+                        <td><span class="mono">#${o.id.substring(0, 8).toUpperCase()}</span></td>
+                        <td>${escapeHtml(o.memorials?.full_name || '—')}</td>
+                        <td>${escapeHtml(o.service_type || '—')}</td>
+                        <td>${dateStr}</td>
+                        <td>₱${(o.amount || 0).toLocaleString('en-PH')}</td>
+                        <td><span class="status-badge ${statusClass}">${o.status || 'pending'}</span></td>
+                        <td><div class="row-actions"><button class="row-action-btn"><span class="material-symbols-outlined">visibility</span></button></div></td>
+                    </tr>`;
+                }).join('');
+            }
+
+            // Load memorials for admin tab
+            const { data: memorials } = await sb.from('memorials')
+                .select('id, full_name, slug, status, created_at, profiles(email)')
+                .order('created_at', { ascending: false })
+                .limit(50);
+
+            const memorialsTableBody = document.querySelector('#tab-memorials .admin-table tbody, #memorialsTableBody');
+            if (memorialsTableBody && memorials && memorials.length > 0) {
+                memorialsTableBody.innerHTML = memorials.map(m => {
+                    const statusClass = m.status === 'published' ? 'active' : m.status === 'draft' ? 'pending' : 'inactive';
+                    const d = new Date(m.created_at);
+                    const dateStr = d.toLocaleDateString('en-PH', { month: 'short', day: 'numeric', year: 'numeric' });
+                    return `<tr>
+                        <td><label class="table-check"><input type="checkbox" class="row-check"><span class="check-mark"></span></label></td>
+                        <td>
+                            <div class="user-cell">
+                                <div class="user-avatar-sm" style="background:var(--primary);display:flex;align-items:center;justify-content:center;border-radius:50%;width:36px;height:36px">
+                                    <span style="color:#fff;font-weight:600;font-size:13px">${escapeHtml(m.full_name.substring(0,2).toUpperCase())}</span>
+                                </div>
+                                <div class="user-info">
+                                    <span class="user-name">${escapeHtml(m.full_name)}</span>
+                                    <span class="user-email">${escapeHtml(m.slug)}</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>${escapeHtml(m.profiles?.email || '—')}</td>
+                        <td>${dateStr}</td>
+                        <td><span class="status-badge ${statusClass}">${m.status || 'draft'}</span></td>
+                        <td><div class="row-actions">
+                            <a href="memorial.html?id=${m.slug}" class="row-action-btn" target="_blank"><span class="material-symbols-outlined">visibility</span></a>
+                        </div></td>
+                    </tr>`;
+                }).join('');
+            }
+
+        })();
+    }
+
+    function escapeHtml(str) {
+        const div = document.createElement('div');
+        div.textContent = String(str);
+        return div.innerHTML;
+    }
 
 });
