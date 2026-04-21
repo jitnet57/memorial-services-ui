@@ -159,19 +159,17 @@
     var activePopup = null;
 
     function createPinIcon(initial, pinned) {
-        var fill = pinned ? '#f59e0b' : '#5ba4d3';
+        var fill = pinned ? '#f59e0b' : '#7c3aed';
         var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="46" viewBox="0 0 36 46">' +
             '<circle cx="18" cy="18" r="16" fill="' + fill + '" stroke="white" stroke-width="2.5"/>' +
             '<text x="18" y="24" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" font-weight="bold" fill="white">' + initial + '</text>' +
             '<polygon points="10,32 26,32 18,46" fill="' + fill + '"/>' +
             '</svg>';
-        return L.divIcon({
-            html: '<img src="data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg) + '" width="36" height="46"/>',
-            iconSize: [36, 46],
-            iconAnchor: [18, 46],
-            popupAnchor: [0, -46],
-            className: ''
-        });
+        return {
+            url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg),
+            scaledSize: new google.maps.Size(36, 46),
+            anchor: new google.maps.Point(18, 46)
+        };
     }
 
     function makePopupContent(m) {
@@ -206,14 +204,18 @@
     function initMap() {
         if (gMap) return;
         var mapEl = document.getElementById('memorialMap');
-        if (!mapEl || typeof L === 'undefined') return;
-        gMap = L.map(mapEl, { zoomControl: true }).setView([12.5, 122.5], 6);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-            maxZoom: 19
-        }).addTo(gMap);
-        memorialsMapData.forEach(function (m) { addMapMarker(m); });
+        if (!mapEl || typeof google === 'undefined') return;
+        gMap = new google.maps.Map(mapEl, {
+            center: { lat: 12.5, lng: 122.5 },
+            zoom: 6,
+            mapTypeControl: false,
+            streetViewControl: false,
+            fullscreenControl: false,
+            styles: [{ featureType: 'poi', stylers: [{ visibility: 'off' }] }]
+        });
+        memorialsMapData.forEach(function(m) { addMapMarker(m); });
     }
+    window.initAlaalaMap = initMap;
 
     function focusCard(id) {
         var card = document.querySelector('.memorial-card[data-memorial-id="' + id + '"]');
@@ -224,50 +226,59 @@
     }
 
     function focusMapMarker(id) {
-        var m = memorialsMapData.find(function (d) { return d.id === id; });
+        var m = memorialsMapData.find(function(d) { return d.id === id; });
         var data = mapMarkers[id];
         if (!m || !data || !gMap) return;
         document.getElementById('memorialMap').scrollIntoView({ behavior: 'smooth', block: 'center' });
-        setTimeout(function () {
-            gMap.setView([m.lat, m.lng], 13);
-            setTimeout(function () { data.marker.openPopup(); }, 400);
+        setTimeout(function() {
+            gMap.setCenter({ lat: m.lat, lng: m.lng });
+            gMap.setZoom(13);
+            setTimeout(function() {
+                if (activePopup) activePopup.close();
+                data.infoWindow.open(gMap, data.marker);
+                activePopup = data.infoWindow;
+            }, 400);
         }, 400);
     }
 
     function addMapMarker(m) {
         var pinned = isPinned(m.id);
-        var marker = L.marker([m.lat, m.lng], {
+        var marker = new google.maps.Marker({
+            position: { lat: m.lat, lng: m.lng },
+            map: gMap,
             icon: createPinIcon(m.name.charAt(0).toUpperCase(), pinned),
             title: m.name
-        }).addTo(gMap);
-
-        marker.bindPopup(makePopupContent(m), { maxWidth: 260 });
-
-        marker.on('popupopen', function () {
+        });
+        var infoWindow = new google.maps.InfoWindow({
+            content: makePopupContent(m),
+            maxWidth: 280
+        });
+        marker.addListener('click', function() {
+            if (activePopup) activePopup.close();
+            infoWindow.open(gMap, marker);
+            activePopup = infoWindow;
+        });
+        infoWindow.addListener('domready', function() {
             var btn = document.querySelector('.memorial-map-popup-scroll[data-scroll-to="' + m.id + '"]');
             if (btn) {
-                btn.onclick = function () {
-                    marker.closePopup();
+                btn.onclick = function() {
+                    infoWindow.close();
                     focusCard(m.id);
                 };
             }
         });
-
-        mapMarkers[m.id] = { marker: marker };
+        mapMarkers[m.id] = { marker: marker, infoWindow: infoWindow };
     }
 
     function refreshMapMarker(id) {
         if (!gMap || !mapMarkers[id]) return;
-        var m = memorialsMapData.find(function (d) { return d.id === id; });
+        var m = memorialsMapData.find(function(d) { return d.id === id; });
         if (!m) return;
-        mapMarkers[id].marker.remove();
+        mapMarkers[id].marker.setMap(null);
+        if (mapMarkers[id].infoWindow) mapMarkers[id].infoWindow.close();
         delete mapMarkers[id];
         addMapMarker(m);
     }
-
-    document.addEventListener('DOMContentLoaded', function () {
-        setTimeout(initMap, 100);
-    });
 
     // ===== VIEW TOGGLE (Grid / List) =====
     const viewToggle = document.getElementById('viewToggle');

@@ -1188,6 +1188,72 @@
     opacity: 0.4;
 }
 
+/* ===== CAL.COM SCHEDULING EMBED ===== */
+.cal-embed-container {
+    margin-bottom: 1.25rem;
+}
+
+.cal-embed-label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+}
+
+.cal-embed-container cal-inline {
+    display: block;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--bg-card);
+}
+
+.cal-booked-banner {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1.25rem;
+    background: #ecfdf5;
+    border: 1px solid #6ee7b7;
+    border-radius: var(--radius-md);
+    margin-top: 0.75rem;
+    animation: fadeInUp 0.3s ease;
+}
+
+.cal-booked-banner .material-symbols-outlined {
+    font-size: 24px;
+    color: var(--success);
+    flex-shrink: 0;
+}
+
+.cal-booked-banner strong {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #065f46;
+    margin-bottom: 0.15rem;
+}
+
+.cal-booked-banner p {
+    font-size: 0.825rem;
+    color: #047857;
+    margin: 0;
+}
+
+[data-theme="dark"] .cal-booked-banner {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.3);
+}
+
+[data-theme="dark"] .cal-booked-banner strong {
+    color: #6ee7b7;
+}
+
+[data-theme="dark"] .cal-booked-banner p {
+    color: #a7f3d0;
+}
+
 /* ===== DARK MODE ===== */
 [data-theme="dark"] .service-card.selected {
     background: rgba(91, 164, 211, 0.1);

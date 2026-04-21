@@ -3,7 +3,7 @@
    Cache-first for static, network-first for pages
    ======================================== */
 
-const CACHE_NAME = 'alaala-v3';
+const CACHE_NAME = 'alaala-v4';
 const STATIC_ASSETS = [
     '/',
     '/index.html',

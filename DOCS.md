@@ -134,7 +134,7 @@ memorial-services-ui/
 ## 5. 서비스 워커 (PWA)
 
 **파일:** `sw.js`  
-**현재 캐시 버전:** `alaala-v3`
+**현재 캐시 버전:** `alaala-v4`
 
 ### 캐시 전략
 
@@ -150,7 +150,7 @@ memorial-services-ui/
 
 ```javascript
 // sw.js 상단
-const CACHE_NAME = 'alaala-v3';  // 변경 시 → alaala-v4, v5 순으로 증가
+const CACHE_NAME = 'alaala-v4';  // 변경 시 → alaala-v5, v6 순으로 증가
 ```
 
 버전을 올리면 activate 이벤트에서 이전 캐시가 자동 삭제되고, 열린 탭이 자동 새로고침됩니다.

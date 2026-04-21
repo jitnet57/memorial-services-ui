@@ -29,3 +29,9 @@ maibauntourph@gmail.com
 
 ## database
 
+supabase로 진행
+
+## @advisor
+
+어드바이저 opus 4.7 콜 --어려운 기획은 얘한데 문의
+

@@ -30,6 +30,44 @@
     let servicePrice = 0;
     const SERVICE_FEE = 25;
 
+    var calBooked = false;
+    var calBookedStart = null;
+
+    var calLinks = {
+        'mass': 'kenneth-call/mass-offering',
+        'flowers': 'kenneth-call/flower-delivery',
+        'livestream': 'kenneth-call/live-stream',
+        'ai-voice': 'kenneth-call/ai-voice-tribute',
+        'lot-cleaning': 'kenneth-call/lot-cleaning',
+        'tombstone-repair': 'kenneth-call/tombstone-repair'
+    };
+
+    (function() {
+        window.Cal = window.Cal || function() {
+            (window.Cal.q = window.Cal.q || []).push(arguments);
+        };
+        Cal('on', {
+            action: 'bookingSuccessful',
+            callback: function(e) {
+                calBooked = true;
+                calBookedStart = (e.detail && e.detail.data && e.detail.data.startTime) || null;
+                var bannerKey = (selectedService === 'mass') ? 'mass'
+                             : (selectedService === 'flowers') ? 'flowers'
+                             : 'generic';
+                var banner = document.getElementById('calBooked-' + bannerKey);
+                var timeEl = document.getElementById('calBookedTime-' + bannerKey);
+                if (timeEl && calBookedStart) {
+                    var d = new Date(calBookedStart);
+                    timeEl.textContent = d.toLocaleDateString('en-PH', {
+                        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
+                        hour: '2-digit', minute: '2-digit'
+                    });
+                }
+                if (banner) banner.style.display = 'flex';
+            }
+        });
+    }());
+
     const serviceNames = {
         'mass': 'Mass Offering',
         'flowers': 'Flower Delivery',
@@ -116,6 +154,10 @@
 
     // ===== STEP 2: DYNAMIC FORM =====
     function setupStep2() {
+        calBooked = false;
+        calBookedStart = null;
+        document.querySelectorAll('.cal-booked-banner').forEach(function(b) { b.style.display = 'none'; });
+
         // Hide all service forms
         document.querySelectorAll('.service-form').forEach(function (f) {
             f.classList.remove('active');
@@ -132,6 +174,17 @@
         if (form) {
             form.classList.add('active');
             form.style.display = 'block';
+        }
+
+        // Set cal-link for generic widget based on selected service
+        var genericWidget = document.getElementById('calWidget-generic');
+        if (genericWidget && calLinks[selectedService]) {
+            genericWidget.setAttribute('cal-link', calLinks[selectedService]);
+        }
+        // Hide cal embed for services that don't need scheduling
+        var genericContainer = document.getElementById('calContainer-generic');
+        if (genericContainer) {
+            genericContainer.style.display = calLinks[selectedService] ? '' : 'none';
         }
 
         // Update summary sidebar
@@ -200,30 +253,42 @@
         if (selectedService === 'mass') {
             form = document.getElementById('form-mass');
             var parish = document.getElementById('massParish');
-            var date = document.getElementById('massDate');
-            var time = document.getElementById('massTime');
-            if (!parish.value || !date.value || !time.value) {
+            if (!parish.value) {
                 highlightInvalid(form);
+                return false;
+            }
+            if (!calBooked) {
+                flashCalContainer('calContainer-mass');
                 return false;
             }
         } else if (selectedService === 'flowers') {
             form = document.getElementById('form-flowers');
-            var fDate = document.getElementById('flowerDate');
             var fAddr = document.getElementById('flowerAddress');
             var fRecip = document.getElementById('flowerRecipient');
-            if (!fDate.value || !fAddr.value || !fRecip.value) {
+            if (!fAddr.value || !fRecip.value) {
                 highlightInvalid(form);
                 return false;
             }
-        } else {
-            form = document.getElementById('form-generic');
-            var gDate = document.getElementById('genericDate');
-            if (!gDate.value) {
-                highlightInvalid(form);
+            if (!calBooked) {
+                flashCalContainer('calContainer-flowers');
+                return false;
+            }
+        } else if (calLinks[selectedService]) {
+            if (!calBooked) {
+                flashCalContainer('calContainer-generic');
                 return false;
             }
         }
         return true;
+    }
+
+    function flashCalContainer(id) {
+        var el = document.getElementById(id);
+        if (!el) return;
+        el.style.outline = '2px solid var(--error)';
+        el.style.borderRadius = 'var(--radius-md)';
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(function() { el.style.outline = ''; }, 2500);
     }
 
     function highlightInvalid(form) {
@@ -276,14 +341,12 @@
     }
 
     function getScheduledDate() {
-        var dateInput;
-        if (selectedService === 'mass') dateInput = document.getElementById('massDate');
-        else if (selectedService === 'flowers') dateInput = document.getElementById('flowerDate');
-        else dateInput = document.getElementById('genericDate');
-
-        if (dateInput && dateInput.value) {
-            var d = new Date(dateInput.value + 'T00:00:00');
-            return d.toLocaleDateString('en-PH', { year: 'numeric', month: 'long', day: 'numeric' });
+        if (calBookedStart) {
+            var d = new Date(calBookedStart);
+            return d.toLocaleDateString('en-PH', {
+                year: 'numeric', month: 'long', day: 'numeric',
+                hour: '2-digit', minute: '2-digit'
+            });
         }
         return null;
     }
