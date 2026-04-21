@@ -3,7 +3,7 @@
    Cache-first for static, network-first for pages
    ======================================== */
 
-const CACHE_NAME = 'alaala-v1';
+const CACHE_NAME = 'alaala-v2';
 const STATIC_ASSETS = [
     '/',
     '/index.html',
@@ -64,13 +64,8 @@ self.addEventListener('fetch', (event) => {
     // Skip non-GET requests
     if (request.method !== 'GET') return;
 
-    // Skip external requests
-    if (url.origin !== location.origin) {
-        event.respondWith(
-            fetch(request).catch(() => caches.match(request))
-        );
-        return;
-    }
+    // Skip external requests — let browser handle CORS natively
+    if (url.origin !== location.origin) return;
 
     // HTML pages — network first, fallback to cache
     if (request.headers.get('accept')?.includes('text/html')) {
