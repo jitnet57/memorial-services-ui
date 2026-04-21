@@ -154,49 +154,30 @@
         }
     ];
 
-    var leafletMap = null;
+    var gMap = null;
     var mapMarkers = {};
+    var activeInfoWindow = null;
 
-    function initMap() {
-        if (leafletMap) return;
-        if (typeof L === 'undefined') return;
-
-        leafletMap = L.map('memorialMap', {
-            center: [12.5, 122.5],
-            zoom: 6,
-            zoomControl: true
-        });
-
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-            maxZoom: 18
-        }).addTo(leafletMap);
-
-        memorialsMapData.forEach(function (m) {
-            addMapMarker(m);
-        });
+    function createPinIcon(initial, pinned) {
+        var fill = pinned ? '#f59e0b' : '#7c3aed';
+        var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="46" viewBox="0 0 36 46">' +
+            '<circle cx="18" cy="18" r="16" fill="' + fill + '" stroke="white" stroke-width="2.5"/>' +
+            '<text x="18" y="24" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" font-weight="bold" fill="white">' + initial + '</text>' +
+            '<polygon points="10,32 26,32 18,46" fill="' + fill + '"/>' +
+            '</svg>';
+        return {
+            url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg),
+            scaledSize: new google.maps.Size(36, 46),
+            anchor: new google.maps.Point(18, 46)
+        };
     }
 
-    function addMapMarker(m) {
-        var pinned = isPinned(m.id);
-        var icon = L.divIcon({
-            className: '',
-            html: '<div class="memorial-map-marker' + (pinned ? ' is-pinned' : '') + '">' +
-                  '<img src="' + m.avatar + '" alt="' + m.name + '">' +
-                  '</div>',
-            iconSize: [42, 42],
-            iconAnchor: [21, 42],
-            popupAnchor: [0, -44]
-        });
-
-        var marker = L.marker([m.lat, m.lng], { icon: icon });
-
-        var popupContent =
-            '<div class="memorial-map-popup">' +
+    function makePopupContent(m) {
+        var initial = m.name.charAt(0).toUpperCase();
+        return '<div class="memorial-map-popup">' +
             '<div class="memorial-map-popup-header">' +
-            '<img src="' + m.avatar + '" class="memorial-map-popup-avatar" alt="' + m.name + '">' +
-            '<div>' +
-            '<div class="memorial-map-popup-name">' + m.name + '</div>' +
+            '<div style="width:40px;height:40px;border-radius:50%;background:#7c3aed;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:16px;flex-shrink:0;">' + initial + '</div>' +
+            '<div><div class="memorial-map-popup-name">' + m.name + '</div>' +
             '<div class="memorial-map-popup-dates">' + m.dates + '</div>' +
             '</div></div>' +
             '<div class="memorial-map-popup-location">📍 ' + m.location + '</div>' +
@@ -204,28 +185,95 @@
             '<span>🕯️ ' + m.candles + ' candles</span>' +
             '<span>❤️ ' + m.tributes + ' tributes</span>' +
             '</div>' +
+            '<div class="memorial-map-popup-actions">' +
             '<a href="' + m.link + '" class="memorial-map-popup-link">Visit Memorial →</a>' +
-            '</div>';
+            '<button class="memorial-map-popup-scroll" data-scroll-to="' + m.id + '">See card ↓</button>' +
+            '</div></div>';
+    }
 
-        marker.bindPopup(popupContent, { maxWidth: 240 });
-        marker.addTo(leafletMap);
-        mapMarkers[m.id] = marker;
+    function initMap() {
+        if (gMap) return;
+        var mapEl = document.getElementById('memorialMap');
+        if (!mapEl) return;
+        gMap = new google.maps.Map(mapEl, {
+            center: { lat: 12.5, lng: 122.5 },
+            zoom: 6,
+            mapTypeControl: false,
+            streetViewControl: false,
+            fullscreenControl: true
+        });
+        memorialsMapData.forEach(function (m) { addMapMarker(m); });
+    }
+
+    window.initAlaalaMap = initMap;
+
+    function focusCard(id) {
+        var card = document.querySelector('.memorial-card[data-memorial-id="' + id + '"]');
+        if (!card) return;
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        card.classList.add('map-linked');
+        setTimeout(function () { card.classList.remove('map-linked'); }, 1800);
+    }
+
+    function focusMapMarker(id) {
+        var m = memorialsMapData.find(function (d) { return d.id === id; });
+        var data = mapMarkers[id];
+        if (!m || !data || !gMap) return;
+        document.getElementById('memorialMap').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(function () {
+            gMap.panTo({ lat: m.lat, lng: m.lng });
+            gMap.setZoom(13);
+            setTimeout(function () {
+                if (activeInfoWindow) activeInfoWindow.close();
+                data.infoWindow.open(gMap, data.marker);
+                activeInfoWindow = data.infoWindow;
+            }, 500);
+        }, 400);
+    }
+
+    function addMapMarker(m) {
+        var pinned = isPinned(m.id);
+        var marker = new google.maps.Marker({
+            position: { lat: m.lat, lng: m.lng },
+            map: gMap,
+            title: m.name,
+            icon: createPinIcon(m.name.charAt(0).toUpperCase(), pinned)
+        });
+
+        var infoWindow = new google.maps.InfoWindow({ content: makePopupContent(m) });
+
+        marker.addListener('click', function () {
+            if (activeInfoWindow) activeInfoWindow.close();
+            infoWindow.open(gMap, marker);
+            activeInfoWindow = infoWindow;
+        });
+
+        google.maps.event.addListener(infoWindow, 'domready', function () {
+            var btn = document.querySelector('.memorial-map-popup-scroll[data-scroll-to="' + m.id + '"]');
+            if (btn) {
+                btn.onclick = function () {
+                    infoWindow.close();
+                    focusCard(m.id);
+                };
+            }
+        });
+
+        mapMarkers[m.id] = { marker: marker, infoWindow: infoWindow };
     }
 
     function refreshMapMarker(id) {
-        if (!leafletMap || !mapMarkers[id]) return;
+        if (!gMap || !mapMarkers[id]) return;
         var m = memorialsMapData.find(function (d) { return d.id === id; });
         if (!m) return;
-        leafletMap.removeLayer(mapMarkers[id]);
+        mapMarkers[id].marker.setMap(null);
+        mapMarkers[id].infoWindow.close();
         delete mapMarkers[id];
         addMapMarker(m);
     }
 
-    // ===== VIEW TOGGLE (Grid / List / Map) =====
+    // ===== VIEW TOGGLE (Grid / List) =====
     const viewToggle = document.getElementById('viewToggle');
     const memorialGrid = document.getElementById('memorialGrid');
-    var mapContainer = document.getElementById('exploreMapContainer');
-    var paginationSection = document.querySelector('.explore-pagination-section');
 
     if (viewToggle && memorialGrid) {
         viewToggle.addEventListener('click', function (e) {
@@ -235,29 +283,16 @@
                 b.classList.remove('active');
             });
             btn.classList.add('active');
-
             var view = btn.getAttribute('data-view');
-
-            if (view === 'map') {
-                memorialGrid.style.display = 'none';
-                if (mapContainer) mapContainer.classList.add('active');
-                if (paginationSection) paginationSection.style.display = 'none';
-                initMap();
-                if (leafletMap) {
-                    setTimeout(function () { leafletMap.invalidateSize(); }, 100);
-                }
+            if (view === 'list') {
+                memorialGrid.classList.add('list-view');
             } else {
-                memorialGrid.style.display = '';
-                if (mapContainer) mapContainer.classList.remove('active');
-                if (paginationSection) paginationSection.style.display = '';
-                if (view === 'list') {
-                    memorialGrid.classList.add('list-view');
-                } else {
-                    memorialGrid.classList.remove('list-view');
-                }
+                memorialGrid.classList.remove('list-view');
             }
         });
     }
+
+    // Map is initialized via window.initAlaalaMap callback from Google Maps API
 
     // ===== SORT DROPDOWN =====
     var sortSelect = document.getElementById('sortSelect');
@@ -403,16 +438,34 @@
         });
     }
 
-    // Init pin buttons
+    // Init pin buttons + show-on-map buttons
     document.querySelectorAll('.memorial-card[data-memorial-id]').forEach(function (card) {
+        var id = card.getAttribute('data-memorial-id');
+
+        // Pin button
         var pinBtn = card.querySelector('.memorial-card-pin-btn');
-        if (!pinBtn) return;
-        updatePinButton(card, isPinned(card.getAttribute('data-memorial-id')));
-        pinBtn.addEventListener('click', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-            togglePin(card);
-        });
+        if (pinBtn) {
+            updatePinButton(card, isPinned(id));
+            pinBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                togglePin(card);
+            });
+        }
+
+        // Show on map button — injected into the location row
+        var locEl = card.querySelector('.memorial-card-location');
+        if (locEl) {
+            var mapBtn = document.createElement('button');
+            mapBtn.className = 'card-show-on-map';
+            mapBtn.title = 'Show on map';
+            mapBtn.innerHTML = '<span class="material-symbols-outlined">my_location</span>';
+            mapBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                focusMapMarker(id);
+            });
+            locEl.appendChild(mapBtn);
+        }
     });
 
     renderPinnedSidebar();
@@ -446,5 +499,21 @@
             card.classList.add('visible');
         });
     }
+
+    // Replace ui-avatars.com with inline SVGs to avoid CORS issues
+    document.querySelectorAll('img').forEach(function (img) {
+        if (img.src && img.src.indexOf('ui-avatars.com') !== -1) {
+            var name = img.alt || '';
+            var parts = name.trim().split(/\s+/);
+            var initials = parts.length >= 2
+                ? (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
+                : (parts[0] ? parts[0][0].toUpperCase() : '?');
+            var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48">' +
+                '<circle cx="24" cy="24" r="24" fill="#6366f1"/>' +
+                '<text x="24" y="31" text-anchor="middle" font-size="17" font-weight="bold" fill="white" font-family="Arial,sans-serif">' + initials + '</text>' +
+                '</svg>';
+            img.src = 'data:image/svg+xml,' + encodeURIComponent(svg);
+        }
+    });
 
 })();
