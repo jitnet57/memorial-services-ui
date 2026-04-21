@@ -481,4 +481,22 @@
         return n.toLocaleString('en-PH');
     }
 
+    // ===== URL PARAM: PRE-SELECT SERVICE =====
+    (function () {
+        var params = new URLSearchParams(window.location.search);
+        var preservice = params.get('service');
+        if (!preservice) return;
+
+        var card = document.querySelector('.service-card[data-service="' + preservice + '"]');
+        if (!card) return;
+
+        serviceCards.forEach(function (c) { c.classList.remove('selected'); });
+        card.classList.add('selected');
+        selectedService = card.getAttribute('data-service');
+        servicePrice = parseInt(card.getAttribute('data-price')) || 0;
+        if (step1Next) step1Next.disabled = false;
+
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }());
+
 })();
